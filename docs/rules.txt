@@ -16,8 +16,11 @@ Check out new branch:
   git checkout -b feature/new-feature
 Push branch to github
   git push origin feature/new-feature
-Pull master updates into branch:
-  git pull origin master
+Pull elder updates into branch:
+  git pull origin elder
 When feature is complete:
   Push to your branch on github and make pull request
   Check in with team
+
+If you need to roll back your work to state of last commit:
+  git clean -f
