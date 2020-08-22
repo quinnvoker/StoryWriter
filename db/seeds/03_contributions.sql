@@ -13,3 +13,4 @@ INSERT INTO contributions (story_id, user_id, content, created_at, accepted_at) 
 INSERT INTO contributions (story_id, user_id, content, created_at) VALUES (6, 2, 'Testing contribution 12', '2020-10-23 00:45:02.85335');
 INSERT INTO contributions (story_id, user_id, content, created_at) VALUES (7, 3, 'Testing contribution 13', '2020-08-29 00:45:02.85335');
 INSERT INTO contributions (story_id, user_id, content, created_at) VALUES (8, 4, 'Testing contribution 14', '2020-09-12 00:45:02.85335');
+INSERT INTO contributions (story_id, user_id, content, created_at) VALUES (6, 3, 'Testing contribution 15', '2020-10-23 00:45:02.85335');
