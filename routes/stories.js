@@ -44,8 +44,8 @@ module.exports = (db) => {
     const newStory = [owner_id, title, cover_image_url];
     db.query(`INSERT INTO stories (owner_id, title, cover_image_url) VALUES ($1, $2, $3) RETURNING *`, newStory)
       .then(data => {
-        const stories = data.rows;
-        res.json({ stories });
+        const story = data.rows;
+        res.json({ story });
       })
       .catch(err => {
         res
@@ -54,12 +54,14 @@ module.exports = (db) => {
       });
   });
 
-  // DELETE
-  router.get("/:id", (req, res) => {
-    db.query(`SELECT * FROM stories WHERE id ;`)
+  // DELETE - toggle deleted field to true
+  router.post("/:id", (req, res) => {
+    const storyId = req.params.id;
+    db.query(`UPDATE stories SET deleted = TRUE WHERE id = $1 ;`, [storyId])
       .then(data => {
-        const stories = data.rows;
-        res.json({ stories });
+        // const stories = data.rows;
+        res.send('Story deleted!');
+        // res.json({ stories });
       })
       .catch(err => {
         res
