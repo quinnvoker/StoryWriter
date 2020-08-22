@@ -1,0 +1,9 @@
+CREATE TABLE contributions (
+  id SERIAL PRIMARY KEY NOT NULL,
+  story_id INTEGER REFERENCES stories(id) ON DELETE CASCADE,
+  user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+  content TEXT NOT NULL,
+  created_at TIMESTAMP,
+  accepted_at TIMESTAMP DEFAULT NULL,
+  deleted BOOLEAN NOT NULL DEFAULT FALSE
+)
