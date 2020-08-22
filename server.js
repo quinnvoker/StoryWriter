@@ -40,7 +40,7 @@ app.use(cookieSession({
 
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
-const loginRoutes = require("./routes/users");
+const loginRoutes = require("./routes/login");
 const storiesRoutes = require("./routes/stories");
 const contributionsRoutes = require("./routes/contributions");
 const votesRoutes = require("./routes/votes");
