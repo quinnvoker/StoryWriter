@@ -40,12 +40,12 @@ module.exports = (db) => {
 
   // ADD
   router.post("/", (req, res) => {
-    const { owner_id, title, cover_image_url } = req.body;
-    const newStory = [owner_id, title, cover_image_url];
-    db.query(`INSERT INTO stories (owner_id, title, cover_image_url) VALUES ($1, $2, $3) RETURNING *`, newStory)
+    const { story_id, user_id, content } = req.body;
+    const newContribution = [story_id, user_id, content];
+    db.query(`INSERT INTO contributions (story_id, user_id, content) VALUES ($1, $2, $3) RETURNING *`, newContribution)
       .then(data => {
-        const story = data.rows;
-        res.json({ story });
+        const contribution = data.rows;
+        res.json({ contribution });
       })
       .catch(err => {
         res
@@ -56,11 +56,11 @@ module.exports = (db) => {
 
   // DELETE - toggle deleted field to true
   router.post("/:id", (req, res) => {
-    const storyId = req.params.id;
-    db.query(`UPDATE stories SET deleted = TRUE WHERE id = $1 ;`, [storyId])
+    const contributionId = req.params.id;
+    db.query(`UPDATE contributions SET deleted = TRUE WHERE id = $1 ;`, [contributionId])
       .then(data => {
         // const stories = data.rows;
-        res.send('Story deleted!');
+        res.send('Contribution deleted!');
         // res.json({ stories });
       })
       .catch(err => {
