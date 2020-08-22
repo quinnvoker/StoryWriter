@@ -9,27 +9,14 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  // Browse
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM contributions WHERE deleted = FALSE;`)
+
+  // Browse based on user_id
+  router.get('/', (req, res) => {
+    const user_id = req.session.user_id;
+    db.query(`SELECT * FROM contributions WHERE deleted = FALSE AND user_id = $1;`, [user_id])
       .then(data => {
         const contributions = data.rows;
         res.json({ contributions });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-
-  // Browse based on owner_id
-  router.get('/mystories', (req, res) => {
-    const user_id = req.session.user_id;
-    db.query(`SELECT * FROM stories WHERE deleted = FALSE AND user_id = $1;`, [user_id])
-      .then(data => {
-        const stories = data.rows;
-        res.json({ stories });
       })
       .catch(err => {
         res
@@ -75,7 +62,7 @@ module.exports = (db) => {
   router.post("/:id", (req, res) => {
     const contribution_id = req.params.id;
     const user_id = req.session.user_id;
-    db.query(`UPDATE contributions SET deleted = TRUE WHERE id = $1 AND user_id = $2 RETURNING *;`, [contribution_id, user_id])
+    db.query(`UPDATE contributions SET deleted = TRUE WHERE id = $1 AND user_id = $2 AND accepted_at IS NULL RETURNING *;`, [contribution_id, user_id])
       .then(data => {
         if (data.rows.length > 0) {
           const contribution = data.rows[0];
