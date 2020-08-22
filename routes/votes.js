@@ -9,13 +9,13 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  router.get("/", (req, res) => {
-    let query = `SELECT * FROM widgets`;
-    console.log(query);
-    db.query(query)
+  router.post("/:id", (req, res) => {
+    const user_id = req.session.user_id;
+    const contribution_id = req.params.id;
+    db.query(`INSERT INTO votes (user_id, contribution_id) VALUES ($1, $2) RETURNING *`, [user_id, contribution_id])
       .then(data => {
-        const widgets = data.rows;
-        res.json({ widgets });
+        const vote = data.rows[0];
+        res.json({ vote });
       })
       .catch(err => {
         res
