@@ -11,7 +11,7 @@ const router  = express.Router();
 module.exports = (db) => {
   // Browse
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM contributions;`)
+    db.query(`SELECT * FROM contributions WHERE deleted = FALSE;`)
       .then(data => {
         const contributions = data.rows;
         res.json({ contributions });
@@ -24,11 +24,11 @@ module.exports = (db) => {
   });
   // Read
   router.get("/:id", (req, res) => {
-    const storyId = req.params.id;
-    db.query(`SELECT * FROM stories WHERE id = $1;`, [storyId])
+    const contributionId = req.params.id;
+    db.query(`SELECT * FROM contributions WHERE id = $1 AND deleted = FALSE;`, [contributionId])
       .then(data => {
-        const story = data.rows;
-        res.json({ story});
+        const contribution = data.rows;
+        res.json({ contribution});
       })
       .catch(err => {
         res
