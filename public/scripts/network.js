@@ -1,21 +1,21 @@
 const getAllStories = () => {
-  return $.ajax('/stories');
+  return $.ajax('/api/stories');
 };
 
 const getMyStories = () => {
-  return $.ajax('/stories/mystories');
+  return $.ajax('/api/stories/mystories');
 };
 
 const getStory = (data) => {
   const story_id = data.story_id;
-  return $.ajax(`/stories`, { data });
+  return $.ajax(`/api/stories`, { data });
 };
 
 const addStory = (data) => {
-  return $.ajax('/stories', { data, method: 'POST'});
+  return $.ajax('/api/stories', { data, method: 'POST'});
 };
 
 const deleteStory = (data) => {
   const story_id = data.story_id;
-  return $.ajax(`/stories/${story_id}`, { data, method: 'Post'});
+  return $.ajax(`/api/stories/${story_id}`, { data, method: 'Post'});
 };
