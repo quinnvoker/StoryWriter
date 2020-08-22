@@ -17,5 +17,5 @@ const addStory = (data) => {
 
 const deleteStory = (data) => {
   const story_id = data.story_id;
-  return $.ajax(`/api/stories/${story_id}`, { data, method: 'Post'});
+  return $.ajax(`/api/stories/${story_id}`, { data, method: 'POST'});
 };
