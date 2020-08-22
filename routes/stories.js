@@ -74,7 +74,7 @@ module.exports = (db) => {
   router.post("/:id", (req, res) => {
     const storyId = req.params.id;
     const owner_id = req.session.user_id;
-    db.query(`UPDATE stories SET deleted = TRUE WHERE id = $1 AND owner_id RETURNING *;`, [storyId, owner_id])
+    db.query(`UPDATE stories SET deleted = TRUE WHERE id = $1 AND owner_id = $2 RETURNING *;`, [storyId, owner_id])
       .then(data => {
         if (data.rows.length > 0) {
           const story = data.rows[0];
