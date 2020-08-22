@@ -62,7 +62,7 @@ module.exports = (db) => {
   router.post("/:id", (req, res) => {
     const contribution_id = req.params.id;
     const user_id = req.session.user_id;
-    db.query(`UPDATE contributions SET deleted = TRUE WHERE id = $1 AND user_id = $2 RETURNING *;`, [contribution_id, user_id])
+    db.query(`UPDATE contributions SET deleted = TRUE WHERE id = $1 AND user_id = $2 AND accepted_at IS NULL RETURNING *;`, [contribution_id, user_id])
       .then(data => {
         if (data.rows.length > 0) {
           const contribution = data.rows[0];
