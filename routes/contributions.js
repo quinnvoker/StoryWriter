@@ -9,27 +9,14 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (db) => {
-  // Browse
-  router.get("/", (req, res) => {
-    db.query(`SELECT * FROM contributions WHERE deleted = FALSE;`)
+
+  // Browse based on user_id
+  router.get('/', (req, res) => {
+    const user_id = req.session.user_id;
+    db.query(`SELECT * FROM contributions WHERE deleted = FALSE AND user_id = $1;`, [user_id])
       .then(data => {
         const contributions = data.rows;
         res.json({ contributions });
-      })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
-  });
-
-  // Browse based on owner_id
-  router.get('/mystories', (req, res) => {
-    const user_id = req.session.user_id;
-    db.query(`SELECT * FROM stories WHERE deleted = FALSE AND user_id = $1;`, [user_id])
-      .then(data => {
-        const stories = data.rows;
-        res.json({ stories });
       })
       .catch(err => {
         res
