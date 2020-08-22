@@ -2,12 +2,12 @@
 
 ## Stories
 * Full listing of stories
-  * all stories
-  * all completed stories
-  * all incompleted stories
+  * all stories / 04
+  * all completed stories / 05
+  * all incompleted stories /06
 * Stories by owner_id
-  * completed stories only
-  * all stories
+  * all stories / 01
+  * completed stories only /02
 
 
 ## Contributions
