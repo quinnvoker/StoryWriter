@@ -11,9 +11,9 @@
 
 
 ## Contributions
-* All accepted contributions by story_id
-* All pending contributions by story_id
-* All contributions by user_id (my contributions)
+* All accepted contributions by story_id 07
+* All pending contributions by story_id 08
+* All contributions by user_id (my contributions) 09
 
 ## Votes
 * Votes count by contribution_id
