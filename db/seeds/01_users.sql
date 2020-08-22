@@ -5,3 +5,4 @@ INSERT INTO users (name) VALUES ('Kay');
 INSERT INTO users (name) VALUES ('Jay');
 INSERT INTO users (name) VALUES ('Bob');
 INSERT INTO users (name) VALUES ('Carol');
+INSERT INTO users (name) VALUES ('Derek');
