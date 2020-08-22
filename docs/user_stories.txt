@@ -21,7 +21,9 @@ As a non logged-in user, I cannot write, add to, or vote on stories, because tho
 
 As a user, I want to start my own stories, because I want to collaborate with others
 As a user, I want to add contributions to stories, because I want to help tell a story
-As a user, I want to vote on contributions, and see votes, because I want to know if people like my contribution
+As a user, I want to vote on contributions, because I want to show peopel which story I like
+As a user, I want to see votes, because I want to know if people like a contribution
+
 
 As the story owner, I want to pick the next contribution to add to the story, because I want to control my story
 As the story owner, I want to be able to mark a story as finished, to let others know not to add any more
@@ -41,3 +43,10 @@ users
 contributions
 votes
 STRETCH: favourites
+STRETCH: images ???  (maybe that's just a line in contribs, I dunno)
+
+ROUTING
+
+Users - GET ( app.get ('login/:id')...)
+Stories - POST /GET/ EDIT/ DELETE
+Contributions - POST/ GET/ DELETE
