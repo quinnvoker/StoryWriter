@@ -37,9 +37,12 @@ module.exports = (db) => {
       });
   });
   // EDIT - No route as edit not allowed for stories consisitence
+
   // ADD
-  router.get("/:id", (req, res) => {
-    db.query(`SELECT * FROM stories WHERE id ;`)
+  router.post("/", (req, res) => {
+    const { owner_id, title, cover_image_url } = req.body;
+    const newStory = [owner_id, title, cover_image_url];
+    db.query(`INSERT INTO stories (owner_id, title, cover_image_url) VALUES ($1, $2, $3) RETURNING *`, newStory)
       .then(data => {
         const stories = data.rows;
         res.json({ stories });
