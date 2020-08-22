@@ -1,0 +1,52 @@
+Option 3: Story Creator
+An app that lets you write a story and lets other people contribute to that story. Users that created a story can select which contribution is worthy to the next part of the story, and reject all others.
+
+Requirements:
+authorized users can start a story
+users can add contributions to an existing story
+users can upvote a contribution
+users can see upvotes of a contribution
+creator of story can accept a contribution; this merges it to the rest of the story
+creator of a story can mark the story completed
+users can view a list of stories on the homepage along with their status e.g. in progress or completed
+users cannot add to a completed story
+users can read a story
+
+
+// Stories
+
+As a non logged-in user, I want to browse all stories, so I can pick one to read
+As a non logged-in user, I want to read stories, because I want to see what people are writing
+As a non logged-in user, I cannot write, add to, or vote on stories, because those things need to be tracked
+
+As a user, I want to start my own stories, because I want to collaborate with others
+As a user, I want to add contributions to stories, because I want to help tell a story
+As a user, I want to vote on contributions, because I want to show peopel which story I like
+As a user, I want to see votes, because I want to know if people like a contribution
+
+
+As the story owner, I want to pick the next contribution to add to the story, because I want to control my story
+As the story owner, I want to be able to mark a story as finished, to let others know not to add any more
+As the story owner, I want to be able to delete a story, because I might want to cancel the collaboration
+
+As a user, I cannot edit a post after it is sent, because stories need to be consistent
+
+STRETCH: As a contributor, I want to add an image to my contribution, to illustrate my story
+STRETCH: As a user, I want to be able to favourite stories, so I can keep track of ones I like
+
+
+
+ERD NOUNS
+
+stories
+users
+contributions
+votes
+STRETCH: favourites
+STRETCH: images ???  (maybe that's just a line in contribs, I dunno)
+
+ROUTING
+
+Users - GET ( app.get ('login/:id')...)
+Stories - POST /GET/ EDIT/ DELETE
+Contributions - POST/ GET/ DELETE

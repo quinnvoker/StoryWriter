@@ -1,0 +1,23 @@
+File names: snake_case
+Method names: verbNoun - getUserId, deleteStory, etc.
+Method Comments:
+/**
+ * Get a single user from the database given their email.
+ * @param {String} email The email of the user.
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+Variable Names:
+No single letter variable names!! (unless it's i for a for loop iterator)
+Give variables specific names (like for(const user of users) vs for(const element of users))
+
+When working on features:
+Check out new branch:
+  git checkout -b feature/new-feature
+Push branch to github
+  git push origin feature/new-feature
+Pull master updates into branch:
+  git pull origin master
+When feature is complete:
+  Push to your branch on github and make pull request
+  Check in with team
