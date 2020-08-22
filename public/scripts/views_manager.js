@@ -4,15 +4,15 @@ $(() => {
 
   window.views_manager = {
     show(item) {
-      $test_heading.detach();
-      $test_paragraph.detach();
+      $test_1.detach();
+      $test_2.detach();
 
       switch (item) {
-        case 'test_heading':
-          $test_heading.appendTo($main);
+        case 'test_1':
+          $test_1.appendTo($main);
           break;
-        case 'test_paragraph':
-          $test_paragraph.appendTo($main);
+        case 'test_2':
+          $test_2.appendTo($main);
           break;
       };
     }
