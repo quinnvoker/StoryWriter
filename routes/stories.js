@@ -11,7 +11,7 @@ const router  = express.Router();
 module.exports = (db) => {
   // Browse
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM stories;`)
+    db.query(`SELECT * FROM stories WHERE deleted = FALSE;`)
       .then(data => {
         const stories = data.rows;
         res.json({ stories });
