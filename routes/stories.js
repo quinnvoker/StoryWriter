@@ -25,7 +25,7 @@ module.exports = (db) => {
   // Read
   router.get("/:id", (req, res) => {
     const storyId = req.params.id;
-    db.query(`SELECT * FROM stories WHERE id = $1;`, [storyId])
+    db.query(`SELECT * FROM stories WHERE id = $1 AND deleted = FALSE;`, [storyId])
       .then(data => {
         const story = data.rows;
         res.json({ story});
