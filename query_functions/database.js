@@ -47,13 +47,13 @@ const getAllStories = function(options) {
 exports.getAllStories = getAllStories;
 
 
-/** Get all contributions from the database
+/** Get contributions from the database
  * @param {user_id: integer} user_id
  * the user_id of contributions, if check myContributions, call with user_id from req.session.
  * @return {Promise<{}>} A promise to the user.
  */
 
-const getAllContributionsByUserId = function(options) {
+const getContributionsByUserId = function(options) {
   let queryString = `
   SELECT
   contributions.id,
@@ -81,10 +81,10 @@ const getAllContributionsByUserId = function(options) {
   return db.query(queryString, [options.user_id])
     .then(resolve => resolve.rows);
 };
-exports.getAllContributionsByUserId = getAllContributionsByUserId;
+exports.getContributionsByUserId = getContributionsByUserId;
 
 
-/** Get all accepted contributions from the database by story_id
+/** Get accepted contributions from the database by story_id
  * @param {story_id: integer} story_id
  * @return {Promise<{}>} A promise to the user.
  */
@@ -112,7 +112,7 @@ const getAcceptedContributionByStoryId = function(options) {
 };
 exports.getAcceptedContributionByStoryId = getAcceptedContributionByStoryId;
 
-/** Get all pending contributions from the database by story_id
+/** Get pending contributions from the database by story_id
  * @param {story_id: integer} story_id
  * @return {Promise<{}>} A promise to the user.
  */
@@ -166,3 +166,34 @@ const getPendingContributionByStoryId = function(options) {
 
 };
 exports.getPendingContributionByStoryId = getPendingContributionByStoryId;
+
+
+
+/** Get list of favorite stories from the database by user_id
+ * @param {user_id: integer} user_id
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+const getFavouritesByUserId = function(options) {
+  const queryString = `
+  SELECT
+    stories.id AS story_id,
+    stories.title AS story_title,
+    favourites.user_id AS user,
+    MAX(contributions.accepted_at) AS last_update,
+    completed
+    FROM
+      favourites
+      JOIN stories ON stories.id = favourites.story_id
+      LEFT JOIN contributions ON stories.id = contributions.story_id
+    WHERE
+      favourites.user_id = $1
+    GROUP BY
+      stories.id, title, completed, favourites.user_id
+    ORDER BY
+      story_id;
+  `;
+  return db.query(queryString, [options.user_id])
+    .then(resolve => resolve.rows);
+};
+exports.getFavouritesByUserId = getFavouritesByUserId;
