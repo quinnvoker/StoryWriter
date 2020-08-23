@@ -19,4 +19,4 @@
 * Votes count by contribution_id // integrated with 08 & 09
 
 ## Favorites
-* All favorites by user_id
+* All favorites by user_id // 10
