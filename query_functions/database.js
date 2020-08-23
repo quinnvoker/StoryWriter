@@ -48,14 +48,37 @@ exports.getAllStories = getAllStories;
 
 
 /** Get all contributions from the database
- * @param {string} accepted_at
- * @param {story_id} story_id
  * @param {user_id: integer} user_id
  * the user_id of contributions, if check myContributions, call with user_id from req.session.
  * @return {Promise<{}>} A promise to the user.
  */
 
-const getAllContributions = function(options) {
+const getAllContributionsByUserId = function(options) {
+  let queryString = `
+  SELECT
+  contributions.id,
+  story_id,
+  users.name AS author,
+  content,
+  created_at,
+  accepted_at IS NOT NULL AS is_accepted,
+  COUNT(votes) AS votes
+  FROM
+    contributions
+    JOIN users ON user_id = users.id
+    LEFT JOIN votes ON contributions.id = contribution_id
+  WHERE
+    contributions.user_id = $1 AND deleted = FALSE
+  GROUP BY
+    contributions.id,
+    story_id,
+    users.name,
+    content,
+    created_at
+  ORDER BY created_at
+  `;
 
+  return db.query(queryString, [options.user_id])
+    .then(resolve => resolve.rows);
 };
-exports.getAllContributions = getAllContributions;
+exports.getAllContributionsByUserId = getAllContributionsByUserId;
