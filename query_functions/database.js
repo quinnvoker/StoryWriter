@@ -82,3 +82,32 @@ const getAllContributionsByUserId = function(options) {
     .then(resolve => resolve.rows);
 };
 exports.getAllContributionsByUserId = getAllContributionsByUserId;
+
+
+/** Get all accepted contributions from the database by story_id
+ * @param {story_id: integer} story_id
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+const getAcceptedContributionByStoryId = function(options) {
+  const queryString = `
+  SELECT
+    contributions.id,
+    story_id,
+    user_id AS author,
+    content,
+    accepted_at
+    FROM
+      contributions
+      JOIN users ON user_id = users.id
+    WHERE
+      story_id = $1
+      AND accepted_at IS NOT NULL
+      AND deleted = FALSE
+    ORDER BY
+      accepted_at;
+  `;
+  return db.query(queryString, [options.story_id])
+    .then(resolve => resolve.rows);
+};
+exports.getAcceptedContributionByStoryId = getAcceptedContributionByStoryId;
