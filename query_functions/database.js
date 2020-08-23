@@ -111,3 +111,58 @@ const getAcceptedContributionByStoryId = function(options) {
     .then(resolve => resolve.rows);
 };
 exports.getAcceptedContributionByStoryId = getAcceptedContributionByStoryId;
+
+/** Get all pending contributions from the database by story_id
+ * @param {story_id: integer} story_id
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+const getPendingContributionByStoryId = function(options) {
+  let queryParams = [options.story_id];
+  let queryString = `
+  SELECT
+    contributions.id,
+    story_id,
+    contributions.user_id AS author,
+    content,
+    created_at,
+    accepted_at,
+    COUNT(votes) AS votes
+    FROM
+      contributions
+      JOIN users ON user_id = users.id
+      LEFT JOIN votes ON contributions.id = contribution_id
+    WHERE
+      story_id = $1
+      AND deleted = FALSE
+    GROUP BY
+      contributions.id,
+      story_id,
+      users.name,
+      content,
+      created_at
+  `;
+  const lastUpdated = `
+  SELECT
+    MAX(accepted_at) AS max_accepted_at
+    FROM
+      contributions
+    WHERE story_id = $1 AND deleted = false`;
+
+  return db.query(lastUpdated, queryParams)
+    .then(resolve => {
+      // check if any accepted_at exists, cause cannot compare null with datestamp correctly
+      if (resolve.rows[0].max_accepted_at !== null) {
+        queryParams.push(resolve.rows[0].max_accepted_at);
+        queryString += `
+        HAVING
+          contributions.created_at > $${queryParams.length}
+        ORDER BY votes
+        `;
+      }
+      return db.query(queryString, queryParams);
+    })
+    .then(resolve => resolve.rows);
+
+};
+exports.getPendingContributionByStoryId = getPendingContributionByStoryId;
