@@ -16,7 +16,7 @@
 * All contributions by user_id (my contributions) 09
 
 ## Votes
-* Votes count by contribution_id
+* Votes count by contribution_id // integrated with 08 & 09
 
 ## Favorites
-* All favorites by user_id
+* All favorites by user_id // 10
