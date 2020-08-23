@@ -5,10 +5,11 @@ const db = new Pool(dbParams);
 db.connect();
 
 
-/**
- * Get all stories from the database
- * @param {String} completed undefined = everything, true = completed only, false = incompleted only.
- * @param {String} user_id the owner_id of stories, if check mystories, call with user_id from req.session.
+/** Get all stories from the database
+ * @param {completed: boolean} completed
+ * undefined = everything, true = completed only, false = incompleted only.
+ * @param {owner_id: integer} owner_id
+ * the owner_id of stories, if check myStories, call with user_id from req.session.
  * @return {Promise<{}>} A promise to the user.
  */
 
@@ -37,11 +38,24 @@ const getAllStories = function(options) {
     queryParams.push(options.completed);
     queryString += ` AND stories.completed = $${queryParams.length}`;
   }
-  queryString += `
-  ORDER BY stories.id;`;
-  console.log(queryParams);
-  console.log(queryString);
+
+  queryString += ` ORDER BY stories.id;`;
+
   return db.query(queryString, queryParams)
     .then(resolve => resolve.rows);
 };
 exports.getAllStories = getAllStories;
+
+
+/** Get all contributions from the database
+ * @param {string} accepted_at
+ * @param {story_id} story_id
+ * @param {user_id: integer} user_id
+ * the user_id of contributions, if check myContributions, call with user_id from req.session.
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+const getAllContributions = function(options) {
+
+};
+exports.getAllContributions = getAllContributions;
