@@ -9,7 +9,7 @@ const express = require('express');
 //const cookieSession = require('cookie-session');
 const router  = express.Router();
 
-module.exports = (db) => {
+module.exports = () => {
   router.get("/:id", (req, res) => {
     req.session.user_id = req.params.id;
     res.redirect('/');

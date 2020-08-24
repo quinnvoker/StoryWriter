@@ -34,10 +34,10 @@ const votesRoutes = require("./routes/votes");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/login", loginRoutes(db));
-app.use("/api/stories", storiesRoutes(db));
-app.use("/api/contributions", contributionsRoutes(db));
-app.use("/api/votes", votesRoutes(db));
+app.use("/login", loginRoutes());
+// app.use("/api/stories", storiesRoutes(db));
+// app.use("/api/contributions", contributionsRoutes(db));
+// app.use("/api/votes", votesRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
 
