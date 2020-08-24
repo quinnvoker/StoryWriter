@@ -119,8 +119,10 @@ const getAcceptedContributionByStoryId = function(options) {
 exports.getAcceptedContributionByStoryId = getAcceptedContributionByStoryId;
 
 /** Create new contribution
- *
- * @param {*} options
+ * @param {story_id: interger} newContribution
+ * @param {user_id: interger} newContribution
+ * @param {content: text} newContribution
+ * @return {Promise<{}>} A promise to the user.
  */
 
 const createContribution = function(newContribution) {
@@ -153,13 +155,11 @@ const getPendingContributionByStoryId = function(options) {
   let queryParams = [options.story_id];
   let queryString = `
   SELECT
-    contributions.id,
-    story_id,
-    contributions.user_id AS author,
-    content,
-    created_at,
-    accepted_at,
-    COUNT(votes) AS votes
+    contributions.id AS contribution_id,
+    contributions.user_id AS contribution_author_name,
+    created_at AS contribution_created_at_time,
+    content AS contribution_content,
+    COUNT(votes) AS contribution_vote_count
     FROM
       contributions
       JOIN users ON user_id = users.id
