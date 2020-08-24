@@ -6,6 +6,8 @@ db.connect();
 
 
 /** Get all stories from the database
+ * @param {story_id: integer} story_id
+ * read request for individual story
  * @param {completed: boolean} completed
  * undefined = everything, true = completed only, false = incompleted only.
  * @param {owner_id: integer} owner_id
@@ -28,6 +30,11 @@ const getAllStories = function(options) {
       stories.deleted = FALSE
       `;
   let queryParams = [];
+
+  if (options.story_id) {
+    queryParams.push(options.story_id);
+    queryString += ` AND stories.id = $${queryParams.length}`;
+  }
 
   if (options.owner_id) {
     queryParams.push(options.owner_id);
