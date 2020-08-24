@@ -12,12 +12,12 @@ const getStory = (data) => {
 };
 
 const addStory = (data) => {
-  return $.ajax('/api/stories', { data, method: 'POST'});
+  return $.ajax('/api/stories', { data, method: 'POST' });
 };
 
 const deleteStory = (data) => {
   const story_id = data.story_id;
-  return $.ajax(`/api/stories/${story_id}`, { data, method: 'POST'});
+  return $.ajax(`/api/stories/${story_id}`, { data, method: 'POST' });
 };
 
 const getMyContributions = () => {
@@ -30,5 +30,9 @@ const getContribution = (data) => {
 };
 
 const addContribution = (data) => {
-  return $.ajax('/api/contributions', { data, method: 'POST'});
+  return $.ajax('/api/contributions', { data, method: 'POST' });
+};
+
+const addVote = (data) => {
+  return $.ajax('/api/votes', { data });
 };
