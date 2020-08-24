@@ -10,8 +10,8 @@ db.connect();
  * read request for individual story
  * @param {completed: boolean} completed
  * undefined = everything, true = completed only, false = incompleted only.
- * @param {owner_id: integer} owner_id
- * the owner_id of stories, if check myStories, call with user_id from req.session.
+ * @param {user_id: integer} user_id
+ * For myStories, call with user_id from req.session to pull user's stories
  * @return {Promise<{}>} A promise to the user.
  */
 
@@ -35,8 +35,8 @@ const getAllStories = function(options) {
     queryString += ` AND stories.id = $${queryParams.length}`;
   }
 
-  if (options.owner_id) {
-    queryParams.push(options.owner_id);
+  if (options.user_id) {
+    queryParams.push(options.user_id);
     queryString += ` AND users.id = $${queryParams.length}`;
   }
 
@@ -95,14 +95,14 @@ exports.getContributionsByUserId = getContributionsByUserId;
  * @return {Promise<{}>} A promise to the user.
  */
 
+// My stories view
 const getAcceptedContributionByStoryId = function(options) {
   const queryString = `
   SELECT
-    contributions.id,
-    story_id,
-    user_id AS author,
-    content,
-    accepted_at
+    contributions.id AS contribution_id,
+    user_id AS contribution_author_name,
+    accepted_at AS contribution_accepted_at_time,
+    content AS contribution_content
     FROM
       contributions
       JOIN users ON user_id = users.id
@@ -117,6 +117,32 @@ const getAcceptedContributionByStoryId = function(options) {
     .then(resolve => resolve.rows);
 };
 exports.getAcceptedContributionByStoryId = getAcceptedContributionByStoryId;
+
+/** Create new contribution
+ *
+ * @param {*} options
+ */
+
+const createContribution = function(newContribution) {
+  const queryString = `
+  INSERT INTO
+    contributions
+    (story_id, user_id, content)
+    VALUES
+      ($1, $2, $3)
+    RETURNING
+      *
+  `;
+  const { story_id, user_id, content } = newContribution;
+  const queryParams = [story_id, user_id, content];
+  return db.query(queryString, queryParams)
+    .then(resolve => resolve.rows[0]);
+};
+exports.createContribution = createContribution;
+
+
+
+
 
 /** Get pending contributions from the database by story_id
  * @param {story_id: integer} story_id
