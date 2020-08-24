@@ -1,13 +1,15 @@
 # List of queries
 
 ## Stories
+Function - getAllStories(options)
 * Full listing of stories
-  * all stories / 04
-  * all completed stories / 05
-  * all incompleted stories /06
+  * all stories / 04 - {}
+  * all completed stories / 05 - {completed: true}
+  * all incompleted stories /06 - {completed: false}
 * Stories by owner_id
-  * all stories / 01
-  * completed stories only /02
+  * all stories / 01 {owner_id: INT}
+  * completed stories only /02 {owner_id: INT, completed: true}
+  * incompleted stories only {owner_id: INT, completed: false}
 
 
 ## Contributions
