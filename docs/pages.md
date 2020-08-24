@@ -10,6 +10,7 @@ Query needs to return:
  - story_author_name
   Sort by
  - created_date
+ >> getAllStories()
 
 # My stories view
 
@@ -23,7 +24,7 @@ Query needs to return:
  - story_author_name
   Sort by
  - created_date
-
+ >> getAllStories({user_id})
  # Story view
 
  Lists all accepted contributions

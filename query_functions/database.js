@@ -48,7 +48,8 @@ const getAllStories = function(options) {
   queryString += ` ORDER BY stories.created_at;`;
 
   return db.query(queryString, queryParams)
-    .then(resolve => resolve.rows);
+    .then(resolve => resolve.rows)
+    .catch(error=> console.error(error));
 };
 exports.getAllStories = getAllStories;
 
@@ -84,7 +85,8 @@ const getContributionsByUserId = function(options) {
   `;
 
   return db.query(queryString, [options.user_id])
-    .then(resolve => resolve.rows);
+    .then(resolve => resolve.rows)
+    .catch(error=> console.error(error));
 };
 exports.getContributionsByUserId = getContributionsByUserId;
 
@@ -99,7 +101,7 @@ const getAcceptedContributionByStoryId = function(options) {
   const queryString = `
   SELECT
     contributions.id AS contribution_id,
-    user_id AS contribution_author_name,
+    users.name AS contribution_author_name,
     accepted_at AS contribution_accepted_at_time,
     content AS contribution_content
     FROM
@@ -113,7 +115,8 @@ const getAcceptedContributionByStoryId = function(options) {
       accepted_at;
   `;
   return db.query(queryString, [options.story_id])
-    .then(resolve => resolve.rows);
+    .then(resolve => resolve.rows)
+    .catch(error=> console.error(error));
 };
 exports.getAcceptedContributionByStoryId = getAcceptedContributionByStoryId;
 
@@ -152,7 +155,7 @@ const getPendingContributionByStoryId = function(options) {
   let queryString = `
   SELECT
     contributions.id AS contribution_id,
-    contributions.user_id AS contribution_author_name,
+    users.name AS contribution_author_name,
     created_at AS contribution_created_at_time,
     content AS contribution_content,
     COUNT(votes) AS contribution_vote_count
@@ -185,12 +188,13 @@ const getPendingContributionByStoryId = function(options) {
         queryString += `
         HAVING
           contributions.created_at > $${queryParams.length}
-        ORDER BY votes
+        ORDER BY COUNT(votes)
         `;
       }
       return db.query(queryString, queryParams);
     })
-    .then(resolve => resolve.rows);
+    .then(resolve => resolve.rows)
+    .catch(error=> console.error(error));
 
 };
 exports.getPendingContributionByStoryId = getPendingContributionByStoryId;
@@ -222,7 +226,8 @@ const getFavouritesByUserId = function(options) {
       story_id;
   `;
   return db.query(queryString, [options.user_id])
-    .then(resolve => resolve.rows);
+    .then(resolve => resolve.rows)
+    .catch(error=> console.error(error));
 };
 exports.getFavouritesByUserId = getFavouritesByUserId;
 
@@ -252,6 +257,7 @@ const getContributionById = function(options) {
         created_at;
   `;
   return db.query(queryString, [options.contribution_id])
-    .then(resolve => resolve.rows[0]);
+    .then(resolve => resolve.rows[0])
+    .catch(error=> console.error(error));
 };
 exports.getContributionById = getContributionById;
