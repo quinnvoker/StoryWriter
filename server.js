@@ -9,6 +9,7 @@ const bodyParser = require("body-parser");
 const app        = express();
 const morgan     = require('morgan');
 const cookieSession = require('cookie-session');
+const queryFunctions = require('./query_functions/database');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
