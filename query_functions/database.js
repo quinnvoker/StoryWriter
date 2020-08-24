@@ -21,7 +21,7 @@ const getAllStories = function(options) {
     stories.id AS story_id,
     stories.cover_image_url AS story_cover_url,
     stories.title AS story_title,
-    users.name AS story_author_name,
+    users.name AS story_author_name
     FROM
       stories
       JOIN users ON users.id = stories.owner_id
@@ -45,7 +45,7 @@ const getAllStories = function(options) {
     queryString += ` AND stories.completed = $${queryParams.length}`;
   }
 
-  queryString += ` ORDER BY created_at;`;
+  queryString += ` ORDER BY stories.created_at;`;
 
   return db.query(queryString, queryParams)
     .then(resolve => resolve.rows);
