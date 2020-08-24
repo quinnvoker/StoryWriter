@@ -96,3 +96,11 @@ Query needs to return:
 
  And display a 'like' button to cast vote on contribution
  Maybe a link to go back to story?
+
+Query needs input:
+- user_id
+- title
+- cover_image_url
+Query needs to return
+???
+>> createStory()

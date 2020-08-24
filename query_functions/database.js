@@ -53,7 +53,6 @@ const getAllStories = function(options) {
 };
 exports.getAllStories = getAllStories;
 
-
 /** Get contributions from the database
  * @param {user_id: integer} user_id
  * the user_id of contributions, if check myContributions, call with user_id from req.session.
@@ -89,7 +88,6 @@ const getContributionsByUserId = function(options) {
     .catch(error=> console.error(error));
 };
 exports.getContributionsByUserId = getContributionsByUserId;
-
 
 /** Get accepted contributions from the database by story_id
  * @param {story_id: integer} story_id
@@ -144,7 +142,6 @@ const createContribution = function(newContribution) {
 };
 exports.createContribution = createContribution;
 
-
 /** Get pending contributions from the database by story_id
  * @param {story_id: integer} story_id
  * @return {Promise<{}>} A promise to the user.
@@ -198,8 +195,6 @@ const getPendingContributionByStoryId = function(options) {
 
 };
 exports.getPendingContributionByStoryId = getPendingContributionByStoryId;
-
-
 
 /** Get list of favorite stories from the database by user_id
  * @param {user_id: integer} user_id
@@ -261,3 +256,26 @@ const getContributionById = function(options) {
     .catch(error=> console.error(error));
 };
 exports.getContributionById = getContributionById;
+
+/** Create new story entry
+ * @param {user_id: integer} user_id
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+const createStory = function(options) {
+  const queryString = `
+  INSERT INTO
+    stories
+    (owner_id, title, cover_image_url)
+    VALUES
+      ($1, $2, $3)
+    RETURNING
+      *
+  `;
+  const {user_id, title, cover_image_url } = options;
+  const queryParams = [user_id, title, cover_image_url];
+  return db.query(queryString, queryParams)
+    .then(resolve => resolve.rows[0])
+    .catch(error=> console.error(error));
+};
+exports.createStory = createStory;
