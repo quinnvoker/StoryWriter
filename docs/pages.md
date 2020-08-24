@@ -8,6 +8,7 @@ Query needs to return:
  - Story cover url
  - Story title
  - Story author name
+ - Sort by created_date
 
 # My stories view
 
@@ -19,10 +20,10 @@ Query needs to return:
  - Story cover url
  - Story title
  - Story author name
- - Sort by created_date  
+ - Sort by created_date
 
  # Story view
- 
+
  Lists all accepted contributions
  Query needs input:
  - Story id
@@ -38,7 +39,7 @@ Query needs to return:
  - Contribution content
  - User id
  - Story id
- 
+
  Lists all contributions being voted on
  Query needs input:
  - Story id
@@ -66,7 +67,7 @@ Query needs to return:
  - Story id?
 
  # Contribution view
- 
+
  Show full contents of a contribution, and a like button
 
  Query needs input:
