@@ -7,6 +7,7 @@ $(() => {
       $home.detach();
       $myStories.detach();
       $story.detach();
+      $stories.detach();
 
       switch (item) {
         case 'test_1':
@@ -17,6 +18,9 @@ $(() => {
           break;
         case 'home':
           $home.appendTo($main);
+          break;
+        case 'stories':
+          $stories.appendTo($main);
           break;
         case 'myStories':
           $myStories.appendTo($main);

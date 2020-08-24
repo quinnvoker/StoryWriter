@@ -1,7 +1,7 @@
 $(() => {
 
-  // make test_1 component show
-  views_manager.show('home');
+  window.loadAllStories();
+  views_manager.show('stories');
 
   deleteStory({story_id: 8});
 
