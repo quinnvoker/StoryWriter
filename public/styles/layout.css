@@ -78,7 +78,11 @@ section.compose-story{
   position: absolute;
   z-index:-1;
   padding: 30px;
+}
 
+.stories{
+  background:#FEFAE0;
+  padding-top: 100px;
 }
 .logo {
   line-height: 60px;
