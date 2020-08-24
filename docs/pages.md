@@ -102,5 +102,5 @@ Query needs input:
 - title
 - cover_image_url
 Query needs to return
-???
+- story_id
 >> createStory()

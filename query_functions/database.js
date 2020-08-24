@@ -270,7 +270,7 @@ const createStory = function(options) {
     VALUES
       ($1, $2, $3)
     RETURNING
-      *
+      stories.id as story_id
   `;
   const {user_id, title, cover_image_url } = options;
   const queryParams = [user_id, title, cover_image_url];
