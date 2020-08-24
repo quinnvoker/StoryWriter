@@ -50,8 +50,6 @@ $(() => {
     $('header').hide();
     views_manager.show('myStories');
   });
-
-
 });
 
 

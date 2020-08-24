@@ -114,7 +114,6 @@ $(() => {
     $('header').hide();
     views_manager.show('story');
   });
-
 });
 
 
