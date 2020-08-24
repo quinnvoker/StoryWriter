@@ -225,3 +225,33 @@ const getFavouritesByUserId = function(options) {
     .then(resolve => resolve.rows);
 };
 exports.getFavouritesByUserId = getFavouritesByUserId;
+
+/** Get full contribution details by contribution_id
+ * @param {contribution_id: integer} contribution_id
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+const getContributionById = function(options) {
+  const queryString = `
+    SELECT
+      story_id AS story_id,
+      content AS contribution_content,
+      users.name AS contribution_author_name,
+      created_at AS contribution_created_at,
+      COUNT(votes) AS contribution_vote_count
+      FROM
+        contributions
+        JOIN users ON users.id = user_id
+        LEFT JOIN votes ON contributions.id = contribution_id
+      WHERE
+        contributions.id = $1
+      GROUP BY
+        story_id,
+        content,
+        users.name,
+        created_at;
+  `;
+  return db.query(queryString, [options.contribution_id])
+    .then(resolve => resolve.rows[0]);
+};
+exports.getContributionById = getContributionById;
