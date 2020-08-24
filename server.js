@@ -57,3 +57,13 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+
+// // query function testing
+// const { getPendingContributionByStoryId } = require('./query_functions/database');
+
+// const options = {
+//   story_id: 2,
+// };
+// getPendingContributionByStoryId(options)
+//   .then(res => console.log(res));

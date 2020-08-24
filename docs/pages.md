@@ -4,52 +4,61 @@ Lists all stories at bottom
 Query optional:
  - complete? incomplete? all? (stretch)
 Query needs to return:
- - Story id
- - Story cover url
- - Story title
- - Story author name
- - Sort by created_date
+ - story_id
+ - story_cover_url
+ - story_title
+ - story_author_name
+  Sort by
+ - created_date
+ >> getAllStories()
 
 # My stories view
 
 Lists all stories belonging to user id
 Query needs input:
- - User id
+ - user_id
 Query needs to return:
- - Story id
- - Story cover url
- - Story title
- - Story author name
- - Sort by created_date
-
+ - story_id
+ - story_cover_url
+ - story_title
+ - story_author_name
+  Sort by
+ - created_date
+ >> getAllStories({user_id})
  # Story view
 
  Lists all accepted contributions
  Query needs input:
- - Story id
+ - story_id
  Query needs to return:
- - Contribution id
- - Contribution author name
- - Contribution accepted_at time
- - Contribution content
- - Sort by accepted_at time
+ - contribution_id
+ - contribution_author_name
+ - contribution_accepted_at_time
+ - contribution_content
+  Sort by
+ - accepted_at time
+ >> getAcceptedContributionByStoryId()
 
  Form to add new contribution
  Query needs input:
  - Contribution content
  - User id
  - Story id
+>> createContribution()
+
 
  Lists all contributions being voted on
  Query needs input:
  - Story id
  Query needs to return
- - Contribution id
- - Contribution author name
- - Contribution created_at time
- - Contribution content
- - Contribution vote count
- - Sort by vote count
+ - contribution_id
+ - contribution_author_name
+ - contribution_created_at_time
+ - contribution_content
+ - contribution_vote_count
+  Sort by
+ - vote count
+>> getPendingContributionByStoryId()
 
  Each voting contribution should be clickable to open full contribution
 
@@ -60,11 +69,16 @@ Query needs to return:
  Query needs input:
  - User id
  Query needs to return:
- - Contribution id
- - Contribution created_at time
- - Contribution content
- - Contribution vote count
- - Story id?
+ - contribution_id
+ - story_id
+ - contribution_created_at_time
+ - contribution_content
+ - contribution_is_accepted
+ - contribution_vote_count
+  Sort by
+ - created_at
+>> getContributionsByUserId()
+
 
  # Contribution view
 
@@ -73,11 +87,12 @@ Query needs to return:
  Query needs input:
  - Contribution id
  Query needs to return
- - Contribution content
- - Contribution author name
- - Contribution created_at
- - Contribution vote count
- - Story id
+ - story_id
+ - contribution_content
+ - contribution_author_name
+ - contribution_created_at
+ - contribution_vote_count
+ >> getContributionById()
 
  And display a 'like' button to cast vote on contribution
  Maybe a link to go back to story?
