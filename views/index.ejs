@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@400;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="/vendor/border-box.css" type="text/css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
     <link rel="icon" type="image/png" href="favicon.png">
@@ -45,6 +46,7 @@
        </div>
        <h2 class="tagline"><span class="highlight">Create.</span> Collaborate.</h2>
        <form id="new-story" method="POST" action="/tweets/">
+        <input name="title" placeholder="Story Title">
          <textarea name="text" id="tweet-text" placeholder="Start your story..."></textarea>
          <input name="cover-image" placeholder="Cover image URL">
          <div>

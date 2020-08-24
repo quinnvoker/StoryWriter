@@ -5,7 +5,7 @@ $(() => {
   window.views_manager = {
     show(item) {
       $home.detach();
-      $my_stories.detach();
+      $myStories.detach();
       $story.detach();
 
       switch (item) {
@@ -18,8 +18,8 @@ $(() => {
         case 'home':
           $home.appendTo($main);
           break;
-        case 'my_stories':
-          $my_stories.appendTo($main);
+        case 'myStories':
+          $myStories.appendTo($main);
           break;
         case 'story':
           $story.appendTo($main);

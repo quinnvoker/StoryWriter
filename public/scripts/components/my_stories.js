@@ -2,7 +2,7 @@ $(() => {
 
   //append a unique id to each story
   //maybe each <figure> will have an id story-1
-  const $my_stories = $(`
+  const $myStories = $(`
   <div class="content stories">
       <!-- Grid row -->
       <div class="grid">
@@ -42,26 +42,14 @@ $(() => {
          </figcaption>
        </figure>
      </div>
-
   </div>
   `);
 
-  window.$my_stories = $my_stories;
+  window.$myStories = $myStories;
   $('#my-stories').on('click',function() {
     $('header').hide();
-    views_manager.show('my_stories');
+    views_manager.show('myStories');
   });
-
-  $('#story-1').on('click',function(evt) {
-    // evt.preventDefautl();
-    alert("clicked");
-    // $('header').hide();
-    // console.log("from story 1");
-   views_manager.show('story');
-  });
-
-
-
 });
 
 

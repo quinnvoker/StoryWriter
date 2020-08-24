@@ -42,10 +42,12 @@ section.compose-story{
   border:1px solid #BC6C25;
 }
 .compose-story textarea{
-  padding:10px;
+
   width: 650px;
   height: 200px;
+  margin: 5px 0;
   border-radius: 3px;
+  padding: 5px;
   border:1px solid #BC6C25;
   resize:none;
 }
@@ -83,7 +85,14 @@ section.compose-story{
 .stories{
   background:#FEFAE0;
   padding-top: 100px;
+  /*you just need more content on the page. LOL*/
 }
+
+.story-container{
+  width:90%;
+  margin: 0 auto;
+}
+
 .logo {
   line-height: 60px;
   position: fixed;
@@ -284,4 +293,35 @@ figure.effect-sadie:hover p {
 	opacity: 1;
 	-webkit-transform: translate3d(0,0,0);
 	transform: translate3d(0,0,0);
+}
+
+
+.title-tagline{
+  color:#BC6C25;
+  font-size: 20px;
+}
+
+.status{
+  color:#BC6C25;
+  font-size: 15px;
+  font-weight: 300;
+}
+
+.approved-contributions .card{
+  margin: 10px 0;
+  background:#283618;
+  border: 3px solid #283618;
+}
+
+.approved-contributions .even{
+  border:none;
+}
+
+.approved-contributions .card-body{
+  font-size: 15px;
+  padding: 0.5rem;
+  border-radius: 0;
+}
+.approved-contributions .card-body .user{
+  font-size: 15px;
 }
