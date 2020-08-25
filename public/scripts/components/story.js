@@ -23,7 +23,7 @@ $(() => {
       <button type="button" class="orange" data-toggle="modal" data-target="#exampleModal">Continue the adventure</button>
       </section>
       <section class="unapproved-contributions">
-      <div class="card" style="width: 18rem;">
+      <div id="contribution-1" class="card" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title">Special title treatment</h5>
         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
@@ -81,7 +81,7 @@ $(() => {
       </article>`
   }
 
-  // window.$myStories.find('#story-1').on('click',function() {
+  // window.$stories.find($('figure[id*=story-]')).on('click',function() {
   //   $('header').hide();
   //   views_manager.show('story');
   // });

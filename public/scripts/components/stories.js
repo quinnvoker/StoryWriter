@@ -13,6 +13,10 @@ $(() => {
     $story.find('img').attr('src', story.story_cover_url);
     $story.find('h2').text(story.story_title);
 
+    $story.on('click',() =>{
+      views_manager.show('story');
+    })
+
     return $story;
   };
 
