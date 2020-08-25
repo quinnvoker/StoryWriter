@@ -39,6 +39,7 @@ $(() => {
       const contributionData = { content, story_id: window.targetStoryId };
       addContribution(contributionData)
         .then(result => {
+          $composeContribution.modal('hide');
           console.log(result);
         });
     });
