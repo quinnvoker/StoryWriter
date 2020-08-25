@@ -16,24 +16,24 @@ $(() => {
     return $story;
   };
 
-  const $stories = $(`<div class="content stories grid"></div>`);
+  const $stories = $(`<div class="content stories"><div class="grid"></div></div>`);
   window.$stories = $stories;
 
   const loadAllStories = () => {
-    $stories.empty();
+    $stories.find('.grid').empty();
     getAllStories().then(result => {
       for (const story of result.stories) {
-        $stories.append(createStoryPreview(story));
+        $stories.find('.grid').append(createStoryPreview(story));
       }
     });
   };
   window.loadAllStories = loadAllStories;
 
   const loadMyStories = () => {
-    $stories.empty();
+    $stories.find('.grid').empty();
     getMyStories().then(result => {
       for (const story of result.stories) {
-        $stories.append(createStoryPreview(story));
+        $stories.find('.grid').append(createStoryPreview(story));
       }
     });
   };

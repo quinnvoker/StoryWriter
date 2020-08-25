@@ -39,22 +39,7 @@
          </ul>
       </div>
    </nav>
-    <header>
-      <section class="compose-story">
-       <div class="error-panel">
-         <p class="error"></p>
-       </div>
-       <h2 class="tagline"><span class="highlight">Create.</span> Collaborate.</h2>
-       <form id="new-story" method="POST" action="/tweets/">
-        <input name="title" placeholder="Story Title">
-         <textarea name="text" id="tweet-text" placeholder="Start your story..."></textarea>
-         <input name="cover-image" placeholder="Cover image URL">
-         <div>
-           <button id="submit-story" type="submit">Post Story</button>
-         </div>
-       </form>
-     </section>
-   </header>
+
     <main id="main-content"></main>
 
     <script src="scripts/views_manager.js"></script>
@@ -62,6 +47,7 @@
     <script src="scripts/app.js"></script>
 
     <!-- load all components -->
+    <script src="scripts/components/compose_story.js"></script>
     <script src="scripts/components/story.js"></script>
     <script src="scripts/components/stories.js"></script>
 

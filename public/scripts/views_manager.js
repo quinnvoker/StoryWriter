@@ -6,10 +6,13 @@ $(() => {
     show(item) {
       $story.detach();
       $stories.detach();
+      $composeStory.detach();
 
       switch (item) {
         case 'home':
-          $home.appendTo($main);
+          $composeStory.appendTo($main);
+          loadAllStories();
+          $stories.appendTo($main);
           break;
         case 'stories':
           loadAllStories();

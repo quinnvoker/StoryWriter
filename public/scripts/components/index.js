@@ -1,5 +1,5 @@
 $(() => {
 
-  views_manager.show('stories');
+  views_manager.show('home');
 
 });
