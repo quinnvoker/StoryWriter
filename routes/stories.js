@@ -40,10 +40,10 @@ module.exports = (queryFunctions) => {
 
   // Read
   router.get("/:id", (req, res) => {
-    const story_id = req.params.id;
-    db.query(`SELECT * FROM stories WHERE id = $1 AND deleted = FALSE;`, [story_id])
-      .then(data => {
-        const story = data.rows[0];
+    let options = {};
+    options.story_id = req.params.id;
+    queryFunctions.getAcceptedContributionByStoryId(options)
+      .then(story => {
         res.json({ story});
       })
       .catch(err => {
