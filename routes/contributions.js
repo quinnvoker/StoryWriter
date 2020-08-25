@@ -60,8 +60,14 @@ module.exports = (queryFunctions) => {
   // ADD
   router.post("/", (req, res) => {
     const user_id = req.session.user_id;
-    const { story_id, content } = req.body;
-    const newContribution = [story_id, user_id, content];
+    const { story_id, content, accepted } = req.body;
+    console.log(req.body);
+    const newContribution = {
+      user_id,
+      story_id,
+      content,
+      accepted
+    };
     queryFunctions.createContribution(newContribution)
       .then(contribution => {
         res.json({ contribution });

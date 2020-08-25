@@ -126,16 +126,17 @@ exports.getAcceptedContributionByStoryId = getAcceptedContributionByStoryId;
  */
 
 const createContribution = function(options) {
+  let queryParams = [options.story_id, options.user_id, options.content];
   const queryString = `
   INSERT INTO
     contributions
-    (story_id, user_id, content)
+    (story_id, user_id, content ${options.accepted ? ', accepted_at' : ''})
     VALUES
-      ($1, $2, $3)
+      ($1, $2, $3 ${options.accepted ? ', CURRENT_TIMESTAMP' : ''})
     RETURNING
       *
   `;
-  return db.query(queryString, options)
+  return db.query(queryString, queryParams)
     .then(resolve => resolve.rows[0]);
 };
 exports.createContribution = createContribution;

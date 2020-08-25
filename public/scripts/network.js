@@ -35,5 +35,5 @@ const addContribution = (data) => {
 
 const addVote = (data) => {
   const contribution_id = data.contribution_id;
-  return $.ajax(`/api/votes/${contribution_id}`, { data });
+  return $.ajax(`/api/votes/${contr}`, { data });
 };
