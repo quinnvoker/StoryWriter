@@ -3,63 +3,34 @@ $(() => {
   const $story = $(`
   <div class="content stories">
     <div class="story-container">
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
       <h2 class="title-tagline"> Story Title </h2>
-      <div class="progress">
-        <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
       </div>
+      <div class="col-md-6 col-sm-12 text-right">
+        <p class="status"> In Progress </p>
+      </div>
+    </div>
       <section class="approved-contributions">
-      <div class="card odd">
-      <div class="card-body">
-        <p class="user"> User 1 wrote:</p>
-        <p>text</p>
-      </div>
-    </div>
-    <div class="card even">
-      <div class="card-body">
-        This is some text within a card body.
-      </div>
-    </div>
+        <div class="card odd">
+          <div class="card-body">
+            <p class="user"> User 1 wrote:</p>
+            <p>text</p>
+          </div>
+        </div>
       </section>
-      <section class="contribution-form compose-story">
-      <h2>Add to the story</h2>
-       <form id="new-story" method="POST" action="/tweets/">
-         <textarea name="text" id="tweet-text" placeholder="Start your story..."></textarea>
-         <input name="cover-image" placeholder="Cover image URL">
-         <div>
-           <button id="submit-story" type="submit">Post Story</button>
-         </div>
-       </form>
+      <section class="contribution-form">
+      <button type="button" class="orange" data-toggle="modal" data-target="#exampleModal">Continue the adventure</button>
       </section>
       <section class="unapproved-contributions">
-      <div class="row">
-  <div class="col-sm-4">
-    <div class="card">
+      <div class="card" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title">Special title treatment</h5>
         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
+        <i class="fas fa-thumbs-up"></i><span class="like-counter">10</span>
+        <a href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
       </div>
     </div>
-  </div>
-  <div class="col-sm-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-4">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
-  </div>
-</div>
       </section>
     <div>
   </div>
