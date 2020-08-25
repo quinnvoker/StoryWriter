@@ -29,6 +29,7 @@ $(() => {
           $stories.appendTo($main);
           break;
         case 'story':
+          generateStoryView(window.targetStoryId);
           $story.appendTo($main);
           $composeContribution.appendTo($main);
           break;
