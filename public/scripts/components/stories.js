@@ -1,7 +1,7 @@
 $(() => {
   const createStoryPreview = (story) => {
     const $story = $(`
-    <figure id="story-${story.id}" class="effect-sadie">
+    <figure id="story-${story.story_id}" class="effect-sadie">
       <img alt="img01"/>
       <figcaption>
         <h2></h2>
@@ -10,8 +10,8 @@ $(() => {
     </figure>
     `);
 
-    $story.find('img').attr('src', story.cover_image_url);
-    $story.find('h2').text(story.title);
+    $story.find('img').attr('src', story.story_cover_url);
+    $story.find('h2').text(story.story_title);
 
     return $story;
   };
