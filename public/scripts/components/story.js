@@ -24,7 +24,7 @@ $(() => {
       </section>
       <section class="unapproved-contributions">
       <div id="contribution-1" class="card" style="width: 18rem;">
-      <div class="card-body">
+      <div class="card-body" id="contribution-1">
         <h5 class="card-title">Special title treatment</h5>
         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
         <i class="fas fa-thumbs-up"></i><span class="like-counter">10</span>
@@ -81,10 +81,10 @@ $(() => {
       </article>`
   }
 
-  // window.$stories.find($('figure[id*=story-]')).on('click',function() {
-  //   $('header').hide();
-  //   views_manager.show('story');
-  // });
+  window.$story.find($('#contribution-id')).on('click',function() {
+    $('header').hide();
+    views_manager.show('contribution');
+  });
 });
 
 
