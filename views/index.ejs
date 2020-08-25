@@ -22,43 +22,9 @@
 
     <script src="https://kit.fontawesome.com/cff85b250e.js" crossorigin="anonymous"></script>
 
-    <script type="text/javascript" src="/scripts/app.js"></script>
   </head>
   <body>
-    <nav>
-      <div class="menu-icon">
-         <i class="fa fa-bars fa-2x"></i>
-      </div>
-      <div class="logo">
-         Story_Writer.
-      </div>
-      <div class="menu">
-         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a id="my-stories" href="#">My Stories</a></li>
-            <li><a id="contributions" href="#">Contributions</a></li>
-            <!-- <li><a href="#">Contact</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">Contact</a></li> -->
-         </ul>
-      </div>
-   </nav>
-    <header>
-      <section class="compose-story">
-       <div class="error-panel">
-         <p class="error"></p>
-       </div>
-       <h2 class="tagline"><span class="highlight">Create.</span> Collaborate.</h2>
-       <form id="new-story" method="POST" action="/tweets/">
-        <input name="title" placeholder="Story Title">
-         <textarea name="text" id="tweet-text" placeholder="Start your story..."></textarea>
-         <input name="cover-image" placeholder="Cover image URL">
-         <div>
-           <button id="submit-story" type="submit">Post Story</button>
-         </div>
-       </form>
-     </section>
-   </header>
+
     <main id="main-content"></main>
     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -83,13 +49,14 @@
       </div>
     </div>
     <script src="scripts/views_manager.js"></script>
+    <script src="scripts/network.js"></script>
+    <script src="scripts/app.js"></script>
 
     <!-- load all components -->
-    <script src="scripts/components/test_1.js"></script>
-    <script src="scripts/components/test_2.js"></script>
-    <script src="scripts/components/home.js"></script>
-    <script src="scripts/components/my_stories.js"></script>
+    <script src="scripts/components/navbar.js"></script>
+    <script src="scripts/components/compose_story.js"></script>
     <script src="scripts/components/story.js"></script>
+    <script src="scripts/components/stories.js"></script>
 
     <!-- load index component to show others -->
     <script src="scripts/components/index.js"></script>

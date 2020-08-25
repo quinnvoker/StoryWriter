@@ -19,6 +19,7 @@ header {
 
 section.compose-story{
   display:flex;
+  background: #FEFAE0;
   flex-direction: column;
   align-items: center;
   justify-content: center;
@@ -82,15 +83,19 @@ section.compose-story{
 }
 
 .stories{
-  background:#FEFAE0;
   padding-top: 100px;
   /*you just need more content on the page. LOL*/
+}
+
+.my-stories {
+  background:#FEFAE0;
 }
 
 .story-container{
   width:90%;
   margin: 0 auto;
 }
+
 .logo {
   line-height: 60px;
   position: fixed;

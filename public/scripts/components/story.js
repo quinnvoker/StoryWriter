@@ -81,11 +81,10 @@ $(() => {
       </article>`
   }
 
-  window.$myStories.find('#story-1').on('click',function() {
-    $('header').hide();
-    views_manager.show('story');
-  });
-
+  // window.$myStories.find('#story-1').on('click',function() {
+  //   $('header').hide();
+  //   views_manager.show('story');
+  // });
 });
 
 
