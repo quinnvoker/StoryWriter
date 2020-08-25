@@ -14,6 +14,7 @@ $(() => {
     $story.find('h2').text(story.story_title);
 
     $story.on('click',() =>{
+      setTargetStory(story.story_id);
       views_manager.show('story');
     })
 
