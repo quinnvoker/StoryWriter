@@ -17,5 +17,5 @@ $(() => {
   </nav>
   `);
 
-  window.$navbar = $navbar;
+  $navbar.prependTo($('body'));
 });
