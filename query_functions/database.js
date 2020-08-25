@@ -292,13 +292,37 @@ const deleteStory = function(queryParams) {
     WHERE
       id = $1 AND owner_id = $2
     RETURNING
-    *
+    deleted
     `;
   return db.query(queryString, queryParams)
     .then(resolve => resolve.rows[0])
     .catch(error=> console.error(error));
 };
 exports.deleteStory = deleteStory;
+
+/** Delete a contribution
+ * @param {contribution_id, user_id} array with contribution_id and user_id
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+const deleteContribution = function(queryParams) {
+  const queryString = `
+  UPDATE
+    contributions
+    SET
+      deleted = TRUE
+    WHERE
+      id = $1 AND user_id = $2
+    RETURNING
+      deleted
+    `;
+  return db.query(queryString, queryParams)
+    .then(resolve => resolve.rows[0])
+    .catch(error=> console.error(error));
+};
+exports.deleteContribution = deleteContribution;
+
+
 
 /** Create new vote
  * @param {user_id: integer} user_id
