@@ -17,6 +17,24 @@ $(() => {
 
   window.createApprovedContr = createApprovedContr;
 
+  const createPendingContr = (contrObj) => {
+    const $pendingContr = $(`
+    <section class="pending-contributions">
+      <div class="card odd">
+        <div class="card-body">
+          <p class="author"></p>
+          <p class="content"></p>
+        </div>
+      </div>
+    </section>
+    `);
+    $pendingContr.find('.author').html(contrObj.contribution_author_name);
+    $pendingContr.find('.content').html(contrObj.contribution_content);
+    return $pendingContr;
+  };
+
+  window.createPendingContr = createPendingContr;
+
   const $story = $(`
   <div class="content stories">
     <div class="story-container">
