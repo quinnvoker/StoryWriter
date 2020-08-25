@@ -38,7 +38,7 @@ $(() => {
 
   window.createPendingContr = createPendingContr;
 
-  const createStoryInfo = (storyObj) => {
+  const createStoryInfo = (contrArray) => {
     const $storyInfo = $(`
     <div class="row">
       <div class="col-md-6 col-sm-12">
@@ -49,8 +49,11 @@ $(() => {
       </div>
     </div>
     `);
-    $storyInfo.find('.title-tagline').text(storyObj.story_title);
-    $storyInfo.find('.status').text(`${storyObj.completed ? 'Completed' : 'In Progress'}`);
+    let contrObj = contrArray[0];
+    $storyInfo.find('.title-tagline').text(contrObj.story_title);
+    $storyInfo.find('.status').text(`${contrObj.completed ? 'Completed' : 'In Progress'}`);
+
+    return $storyInfo;
   };
 
   window.createStoryInfo = createStoryInfo;
@@ -58,16 +61,41 @@ $(() => {
   const $story = $(`
   <div class="content stories">
     <div class="story-container">
+
       <div class="story-info></div>
+
       <div class="approved-container"></div>
+
       <section class="contribution-form">
         <button type="button" class="orange" data-toggle="modal" data-target="#exampleModal">Continue the adventure</button>
       </section>
+
       <div class="pending-container"></div>
+
     <div>
   </div>
   `);
+
   window.$story = $story;
+
+  const generateStoryView = (storyId) => {
+    $.get(`/api/stories/${storyId}`)
+      .then(apprContrs => {
+        $story.find('.story-info').append(createStoryInfo(apprContrs));
+        for (const contribution of apprContrs) {
+          $story.find('.approved-container').append(createApprovedContr(contribution));
+        }
+      });
+    $.get(`/api/contribution/story/${storyId}`)
+      .then(pendContrs => {
+        for (const contribution of pendContrs) {
+          $story.find('.pending-container').append(createPendingContr(contribution));
+        }
+      });
+  };
+
+  window.generateStoryView = generateStoryView;
+
   window.story = {};
 
   function addContributionEntry(contribution) {
