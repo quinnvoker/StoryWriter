@@ -279,3 +279,27 @@ const createStory = function(options) {
     .catch(error=> console.error(error));
 };
 exports.createStory = createStory;
+
+/** Create new story entry
+ * @param {user_id: integer} user_id
+ * @param {story_id: integer} story_id
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+const deleteStory = function(queryParams) {
+  const queryString = `
+  UPDATE
+    stories
+    SET
+      deleted = TRUE
+    WHERE
+      id = $1 AND owner_id = $2
+    RETURNING
+    *
+    `;
+  return db.query(queryString, queryParams)
+    .then(resolve => resolve.rows[0])
+    .catch(error=> console.error(error));
+};
+
+exports.deleteStory = deleteStory;
