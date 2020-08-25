@@ -7,6 +7,7 @@ $(() => {
       $story.detach();
       $composeStory.detach();
       $stories.detach();
+      $contribution.detach();
 
       // reset background color of stories component
       $stories.removeClass('my-stories');
@@ -28,6 +29,9 @@ $(() => {
           break;
         case 'story':
           $story.appendTo($main);
+          break;
+        case 'contribution':
+          $contribution.appendTo($main);
           break;
       };
     }

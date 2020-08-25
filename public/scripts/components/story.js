@@ -23,12 +23,12 @@ $(() => {
       <button type="button" class="orange" data-toggle="modal" data-target="#exampleModal">Continue the adventure</button>
       </section>
       <section class="unapproved-contributions">
-      <div id="contribution-1" class="card" style="width: 18rem;">
+      <div  class="card" style="width: 18rem;">
       <div class="card-body" id="contribution-1">
         <h5 class="card-title">Special title treatment</h5>
         <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
         <i class="fas fa-thumbs-up"></i><span class="like-counter">10</span>
-        <a href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
+        <a id="contribution-1" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
       </div>
     </div>
       </section>
@@ -81,7 +81,7 @@ $(() => {
       </article>`
   }
 
-  window.$story.find($('#contribution-id')).on('click',function() {
+  window.$story.find('#contribution-1').on('click',function() {
     $('header').hide();
     views_manager.show('contribution');
   });
