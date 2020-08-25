@@ -25,8 +25,8 @@ $(() => {
 
   const loadAllStories = () => {
     $stories.find('.grid').empty();
-    getAllStories().then(result => {
-      for (const story of result.stories) {
+    getAllStories().then(stories => {
+      for (const story of stories) {
         $stories.find('.grid').append(createStoryPreview(story));
       }
     });
@@ -35,8 +35,8 @@ $(() => {
 
   const loadMyStories = () => {
     $stories.find('.grid').empty();
-    getMyStories().then(result => {
-      for (const story of result.stories) {
+    getMyStories().then(stories => {
+      for (const story of stories) {
         $stories.find('.grid').append(createStoryPreview(story));
       }
     });
