@@ -58,14 +58,15 @@ module.exports = (queryFunctions) => {
 
   // ADD
   router.post("/", (req, res) => {
+    console.log(req.body);
     let options = {
       user_id: req.session.user_id,
       title: req.body.title,
       cover_image_url: req.body.cover_image_url
     };
     queryFunctions.createStory(options)
-      .then(storyId => {
-        res.json({ storyId });
+      .then(result => {
+        res.json({ story_id: result.story_id });
       })
       .catch(err => {
         res
