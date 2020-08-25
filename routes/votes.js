@@ -13,7 +13,7 @@ module.exports = (queryFunctions) => {
     const queryParams = [req.session.user_id, req.params.id];
     queryFunctions.createVote(queryParams)
       .then(vote => {
-        res.json({ vote });
+        res.json(vote);
       })
       .catch(err => {
         res

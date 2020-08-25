@@ -17,7 +17,7 @@ module.exports = (queryFunctions) => {
     };
     queryFunctions.getContributionsByUserId(options)
       .then(contributions => {
-        res.json({ contributions });
+        res.json(contributions);
       })
       .catch(err => {
         res
@@ -33,7 +33,7 @@ module.exports = (queryFunctions) => {
     };
     queryFunctions.getPendingContributionByStoryId(options)
       .then(contributions => {
-        res.json({ contributions});
+        res.json(contributions);
       })
       .catch(err => {
         res
@@ -70,7 +70,7 @@ module.exports = (queryFunctions) => {
     };
     queryFunctions.createContribution(newContribution)
       .then(contribution => {
-        res.json({ contribution });
+        res.json(contribution);
       })
       .catch(err => {
         res
@@ -87,7 +87,7 @@ module.exports = (queryFunctions) => {
     queryFunctions.deleteContribution(queryParams)
       .then(contribution => {
         if (contribution) {
-          res.json({ contribution });
+          res.json(contribution);
         } else {
           throw new Error('Contribution not found!');
         }

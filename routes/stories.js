@@ -15,7 +15,7 @@ module.exports = (queryFunctions) => {
     queryFunctions.getAllStories(options)
       .then(stories => {
         console.log(stories);
-        res.json({ stories });
+        res.json(stories);
       })
       .catch(err => {
         res
@@ -30,7 +30,7 @@ module.exports = (queryFunctions) => {
     };
     queryFunctions.getAllStories(options)
       .then(stories => {
-        res.json({ stories });
+        res.json(stories);
       })
       .catch(err => {
         res
@@ -46,7 +46,7 @@ module.exports = (queryFunctions) => {
     };
     queryFunctions.getAcceptedContributionByStoryId(options)
       .then(story => {
-        res.json({ story});
+        res.json(story);
       })
       .catch(err => {
         res
@@ -66,7 +66,7 @@ module.exports = (queryFunctions) => {
     };
     queryFunctions.createStory(options)
       .then(result => {
-        res.json({ story_id: result.story_id });
+        res.json(result);
       })
       .catch(err => {
         res
@@ -84,7 +84,7 @@ module.exports = (queryFunctions) => {
     queryFunctions.deleteStory(options)
       .then(deletedStory => {
         if (deletedStory) {
-          res.json({ deletedStory });
+          res.json(deletedStory);
         } else {
           throw new Error('Story not found!');
         }
