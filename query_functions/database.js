@@ -301,5 +301,26 @@ const deleteStory = function(queryParams) {
     .then(resolve => resolve.rows[0])
     .catch(error=> console.error(error));
 };
-
 exports.deleteStory = deleteStory;
+
+/** Create new story entry
+ * @param {user_id: integer} user_id
+ * @param {contribution_id: integer} contribution_id
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+const voteAContribution = function(queryParams) {
+  const queryString = `
+  INSERT INTO
+    votes
+    (user_id, contribution_id)
+    VALUES
+      ($1, $2)
+    RETURNING
+      *
+  `;
+  return db.query(queryString, queryParams)
+    .then(resolve => resolve.rows[0])
+    .catch(error=> console.error(error));
+};
+exports.voteAContribution = voteAContribution;
