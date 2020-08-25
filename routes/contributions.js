@@ -47,7 +47,7 @@ module.exports = (queryFunctions) => {
     const contributionId = [req.params.id];
     queryFunctions.getContributionById(contributionId)
       .then(contribution => {
-        res.json({ contribution});
+        res.json(contribution);
       })
       .catch(err => {
         res
