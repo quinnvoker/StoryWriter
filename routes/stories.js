@@ -8,12 +8,13 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (db) => {
+module.exports = (queryFunctions) => {
   // Browse
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM stories WHERE deleted = FALSE;`)
-      .then(data => {
-        const stories = data.rows;
+    let options = {};
+    queryFunctions.getAllStories(options)
+      .then(stories => {
+        console.log(stories);
         res.json({ stories });
       })
       .catch(err => {
