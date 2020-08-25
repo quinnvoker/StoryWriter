@@ -6,6 +6,7 @@ $(() => {
     show(item) {
       $story.detach();
       $composeStory.detach();
+      $composeContribution.detach();
       $stories.detach();
       $contribution.detach();
 
@@ -29,6 +30,7 @@ $(() => {
           break;
         case 'story':
           $story.appendTo($main);
+          $composeContribution.appendTo($main);
           break;
         case 'contribution':
           $contribution.appendTo($main);
