@@ -26,6 +26,22 @@ module.exports = (queryFunctions) => {
       });
   });
 
+  // Browse pending contributions based on story_id
+  router.get('/story/:id', (req, res) => {
+    const options = {
+      story_id: req.params.id
+    };
+    queryFunctions.getPendingContributionByStoryId(options)
+      .then(contributions => {
+        res.json({ contributions});
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
   // Read
   router.get("/:id", (req, res) => {
     const contributionId = [req.params.id];
