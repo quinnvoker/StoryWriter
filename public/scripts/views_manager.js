@@ -5,8 +5,11 @@ $(() => {
   window.views_manager = {
     show(item) {
       $story.detach();
-      $stories.detach();
       $composeStory.detach();
+      $stories.detach();
+
+      // reset background color of stories component
+      $stories.removeClass('my-stories');
 
       switch (item) {
         case 'home':
@@ -19,6 +22,7 @@ $(() => {
           $stories.appendTo($main);
           break;
         case 'myStories':
+          $stories.addClass('my-stories');
           loadMyStories();
           $stories.appendTo($main);
           break;

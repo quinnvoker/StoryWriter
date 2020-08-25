@@ -84,9 +84,12 @@ section.compose-story{
 }
 
 .stories{
-  /* background:#FEFAE0; */
   padding-top: 100px;
   /*you just need more content on the page. LOL*/
+}
+
+.my-stories {
+  background:#FEFAE0;
 }
 
 .story-container{
