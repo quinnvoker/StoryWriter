@@ -101,17 +101,20 @@ exports.getContributionsByUserId = getContributionsByUserId;
 const getAcceptedContributionByStoryId = function(options) {
   const queryString = `
   SELECT
+    stories.title AS story_title,
+    stories.completed AS completed,
     contributions.id AS contribution_id,
     users.name AS contribution_author_name,
     accepted_at AS contribution_accepted_at_time,
     content AS contribution_content
     FROM
       contributions
+      JOIN stories ON story_id = stories.id
       JOIN users ON user_id = users.id
     WHERE
       story_id = $1
       AND accepted_at IS NOT NULL
-      AND deleted = FALSE
+      AND contributions.deleted = FALSE
     ORDER BY
       accepted_at;
   `;
