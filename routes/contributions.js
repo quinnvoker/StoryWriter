@@ -46,9 +46,8 @@ module.exports = (queryFunctions) => {
     const user_id = req.session.user_id;
     const { story_id, content } = req.body;
     const newContribution = [story_id, user_id, content];
-    db.query(`INSERT INTO contributions (story_id, user_id, content) VALUES ($1, $2, $3) RETURNING *`, newContribution)
-      .then(data => {
-        const contribution = data.rows[0];
+    queryFunctions.createContribution(newContribution)
+      .then(contribution => {
         res.json({ contribution });
       })
       .catch(err => {

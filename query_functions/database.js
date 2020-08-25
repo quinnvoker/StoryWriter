@@ -125,7 +125,7 @@ exports.getAcceptedContributionByStoryId = getAcceptedContributionByStoryId;
  * @return {Promise<{}>} A promise to the user.
  */
 
-const createContribution = function(newContribution) {
+const createContribution = function(options) {
   const queryString = `
   INSERT INTO
     contributions
@@ -135,9 +135,7 @@ const createContribution = function(newContribution) {
     RETURNING
       *
   `;
-  const { story_id, user_id, content } = newContribution;
-  const queryParams = [story_id, user_id, content];
-  return db.query(queryString, queryParams)
+  return db.query(queryString, options)
     .then(resolve => resolve.rows[0]);
 };
 exports.createContribution = createContribution;
