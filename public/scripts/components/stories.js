@@ -15,12 +15,12 @@ $(() => {
 
     $story.on('click',() =>{
       views_manager.show('story');
-    })
+    });
 
     return $story;
   };
 
-  const $stories = $(`<div class="content stories"><div class="grid"></div></div>`);
+  const $stories = $(`<div class="content stories"><div class="story-container"><div class="grid"></div></div></div>`);
   window.$stories = $stories;
 
   const loadAllStories = () => {

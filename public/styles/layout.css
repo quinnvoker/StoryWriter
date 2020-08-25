@@ -4,10 +4,16 @@ html, body {
   width: 100%;
 }
 
-body {
-  font-family: "Helvetica Neue",sans-serif;
-  font-weight: lighter;
-  /* background:#606C38; */
+body{
+  font-family: 'Comic Neue', cursive;
+}
+
+.logo,
+h1,
+h2,
+h3 {
+  font-family: 'Archivo Black', sans-serif;
+
 }
 
 header {
@@ -38,7 +44,7 @@ section.compose-story{
 
 .compose-story input{
   margin: 5px 0;
-  border-radius: 3px;
+  /* border-radius: 3px; */
   padding: 5px;
   border:1px solid #BC6C25;
 }
@@ -46,7 +52,7 @@ section.compose-story{
   width: 650px;
   height: 200px;
   margin: 5px 0;
-  border-radius: 3px;
+  /* border-radius: 3px; */
   padding: 5px;
   border:1px solid #BC6C25;
   resize:none;
@@ -84,15 +90,15 @@ section.compose-story{
 
 .stories{
   padding-top: 100px;
-  /*you just need more content on the page. LOL*/
 }
 
 .my-stories {
+  min-height:100%;
   background:#FEFAE0;
 }
 
 .story-container{
-  width:90%;
+  width:95%;
   margin: 0 auto;
 }
 
@@ -305,9 +311,9 @@ figure.effect-sadie:hover p {
 }
 
 
-.title-tagline{
+.tagline{
   color:#BC6C25;
-  font-size: 20px;
+  /* font-size: 20px; */
 }
 
 .status{
@@ -391,3 +397,23 @@ figure.effect-sadie:hover p {
   border:none;
   border-radius:3px;
 }
+
+/* .my-contributions{
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+} */
+.my-contributions .card{
+  border:1px solid #BC6C25;
+  max-width: 420px;
+  font-size: 15px;
+  margin: 5px;
+  border-radius:0;
+}
+
+
+.my-contributions .card a{
+  text-align:right;
+  float:right;
+}
+

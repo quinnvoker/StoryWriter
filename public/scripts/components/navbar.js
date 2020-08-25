@@ -33,5 +33,9 @@ $(() => {
     views_manager.show('myStories');
   });
 
+  $navbar.find('#contributions').click(() => {
+    views_manager.show('contributions');
+  });
+
   $navbar.prependTo($('body'));
 });
