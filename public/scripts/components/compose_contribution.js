@@ -9,8 +9,8 @@ $(() => {
           </button>
         </div>
         <div class="modal-body">
-          <form id="new-story" method="POST" action="/tweets/">
-            <textarea name="text" id="tweet-text" placeholder="Continue the adventure..."></textarea>
+          <form id="new-story">
+            <textarea name="text" id="contribution-content" placeholder="Continue the adventure..."></textarea>
             <div>
             </div>
           </form>
@@ -23,6 +23,25 @@ $(() => {
     </div>
   </div>
   `);
+
+  window.targetStoryId = -1;
+
+  const setTargetStory = (storyId) => {
+    window.targetStoryId = storyId;
+  };
+  window.setTargetStory = setTargetStory;
+
+  $composeContribution.find('#submit-contribution')
+    .click((event) => {
+      event.preventDefault();
+      const content = $composeContribution.find('#contribution-content').val();
+
+      const contributionData = { content, story_id: window.targetStoryId };
+      addContribution(contributionData)
+        .then(result => {
+          console.log(result);
+        });
+    });
 
   window.$composeContribution = $composeContribution;
 });

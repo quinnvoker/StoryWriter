@@ -26,12 +26,12 @@ $(() => {
     const cover_image_url = $composeStory.find('#new-story-cover').val();
 
     const storyData = {title, cover_image_url};
-    $.ajax('/api/stories', {method: 'POST', data: storyData})
+    addStory(storyData)
       .then(result => {
         const content = $composeStory.find('#contribution-content').val();
         const contributionData = { content, story_id: result.story_id, accepted: true };
 
-        $.ajax('api/contributions', { method: 'POST', data: contributionData })
+        addContribution(contributionData)
           .then(result => {
             console.log(result);
           });
