@@ -17,7 +17,7 @@ $(() => {
 
   const createPendingContr = (contrObj) => {
     const $pendingContr = $(`
-        <div  class="card" style="width: 18rem;">
+        <div class="card" style="width: 18rem;">
           <div class="card-body" id="contribution-1">
             <h5 class="card-title author"></h5>
             <p class="card-text content"></p>
@@ -92,7 +92,7 @@ $(() => {
           $approved.append(createApprovedContr(contribution));
         }
       });
-    $.get(`/api/contribution/story/${storyId}`)
+    $.get(`/api/contributions/story/${storyId}`)
       .then(pendContrs => {
         for (const contribution of pendContrs) {
           $pending.append(createPendingContr(contribution));
