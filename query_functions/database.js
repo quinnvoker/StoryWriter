@@ -278,9 +278,8 @@ const createStory = function(options) {
 };
 exports.createStory = createStory;
 
-/** Create new story entry
- * @param {user_id: integer} user_id
- * @param {story_id: integer} story_id
+/** Delete a story
+ * @param {story_id, user_id} array with story_id and user_id
  * @return {Promise<{}>} A promise to the user.
  */
 
@@ -301,13 +300,13 @@ const deleteStory = function(queryParams) {
 };
 exports.deleteStory = deleteStory;
 
-/** Create new story entry
+/** Create new vote
  * @param {user_id: integer} user_id
  * @param {contribution_id: integer} contribution_id
  * @return {Promise<{}>} A promise to the user.
  */
 
-const voteAContribution = function(queryParams) {
+const createVote = function(queryParams) {
   const queryString = `
   INSERT INTO
     votes
@@ -321,4 +320,4 @@ const voteAContribution = function(queryParams) {
     .then(resolve => resolve.rows[0])
     .catch(error=> console.error(error));
 };
-exports.voteAContribution = voteAContribution;
+exports.createVote = createVote;
