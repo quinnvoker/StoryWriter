@@ -33,6 +33,7 @@ $(() => {
 
         addContribution(contributionData)
           .then(result => {
+            $composeStory.find('#new-story')[0].reset();
             console.log(result);
           });
       });
