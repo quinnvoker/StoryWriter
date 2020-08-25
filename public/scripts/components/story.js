@@ -19,54 +19,51 @@ $(() => {
 
   const createPendingContr = (contrObj) => {
     const $pendingContr = $(`
-    <section class="pending-contributions">
-      <div class="card odd">
-        <div class="card-body">
-          <p class="author"></p>
-          <p class="content"></p>
+      <section class="pending-contributions">
+        <div  class="card" style="width: 18rem;">
+          <div class="card-body" id="contribution-1">
+            <h5 class="card-title author"></h5>
+            <p class="card-text content"></p>
+            <i class="fas fa-thumbs-up"></i><span class="like-counter"></span>
+            <a id="contribution-1" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
     `);
     $pendingContr.find('.author').html(contrObj.contribution_author_name);
     $pendingContr.find('.content').html(contrObj.contribution_content);
+    $pendingContr.find('.like-counter').html(contrObj.contribution_vote_count);
     return $pendingContr;
   };
 
   window.createPendingContr = createPendingContr;
 
+  const createStoryInfo = (storyObj) => {
+    const $storyInfo = $(`
+    <div class="row">
+      <div class="col-md-6 col-sm-12">
+        <h2 class="title-tagline"></h2>
+      </div>
+      <div class="col-md-6 col-sm-12 text-right">
+        <p class="status"></p>
+      </div>
+    </div>
+    `);
+    $storyInfo.find('.title-tagline').text(storyObj.story_title);
+    $storyInfo.find('.status').text(`${storyObj.completed ? 'Completed' : 'In Progress'}`);
+  };
+
+  window.createStoryInfo = createStoryInfo;
+
   const $story = $(`
   <div class="content stories">
     <div class="story-container">
-    <div class="row">
-      <div class="col-md-6 col-sm-12">
-      <h2 class="title-tagline"> Story Title </h2>
-      </div>
-      <div class="col-md-6 col-sm-12 text-right">
-        <p class="status"> In Progress </p>
-      </div>
-    </div>
-      <section class="approved-contributions">
-        <div class="card odd">
-          <div class="card-body">
-            <p class="user"> User 1 wrote:</p>
-            <p>text</p>
-          </div>
-        </div>
-      </section>
+      <div class="story-info></div>
+      <div class="approved-container"></div>
       <section class="contribution-form">
-      <button type="button" class="orange" data-toggle="modal" data-target="#exampleModal">Continue the adventure</button>
+        <button type="button" class="orange" data-toggle="modal" data-target="#exampleModal">Continue the adventure</button>
       </section>
-      <section class="unapproved-contributions">
-      <div  class="card" style="width: 18rem;">
-      <div class="card-body" id="contribution-1">
-        <h5 class="card-title">Special title treatment</h5>
-        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <i class="fas fa-thumbs-up"></i><span class="like-counter">10</span>
-        <a id="contribution-1" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
-      </div>
-    </div>
-      </section>
+      <div class="pending-container"></div>
     <div>
   </div>
   `);
