@@ -268,17 +268,23 @@ exports.getContributionById = getContributionById;
  */
 
 const createStory = function(options) {
+  const coverUrlEmpty = options.cover_image_url.length < 1;
+
   const queryString = `
   INSERT INTO
     stories
-    (owner_id, title, cover_image_url)
+    (owner_id, title ${!coverUrlEmpty ? ', cover_image_url' : '' })
     VALUES
-      ($1, $2, $3)
+      ($1, $2 ${!coverUrlEmpty ? ', $3' : '' })
     RETURNING
       stories.id as story_id
   `;
-  const {user_id, title, cover_image_url } = options;
-  const queryParams = [user_id, title, cover_image_url];
+
+  const queryParams = [options.user_id, options.title];
+  if (!coverUrlEmpty) {
+    queryParams.push(options.cover_image_url);
+  }
+
   return db.query(queryString, queryParams)
     .then(resolve => resolve.rows[0])
     .catch(error=> console.error(error));
