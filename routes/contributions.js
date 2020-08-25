@@ -28,10 +28,9 @@ module.exports = (queryFunctions) => {
 
   // Read
   router.get("/:id", (req, res) => {
-    const contributionId = req.params.id;
-    db.query(`SELECT * FROM contributions WHERE id = $1 AND deleted = FALSE;`, [contributionId])
-      .then(data => {
-        const contribution = data.rows[0];
+    const contributionId = [req.params.id];
+    queryFunctions.getContributionById(contributionId)
+      .then(contribution => {
         res.json({ contribution});
       })
       .catch(err => {

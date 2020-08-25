@@ -231,7 +231,7 @@ exports.getFavouritesByUserId = getFavouritesByUserId;
  * @return {Promise<{}>} A promise to the user.
  */
 
-const getContributionById = function(options) {
+const getContributionById = function(queryParams) {
   const queryString = `
     SELECT
       story_id AS story_id,
@@ -251,7 +251,7 @@ const getContributionById = function(options) {
         users.name,
         created_at;
   `;
-  return db.query(queryString, [options.contribution_id])
+  return db.query(queryString, queryParams)
     .then(resolve => resolve.rows[0])
     .catch(error=> console.error(error));
 };
