@@ -8,14 +8,15 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (db) => {
+module.exports = (queryFunctions) => {
 
   // Browse based on user_id
   router.get('/', (req, res) => {
-    const user_id = req.session.user_id;
-    db.query(`SELECT * FROM contributions WHERE deleted = FALSE AND user_id = $1;`, [user_id])
-      .then(data => {
-        const contributions = data.rows;
+    const options = {
+      user_id : req.session.user_id
+    };
+    queryFunctions.getContributionsByUserId(options)
+      .then(contributions => {
         res.json({ contributions });
       })
       .catch(err => {

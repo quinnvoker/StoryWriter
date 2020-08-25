@@ -53,7 +53,7 @@ const getAllStories = function(options) {
 };
 exports.getAllStories = getAllStories;
 
-/** Get contributions from the database
+/** Get contributions by user_id from the database
  * @param {user_id: integer} user_id
  * the user_id of contributions, if check myContributions, call with user_id from req.session.
  * @return {Promise<{}>} A promise to the user.
