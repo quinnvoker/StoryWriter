@@ -8,13 +8,11 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (db) => {
+module.exports = (queryFunctions) => {
   router.post("/:id", (req, res) => {
-    const user_id = req.session.user_id;
-    const contribution_id = req.params.id;
-    db.query(`INSERT INTO votes (user_id, contribution_id) VALUES ($1, $2) RETURNING *`, [user_id, contribution_id])
-      .then(data => {
-        const vote = data.rows[0];
+    const queryParams = [req.session.user_id, req.params.id];
+    queryFunctions.createVote(queryParams)
+      .then(vote => {
         res.json({ vote });
       })
       .catch(err => {

@@ -8,15 +8,32 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (db) => {
+module.exports = (queryFunctions) => {
 
   // Browse based on user_id
   router.get('/', (req, res) => {
-    const user_id = req.session.user_id;
-    db.query(`SELECT * FROM contributions WHERE deleted = FALSE AND user_id = $1;`, [user_id])
-      .then(data => {
-        const contributions = data.rows;
+    const options = {
+      user_id : req.session.user_id
+    };
+    queryFunctions.getContributionsByUserId(options)
+      .then(contributions => {
         res.json({ contributions });
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+  // Browse pending contributions based on story_id
+  router.get('/story/:id', (req, res) => {
+    const options = {
+      story_id: req.params.id
+    };
+    queryFunctions.getPendingContributionByStoryId(options)
+      .then(contributions => {
+        res.json({ contributions});
       })
       .catch(err => {
         res
@@ -27,10 +44,9 @@ module.exports = (db) => {
 
   // Read
   router.get("/:id", (req, res) => {
-    const contributionId = req.params.id;
-    db.query(`SELECT * FROM contributions WHERE id = $1 AND deleted = FALSE;`, [contributionId])
-      .then(data => {
-        const contribution = data.rows[0];
+    const contributionId = [req.params.id];
+    queryFunctions.getContributionById(contributionId)
+      .then(contribution => {
         res.json({ contribution});
       })
       .catch(err => {
@@ -46,9 +62,8 @@ module.exports = (db) => {
     const user_id = req.session.user_id;
     const { story_id, content } = req.body;
     const newContribution = [story_id, user_id, content];
-    db.query(`INSERT INTO contributions (story_id, user_id, content) VALUES ($1, $2, $3) RETURNING *`, newContribution)
-      .then(data => {
-        const contribution = data.rows[0];
+    queryFunctions.createContribution(newContribution)
+      .then(contribution => {
         res.json({ contribution });
       })
       .catch(err => {
@@ -62,10 +77,10 @@ module.exports = (db) => {
   router.post("/:id", (req, res) => {
     const contribution_id = req.params.id;
     const user_id = req.session.user_id;
-    db.query(`UPDATE contributions SET deleted = TRUE WHERE id = $1 AND user_id = $2 AND accepted_at IS NULL RETURNING *;`, [contribution_id, user_id])
-      .then(data => {
-        if (data.rows.length > 0) {
-          const contribution = data.rows[0];
+    const queryParams = [contribution_id, user_id];
+    queryFunctions.deleteContribution(queryParams)
+      .then(contribution => {
+        if (contribution) {
           res.json({ contribution });
         } else {
           throw new Error('Contribution not found!');

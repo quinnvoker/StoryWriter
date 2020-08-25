@@ -9,12 +9,7 @@ const bodyParser = require("body-parser");
 const app        = express();
 const morgan     = require('morgan');
 const cookieSession = require('cookie-session');
-
-// PG database client/connection setup
-const { Pool } = require('pg');
-const dbParams = require('./lib/db.js');
-const db = new Pool(dbParams);
-db.connect();
+const queryFunctions = require('./query_functions/database');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -40,10 +35,10 @@ const votesRoutes = require("./routes/votes");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/login", loginRoutes(db));
-app.use("/api/stories", storiesRoutes(db));
-app.use("/api/contributions", contributionsRoutes(db));
-app.use("/api/votes", votesRoutes(db));
+app.use("/login", loginRoutes());
+app.use("/api/stories", storiesRoutes(queryFunctions));
+app.use("/api/contributions", contributionsRoutes(queryFunctions));
+app.use("/api/votes", votesRoutes(queryFunctions));
 // Note: mount other resources here, using the same pattern above
 
 

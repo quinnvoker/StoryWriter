@@ -53,7 +53,7 @@ const getAllStories = function(options) {
 };
 exports.getAllStories = getAllStories;
 
-/** Get contributions from the database
+/** Get contributions by user_id from the database
  * @param {user_id: integer} user_id
  * the user_id of contributions, if check myContributions, call with user_id from req.session.
  * @return {Promise<{}>} A promise to the user.
@@ -125,7 +125,7 @@ exports.getAcceptedContributionByStoryId = getAcceptedContributionByStoryId;
  * @return {Promise<{}>} A promise to the user.
  */
 
-const createContribution = function(newContribution) {
+const createContribution = function(options) {
   const queryString = `
   INSERT INTO
     contributions
@@ -135,9 +135,7 @@ const createContribution = function(newContribution) {
     RETURNING
       *
   `;
-  const { story_id, user_id, content } = newContribution;
-  const queryParams = [story_id, user_id, content];
-  return db.query(queryString, queryParams)
+  return db.query(queryString, options)
     .then(resolve => resolve.rows[0]);
 };
 exports.createContribution = createContribution;
@@ -231,7 +229,7 @@ exports.getFavouritesByUserId = getFavouritesByUserId;
  * @return {Promise<{}>} A promise to the user.
  */
 
-const getContributionById = function(options) {
+const getContributionById = function(queryParams) {
   const queryString = `
     SELECT
       story_id AS story_id,
@@ -251,7 +249,7 @@ const getContributionById = function(options) {
         users.name,
         created_at;
   `;
-  return db.query(queryString, [options.contribution_id])
+  return db.query(queryString, queryParams)
     .then(resolve => resolve.rows[0])
     .catch(error=> console.error(error));
 };
@@ -279,3 +277,71 @@ const createStory = function(options) {
     .catch(error=> console.error(error));
 };
 exports.createStory = createStory;
+
+/** Delete a story
+ * @param {story_id, user_id} array with story_id and user_id
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+const deleteStory = function(queryParams) {
+  const queryString = `
+  UPDATE
+    stories
+    SET
+      deleted = TRUE
+    WHERE
+      id = $1 AND owner_id = $2
+    RETURNING
+    deleted
+    `;
+  return db.query(queryString, queryParams)
+    .then(resolve => resolve.rows[0])
+    .catch(error=> console.error(error));
+};
+exports.deleteStory = deleteStory;
+
+/** Delete a contribution
+ * @param {contribution_id, user_id} array with contribution_id and user_id
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+const deleteContribution = function(queryParams) {
+  const queryString = `
+  UPDATE
+    contributions
+    SET
+      deleted = TRUE
+    WHERE
+      id = $1 AND user_id = $2
+    RETURNING
+      deleted
+    `;
+  return db.query(queryString, queryParams)
+    .then(resolve => resolve.rows[0])
+    .catch(error=> console.error(error));
+};
+exports.deleteContribution = deleteContribution;
+
+
+
+/** Create new vote
+ * @param {user_id: integer} user_id
+ * @param {contribution_id: integer} contribution_id
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+const createVote = function(queryParams) {
+  const queryString = `
+  INSERT INTO
+    votes
+    (user_id, contribution_id)
+    VALUES
+      ($1, $2)
+    RETURNING
+      *
+  `;
+  return db.query(queryString, queryParams)
+    .then(resolve => resolve.rows[0])
+    .catch(error=> console.error(error));
+};
+exports.createVote = createVote;

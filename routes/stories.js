@@ -8,12 +8,13 @@
 const express = require('express');
 const router  = express.Router();
 
-module.exports = (db) => {
+module.exports = (queryFunctions) => {
   // Browse
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM stories WHERE deleted = FALSE;`)
-      .then(data => {
-        const stories = data.rows;
+    let options = {};
+    queryFunctions.getAllStories(options)
+      .then(stories => {
+        console.log(stories);
         res.json({ stories });
       })
       .catch(err => {
@@ -24,10 +25,11 @@ module.exports = (db) => {
   });
   // Browse based on owner_id
   router.get('/mystories', (req, res) => {
-    const owner_id = req.session.user_id;
-    db.query(`SELECT * FROM stories WHERE deleted = FALSE AND owner_id = $1;`, [owner_id])
-      .then(data => {
-        const stories = data.rows;
+    let options = {
+      user_id : req.session.user_id,
+    };
+    queryFunctions.getAllStories(options)
+      .then(stories => {
         res.json({ stories });
       })
       .catch(err => {
@@ -39,10 +41,11 @@ module.exports = (db) => {
 
   // Read
   router.get("/:id", (req, res) => {
-    const story_id = req.params.id;
-    db.query(`SELECT * FROM stories WHERE id = $1 AND deleted = FALSE;`, [story_id])
-      .then(data => {
-        const story = data.rows[0];
+    let options = {
+      story_id: req.params.id,
+    };
+    queryFunctions.getAcceptedContributionByStoryId(options)
+      .then(story => {
         res.json({ story});
       })
       .catch(err => {
@@ -55,13 +58,14 @@ module.exports = (db) => {
 
   // ADD
   router.post("/", (req, res) => {
-    const owner_id = req.session.user_id;
-    const { title, cover_image_url } = req.body;
-    const newStory = [owner_id, title, cover_image_url];
-    db.query(`INSERT INTO stories (owner_id, title, cover_image_url) VALUES ($1, $2, $3) RETURNING *`, newStory)
-      .then(data => {
-        const story = data.rows[0];
-        res.json({ story });
+    let options = {
+      user_id: req.session.user_id,
+      title: req.body.title,
+      cover_image_url: req.body.cover_image_url
+    };
+    queryFunctions.createStory(options)
+      .then(storyId => {
+        res.json({ storyId });
       })
       .catch(err => {
         res
@@ -72,13 +76,14 @@ module.exports = (db) => {
 
   // DELETE - toggle deleted field to true
   router.post("/:id", (req, res) => {
-    const storyId = req.params.id;
-    const owner_id = req.session.user_id;
-    db.query(`UPDATE stories SET deleted = TRUE WHERE id = $1 AND owner_id = $2 RETURNING *;`, [storyId, owner_id])
-      .then(data => {
-        if (data.rows.length > 0) {
-          const story = data.rows[0];
-          res.json({ story });
+    const options = [
+      req.params.id,
+      req.session.user_id
+    ];
+    queryFunctions.deleteStory(options)
+      .then(deletedStory => {
+        if (deletedStory) {
+          res.json({ deletedStory });
         } else {
           throw new Error('Story not found!');
         }
