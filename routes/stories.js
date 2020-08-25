@@ -25,8 +25,9 @@ module.exports = (queryFunctions) => {
   });
   // Browse based on owner_id
   router.get('/mystories', (req, res) => {
-    let options = {};
-    options.user_id = req.session.user_id;
+    let options = {
+      user_id : req.session.user_id,
+    };
     queryFunctions.getAllStories(options)
       .then(stories => {
         res.json({ stories });
@@ -40,8 +41,9 @@ module.exports = (queryFunctions) => {
 
   // Read
   router.get("/:id", (req, res) => {
-    let options = {};
-    options.story_id = req.params.id;
+    let options = {
+      story_id: req.params.id,
+    };
     queryFunctions.getAcceptedContributionByStoryId(options)
       .then(story => {
         res.json({ story});
@@ -56,13 +58,14 @@ module.exports = (queryFunctions) => {
 
   // ADD
   router.post("/", (req, res) => {
-    const owner_id = req.session.user_id;
-    const { title, cover_image_url } = req.body;
-    const newStory = [owner_id, title, cover_image_url];
-    db.query(`INSERT INTO stories (owner_id, title, cover_image_url) VALUES ($1, $2, $3) RETURNING *`, newStory)
-      .then(data => {
-        const story = data.rows[0];
-        res.json({ story });
+    let options = {
+      user_id: req.session.user_id,
+      title: req.body.title,
+      cover_image_url: req.body.cover_image_url
+    };
+    queryFunctions.createStory(options)
+      .then(storyId => {
+        res.json({ storyId });
       })
       .catch(err => {
         res
