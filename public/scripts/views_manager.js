@@ -4,22 +4,27 @@ $(() => {
 
   window.views_manager = {
     show(item) {
-      $home.detach();
-      $myStories.detach();
       $story.detach();
+      $composeStory.detach();
+      $stories.detach();
+
+      // reset background color of stories component
+      $stories.removeClass('my-stories');
 
       switch (item) {
-        case 'test_1':
-          $test_1.appendTo($main);
-          break;
-        case 'test_2':
-          $test_2.appendTo($main);
-          break;
         case 'home':
-          $home.appendTo($main);
+          $composeStory.appendTo($main);
+          loadAllStories();
+          $stories.appendTo($main);
+          break;
+        case 'stories':
+          loadAllStories();
+          $stories.appendTo($main);
           break;
         case 'myStories':
-          $myStories.appendTo($main);
+          $stories.addClass('my-stories');
+          loadMyStories();
+          $stories.appendTo($main);
           break;
         case 'story':
           $story.appendTo($main);
