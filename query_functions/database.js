@@ -64,23 +64,26 @@ const getContributionsByUserId = function(options) {
   SELECT
     contributions.id AS contribution_id,
     story_id,
+    stories.title AS story_title,
     contributions.created_at AS contribution_created_at_time,
     content AS contribution_content,
     accepted_at IS NOT NULL AS contribution_is_accepted,
     COUNT(votes) AS contribution_vote_count
     FROM
       contributions
+      JOIN stories ON stories.id = story_id
       JOIN users ON user_id = users.id
       LEFT JOIN votes ON contributions.id = contribution_id
     WHERE
-      contributions.user_id = $1 AND deleted = FALSE
+      contributions.user_id = $1 AND contributions.deleted = FALSE
     GROUP BY
       contributions.id,
       story_id,
       users.name,
       content,
-      created_at
-    ORDER BY created_at
+      contributions.created_at,
+      stories.title
+    ORDER BY contributions.created_at
   `;
 
   return db.query(queryString, [options.user_id])
