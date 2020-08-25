@@ -25,10 +25,10 @@ module.exports = (queryFunctions) => {
   });
   // Browse based on owner_id
   router.get('/mystories', (req, res) => {
-    const owner_id = req.session.user_id;
-    db.query(`SELECT * FROM stories WHERE deleted = FALSE AND owner_id = $1;`, [owner_id])
-      .then(data => {
-        const stories = data.rows;
+    let options = {};
+    options.user_id = req.session.user_id;
+    queryFunctions.getAllStories(options)
+      .then(stories => {
         res.json({ stories });
       })
       .catch(err => {
