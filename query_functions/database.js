@@ -248,19 +248,22 @@ const getContributionById = function(queryParams) {
       story_id AS story_id,
       content AS contribution_content,
       users.name AS contribution_author_name,
-      created_at AS contribution_created_at,
+      contributions.created_at AS contribution_created_at,
+      stories.owner_id AS story_owner_id,
       COUNT(votes) AS contribution_vote_count
       FROM
         contributions
         JOIN users ON users.id = user_id
         LEFT JOIN votes ON contributions.id = contribution_id
+        LEFT JOIN stories ON contributions.story_id = stories.id
       WHERE
         contributions.id = $1
       GROUP BY
         story_id,
         content,
         users.name,
-        created_at;
+        contributions.created_at,
+        stories.owner_id;
   `;
   return db.query(queryString, queryParams)
     .then(resolve => resolve.rows[0])
