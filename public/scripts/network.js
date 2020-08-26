@@ -44,6 +44,11 @@ const addContribution = (data) => {
   return $.ajax('/api/contributions', { data, method: 'POST' });
 };
 
+const updateContrAccepted = (data) => {
+  const contribution_id = data.contribution_id;
+  return $.ajax(`/api/contributions/story/${contribution_id}`, { data, method: 'POST' });
+}
+
 const addVote = (data) => {
   const contr = data.contribution_id;
   return $.ajax(`/api/votes/${contr}`, { data, method: 'POST'  });
