@@ -62,4 +62,17 @@ $(() => {
   };
   window.loadMyStories = loadMyStories;
 
+  const loadMyFavourites = () => {
+    $stories.find('h2').text("Your favourites");
+    $stories.find('h2').addClass("my-stories-heading");
+    $stories.find('h2').removeClass("all-stories-heading");
+    $stories.find('.grid').empty();
+    getMyStories().then(stories => {
+      for (const story of stories) {
+        $stories.find('.grid').append(createStoryPreview(story));
+      }
+    });
+  };
+  window.loadMyFavourites = loadMyFavourites;
+
 });

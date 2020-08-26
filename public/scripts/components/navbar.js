@@ -12,6 +12,7 @@ $(() => {
           <li><a id="home" href="#">Home</a></li>
           <li><a id="my-stories" href="#">My Stories</a></li>
           <li><a id="contributions" href="#">Contributions</a></li>
+          <li><a id="favourites" href="#">Favourites</a></li>
         </ul>
     </div>
   </nav>
