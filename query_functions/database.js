@@ -172,6 +172,7 @@ const getPendingContributionByStoryId = function(options) {
     WHERE
       story_id = $1
       AND contributions.deleted = FALSE
+      AND contributions.accepted_at IS NULL
     GROUP BY
       contributions.id,
       story_id,
