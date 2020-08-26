@@ -26,6 +26,10 @@ $(() => {
         </div>
       </div>
     `);
+
+    // this is the variable to use to check if viewer is owner of story
+    // console.log(contrObj.is_story_owner);
+
     $pendingContr.find('.card-title').text(contrObj.contribution_author_name);
     $pendingContr.find('.card-text').text(contrObj.contribution_content);
     $pendingContr.find('.like-counter').text(contrObj.contribution_vote_count);
