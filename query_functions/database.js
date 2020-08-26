@@ -384,3 +384,33 @@ const markContrAsAccepted = function(options) {
     .catch(error=> console.error(error));
 };
 exports.markContrAsAccepted = markContrAsAccepted;
+
+
+
+/** Verify if user is owner of story
+ * @param {user_id: integer} user_id
+ * @param {contribution_id: integer} contribution_id
+ * @return {Boolean} A boolean value to the user.
+ */
+
+const verifyUser = function(options) {
+  const queryString = `
+    SELECT
+    owner_id
+      FROM
+        stories
+      LEFT JOIN
+        contributions ON stories.id = story_id
+      WHERE
+        contributions.id = $1
+  `;
+  const queryParams = [options.contribution_id];
+  return db.query(queryString, queryParams)
+    .then(resolve => {
+      const owner_id = resolve.rows[0].owner_id;
+      const user_id = options.user_id;
+      return (Number(owner_id) === Number(user_id)) ? true : false;
+    })
+    .catch(error => console.error(error));
+};
+exports.verifyUser = verifyUser;
