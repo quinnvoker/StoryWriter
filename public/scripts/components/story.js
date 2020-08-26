@@ -24,7 +24,7 @@ $(() => {
           <p class="card-text"></p>
           <i class="fas fa-thumbs-up vote-contribution"></i>
           <button class="approve-contribution">Approve</button>
-          <span class="like-counter">${contrObj.contribution_vote_count} votes</span>
+          <span class="like-counter"></span>
           <a class="read-more text-right" href="#">Read more <i class="fas fa-chevron-right"></i></a>
         </div>
       </div>
@@ -43,11 +43,19 @@ $(() => {
 
     $pendingContr.find('.card-title').text(contrObj.contribution_author_name);
     $pendingContr.find('.card-text').text(contrObj.contribution_content);
-    $pendingContr.find('.like-counter').text(contrObj.contribution_vote_count);
+    $pendingContr.find('.like-counter').text(`${contrObj.contribution_vote_count} votes`);
     $pendingContr.find('.read-more').on('click',function() {
       generateContrView(contrObj.contribution_id);
       views_manager.show('contribution');
     });
+    $voteButton.on('click', () => {
+      const data = { contribution_id: contrObj.contribution_id };
+      addVote(data)
+        .then(resolve => getVote(data))
+        .then(resolve => $pendingContr.find('.like-counter').text(`${resolve.vote_count} votes`));
+    });
+
+
     return $pendingContr;
   };
 
@@ -106,11 +114,24 @@ $(() => {
     const $storyInfo = $story.find('.story-info');
     const $approved = $story.find('.approved-contributions');
     const $pending = $story.find('.unapproved-contributions .row');
+    const $contributionForm = $story.find('.contribution-form');
 
     // remove old element from last view
     $storyInfo.empty();
     $approved.empty();
     $pending.empty();
+
+    // toggle pending contribution list and contribution form visibility if story is complete
+    getStoryData({ story_id: storyId })
+      .then(storyData => {
+        if (storyData.completed) {
+          $pending.hide();
+          $contributionForm.hide();
+        } else {
+          $pending.show();
+          $contributionForm.show();
+        }
+      });
 
     // create element for current view
     $.get(`/api/stories/${storyId}`)
