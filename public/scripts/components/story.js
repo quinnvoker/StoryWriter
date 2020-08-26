@@ -20,14 +20,14 @@ $(() => {
         <div class="card" style="width: 18rem;">
           <div class="card-body" id="contribution-1">
             <h5 class="card-title author"></h5>
-            <p class="card-text content"></p>
+            <p class="card-text unapprove-content"></p>
             <i class="fas fa-thumbs-up"></i><span class="like-counter"></span>
             <a id="contribution-1" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
           </div>
         </div>
     `);
     $pendingContr.find('.author').text(contrObj.contribution_author_name);
-    $pendingContr.find('.content').text(contrObj.contribution_content);
+    $pendingContr.find('.unapprove-content').text(contrObj.contribution_content);
     $pendingContr.find('.like-counter').text(contrObj.contribution_vote_count);
     return $pendingContr;
   };
