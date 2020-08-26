@@ -13,6 +13,7 @@ $(() => {
     return $approvedContr;
   };
 
+
   window.createApprovedContr = createApprovedContr;
 
   const createPendingContr = (contrObj) => {
@@ -38,7 +39,7 @@ $(() => {
     const $storyInfo = $(`
     <div class="row">
       <div class="col-md-6 col-sm-12">
-        <h2 class="title-tagline"></h2>
+        <h4 class="title-tagline"></h4>
       </div>
       <div class="col-md-6 col-sm-12 text-right">
         <p class="status"></p>
@@ -63,7 +64,13 @@ $(() => {
       <div class="approved-contributions"></div>
 
       <section class="contribution-form">
-        <button type="button" class="orange" data-toggle="modal" data-target="#exampleModal">Continue the adventure</button>
+          <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h2 class="display-4 tagline"><span class="highlight">Continue</span> the adventure</h2>
+              <p class="lead">A little blurb goes here.</p>
+              <button type="button" class="orange" data-toggle="modal" data-target="#exampleModal">Submit a contribution <i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
       </section>
 
       <div class="unapproved-contributions"><div class="row"></div></div>

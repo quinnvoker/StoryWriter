@@ -27,11 +27,12 @@ $(() => {
     return $contribution;
   };
 
-  const $contributions = $(`<div class="content stories my-stories"><div class="story-container"><div class="row my-contributions"></div><div></div>`);
+  const $contributions = $(`<div class="content stories my-stories"><div class="story-container"><h2 class="tagline contributions-heading"></h2><div class="row my-contributions"></div><div></div>`);
   window.$contributions = $contributions;
 
   const loadMyContributions = () => {
     $contributions.find('.my-contributions').empty();
+    $contributions.find('h2').text('Your contributions');
     getMyContributions().then(result => {
       console.log(result);
       for (const contribution of result) {
