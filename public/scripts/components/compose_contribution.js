@@ -16,6 +16,11 @@ $(() => {
           </form>
         </div>
         <div class="modal-footer">
+          <div class="error-panel">
+            <i class="fas fa-exclamation-triangle"></i>
+            <span class="error"></span>
+            <i class="fas fa-exclamation-triangle"></i>
+          </div>
           <button type="button" class="secondary" data-dismiss="modal">Close</button>
           <button id="submit-contribution" type="button" class="orange">Submit</button>
         </div>
