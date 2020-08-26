@@ -22,14 +22,32 @@ $(() => {
         <div class="card-body">
           <h5 class="card-title"></h5>
           <p class="card-text"></p>
-          <i class="fas fa-thumbs-up"></i><span class="like-counter">${contrObj.contribution_vote_count} votes</span>
-          <a id="${contrObj.contribution_id}" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
+          <i class="fas fa-thumbs-up vote-contribution"></i>
+          <button class="approve-contribution">Approve</button>
+          <span class="like-counter">${contrObj.contribution_vote_count} votes</span>
+          <a class="contribution-link" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
         </div>
       </div>
     `);
+
+    const $voteButton = $pendingContr.find('.vote-contribution');
+    const $approveButton = $pendingContr.find('.approve-contribution');
+
+    if (contrObj.is_story_owner) {
+      $voteButton.hide();
+      $approveButton.show();
+    } else {
+      $voteButton.show();
+      $approveButton.hide();
+    }
+
     $pendingContr.find('.card-title').text(contrObj.contribution_author_name);
     $pendingContr.find('.card-text').text(contrObj.contribution_content);
     $pendingContr.find('.like-counter').text(contrObj.contribution_vote_count);
+    $pendingContr.find('.contribution-link').on('click',function() {
+      generateContrView(contrObj.contribution_id);
+      views_manager.show('contribution');
+    });
     return $pendingContr;
   };
 
@@ -111,8 +129,5 @@ $(() => {
 
   window.generateStoryView = generateStoryView;
 
-  window.$story.find('#contribution-1').on('click',function() {
-    $('header').hide();
-    views_manager.show('contribution');
-  });
+
 });

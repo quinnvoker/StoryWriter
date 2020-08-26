@@ -52,3 +52,15 @@ app.get("/", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}`);
 });
+
+
+/** For query testing  to be removed at the end
+ *   const { markContrAsAccepted } = require('./query_functions/database');
+ *
+ *  const options = {
+ *    contribution_id: 17
+ *  };
+ *
+ *  console.log(markContrAsAccepted(options));
+ *
+ */
