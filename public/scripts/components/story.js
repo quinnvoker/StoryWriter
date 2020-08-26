@@ -102,11 +102,24 @@ $(() => {
     const $storyInfo = $story.find('.story-info');
     const $approved = $story.find('.approved-contributions');
     const $pending = $story.find('.unapproved-contributions .row');
+    const $contributionForm = $story.find('.contribution-form');
 
     // remove old element from last view
     $storyInfo.empty();
     $approved.empty();
     $pending.empty();
+
+    // toggle pending contribution list and contribution form visibility if story is complete
+    getStoryData({ story_id: storyId })
+      .then(storyData => {
+        if (storyData.completed) {
+          $pending.hide();
+          $contributionForm.hide();
+        } else {
+          $pending.show();
+          $contributionForm.show();
+        }
+      });
 
     // create element for current view
     $.get(`/api/stories/${storyId}`)
