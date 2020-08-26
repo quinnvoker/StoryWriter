@@ -40,6 +40,7 @@ $(() => {
     <div class="row">
       <div class="col-md-6 col-sm-12">
         <h4 class="title-tagline"></h4>
+        <i class="fas fa-heart"></i>
       </div>
       <div class="col-md-6 col-sm-12 text-right">
         <p class="status"></p>
@@ -60,7 +61,6 @@ $(() => {
     <div class="story-container">
 
       <div class="story-info"></div>
-
       <div class="approved-contributions"></div>
 
       <section class="contribution-form">
