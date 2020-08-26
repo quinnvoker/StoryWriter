@@ -88,7 +88,7 @@ Query needs to return:
  Query needs input:
  - Contribution id
  Query needs to return
- - story_id
+ - story_title
  - contribution_content
  - contribution_author_name
  - contribution_created_at
