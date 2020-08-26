@@ -400,3 +400,12 @@ figure.effect-sadie:hover p {
   width: 100%;
   text-align: center;
 }
+
+.cover-image {
+  object-fit: cover;
+  width: 480px;
+}
+
+.story-preview {
+  height: 260px;
+}
