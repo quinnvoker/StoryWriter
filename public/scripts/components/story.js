@@ -25,7 +25,7 @@ $(() => {
           <i class="fas fa-thumbs-up vote-contribution"></i>
           <button class="approve-contribution">Approve</button>
           <span class="like-counter">${contrObj.contribution_vote_count} votes</span>
-          <a class="read-more" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
+          <a class="read-more text-right" href="#">Read more <i class="fas fa-chevron-right"></i></a>
         </div>
       </div>
     `);
@@ -44,7 +44,7 @@ $(() => {
     $pendingContr.find('.card-title').text(contrObj.contribution_author_name);
     $pendingContr.find('.card-text').text(contrObj.contribution_content);
     $pendingContr.find('.like-counter').text(contrObj.contribution_vote_count);
-    $pendingContr.find('.contribution-link').on('click',function() {
+    $pendingContr.find('.read-more').on('click',function() {
       generateContrView(contrObj.contribution_id);
       views_manager.show('contribution');
     });
