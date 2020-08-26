@@ -2,11 +2,15 @@ const express = require('express');
 const router  = express.Router();
 
 module.exports = (queryFunctions) => {
-  router.post("/:id", (req, res) => {
-    const queryParams = [req.session.user_id, req.params.id];
-    queryFunctions.createVote(queryParams)
-      .then(vote => {
-        res.json(vote);
+  // Get full list of favourite stories by user id
+  router.get("/", (req, res) => {
+    const options = {
+      user_id: req.session.user_id,
+    };
+    queryFunctions.getFavouritesByUserId(options)
+      .then(favourites => {
+        console.log(favourites);
+        res.json(favourites);
       })
       .catch(err => {
         res
@@ -15,11 +19,15 @@ module.exports = (queryFunctions) => {
       });
   });
 
-  router.get("/:id", (req, res) => {
-    queryFunctions.getVoteCount({contribution_id: req.params.id})
-      .then(vote => {
-        console.log(vote);
-        res.json(vote);
+  // Add a new favourite story by user id and story id
+  router.post("/:id", (req, res) => {
+    const options = {
+      user_id: req.session.user_id,
+      story_id: req.params.id
+    };
+    queryFunctions.addFavoriteByStoryId(options)
+      .then(favorite => {
+        res.json(favorite);
       })
       .catch(err => {
         res
