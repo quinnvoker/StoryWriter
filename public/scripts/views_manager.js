@@ -41,6 +41,10 @@ $(() => {
           loadMyContributions();
           $contributions.appendTo($main);
           break;
+        case 'favourites':
+          loadMyFavourites();
+          $stories.appendTo($main);
+          break;
       };
     }
   };

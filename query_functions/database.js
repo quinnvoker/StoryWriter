@@ -237,6 +237,31 @@ const getFavouritesByUserId = function(options) {
 };
 exports.getFavouritesByUserId = getFavouritesByUserId;
 
+
+/** Add a story to favourite
+ *
+ * @param {story_id: integer} story_id
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+const addFavoriteByStoryId = function(options) {
+  const queryString = `
+    INSERT INTO
+      favourites
+      (user_id, story_id)
+      VALUES
+        ($1, $2)
+      RETURNING
+        *
+  `;
+  const queryParams = [options.user_id, options.story_id];
+  return db.query(queryString, queryParams)
+    .then(resolve => resolve.rows[0])
+    .catch(error=> console.error(error));
+};
+exports.addFavoriteByStoryId = addFavoriteByStoryId;
+
+
 /** Get full contribution details by contribution_id
  * @param {contribution_id: integer} contribution_id
  * @return {Promise<{}>} A promise to the user.

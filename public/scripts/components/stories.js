@@ -12,6 +12,7 @@ $(() => {
     <figure id="story-${story.story_id}" class="effect-sadie story-preview">
       <img class="cover-image" alt="img01"/>
       <figcaption>
+        <i class="fas fa-heart"></i>
         <h4 class="story-title"></h4>
         <p class="story-author"></p>
         <a href="#">View more</a>
@@ -59,5 +60,19 @@ $(() => {
     });
   };
   window.loadMyStories = loadMyStories;
+
+  const loadMyFavourites = () => {
+    $stories.find('h2').text("Your favourites");
+    $stories.find('h2').addClass("my-stories-heading");
+    $stories.find('h2').removeClass("all-stories-heading");
+    $stories.find('.grid').empty();
+    getMyFavourites().then(stories => {
+      // for (const story of stories) {
+      //   $stories.find('.grid').append(createStoryPreview(story));
+      // }
+      // console.log(stories);
+    });
+  };
+  window.loadMyFavourites = loadMyFavourites;
 
 });

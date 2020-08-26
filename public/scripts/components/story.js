@@ -80,8 +80,13 @@ $(() => {
     $storyInfo.find('.title-tagline').text(contrObj.story_title);
     $storyInfo.find('span.status').text(`${contrObj.completed ? 'Completed' : 'In Progress'}`);
 
+
     $storyInfo.find('.complete-button').hide();
     $storyInfo.find('.favourite-button').hide();
+
+    $storyInfo.find('.favourite-button').on('click',()=>{
+      $storyInfo.find('.favourite-button').addClass('voted');
+    })
 
     return $storyInfo;
   };
