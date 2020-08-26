@@ -217,17 +217,14 @@ const getFavouritesByUserId = function(options) {
   SELECT
     stories.id AS story_id,
     stories.title AS story_title,
-    favourites.user_id AS user,
-    MAX(contributions.accepted_at) AS last_update,
-    completed
+    users.name AS story_author_name,
+    stories.cover_image_url AS story_cover_url
     FROM
       favourites
       JOIN stories ON stories.id = favourites.story_id
-      LEFT JOIN contributions ON stories.id = contributions.story_id
+      JOIN users ON stories.owner_id = users.id
     WHERE
       favourites.user_id = $1
-    GROUP BY
-      stories.id, title, completed, favourites.user_id
     ORDER BY
       story_id;
   `;
