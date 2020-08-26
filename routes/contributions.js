@@ -17,7 +17,7 @@ module.exports = (queryFunctions) => {
     };
     queryFunctions.getContributionsByUserId(options)
       .then(contributions => {
-        res.json({ contributions });
+        res.json(contributions);
       })
       .catch(err => {
         res
@@ -33,7 +33,7 @@ module.exports = (queryFunctions) => {
     };
     queryFunctions.getPendingContributionByStoryId(options)
       .then(contributions => {
-        res.json({ contributions});
+        res.json(contributions);
       })
       .catch(err => {
         res
@@ -47,7 +47,7 @@ module.exports = (queryFunctions) => {
     const contributionId = [req.params.id];
     queryFunctions.getContributionById(contributionId)
       .then(contribution => {
-        res.json({ contribution});
+        res.json(contribution);
       })
       .catch(err => {
         res
@@ -60,11 +60,17 @@ module.exports = (queryFunctions) => {
   // ADD
   router.post("/", (req, res) => {
     const user_id = req.session.user_id;
-    const { story_id, content } = req.body;
-    const newContribution = [story_id, user_id, content];
+    const { story_id, content, accepted } = req.body;
+    console.log(req.body);
+    const newContribution = {
+      user_id,
+      story_id,
+      content,
+      accepted
+    };
     queryFunctions.createContribution(newContribution)
       .then(contribution => {
-        res.json({ contribution });
+        res.json(contribution);
       })
       .catch(err => {
         res
@@ -81,7 +87,7 @@ module.exports = (queryFunctions) => {
     queryFunctions.deleteContribution(queryParams)
       .then(contribution => {
         if (contribution) {
-          res.json({ contribution });
+          res.json(contribution);
         } else {
           throw new Error('Contribution not found!');
         }

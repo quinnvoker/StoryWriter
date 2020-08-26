@@ -64,23 +64,26 @@ const getContributionsByUserId = function(options) {
   SELECT
     contributions.id AS contribution_id,
     story_id,
+    stories.title AS story_title,
     contributions.created_at AS contribution_created_at_time,
     content AS contribution_content,
     accepted_at IS NOT NULL AS contribution_is_accepted,
     COUNT(votes) AS contribution_vote_count
     FROM
       contributions
+      JOIN stories ON stories.id = story_id
       JOIN users ON user_id = users.id
       LEFT JOIN votes ON contributions.id = contribution_id
     WHERE
-      contributions.user_id = $1 AND deleted = FALSE
+      contributions.user_id = $1 AND contributions.deleted = FALSE
     GROUP BY
       contributions.id,
       story_id,
       users.name,
       content,
-      created_at
-    ORDER BY created_at
+      contributions.created_at,
+      stories.title
+    ORDER BY contributions.created_at
   `;
 
   return db.query(queryString, [options.user_id])
@@ -98,17 +101,20 @@ exports.getContributionsByUserId = getContributionsByUserId;
 const getAcceptedContributionByStoryId = function(options) {
   const queryString = `
   SELECT
+    stories.title AS story_title,
+    stories.completed AS completed,
     contributions.id AS contribution_id,
     users.name AS contribution_author_name,
     accepted_at AS contribution_accepted_at_time,
     content AS contribution_content
     FROM
       contributions
+      JOIN stories ON story_id = stories.id
       JOIN users ON user_id = users.id
     WHERE
       story_id = $1
       AND accepted_at IS NOT NULL
-      AND deleted = FALSE
+      AND contributions.deleted = FALSE
     ORDER BY
       accepted_at;
   `;
@@ -126,16 +132,17 @@ exports.getAcceptedContributionByStoryId = getAcceptedContributionByStoryId;
  */
 
 const createContribution = function(options) {
+  let queryParams = [options.story_id, options.user_id, options.content];
   const queryString = `
   INSERT INTO
     contributions
-    (story_id, user_id, content)
+    (story_id, user_id, content ${options.accepted ? ', accepted_at' : ''})
     VALUES
-      ($1, $2, $3)
+      ($1, $2, $3 ${options.accepted ? ', CURRENT_TIMESTAMP' : ''})
     RETURNING
       *
   `;
-  return db.query(queryString, options)
+  return db.query(queryString, queryParams)
     .then(resolve => resolve.rows[0]);
 };
 exports.createContribution = createContribution;
@@ -261,17 +268,23 @@ exports.getContributionById = getContributionById;
  */
 
 const createStory = function(options) {
+  const coverUrlEmpty = options.cover_image_url.length < 1;
+
   const queryString = `
   INSERT INTO
     stories
-    (owner_id, title, cover_image_url)
+    (owner_id, title ${!coverUrlEmpty ? ', cover_image_url' : '' })
     VALUES
-      ($1, $2, $3)
+      ($1, $2 ${!coverUrlEmpty ? ', $3' : '' })
     RETURNING
       stories.id as story_id
   `;
-  const {user_id, title, cover_image_url } = options;
-  const queryParams = [user_id, title, cover_image_url];
+
+  const queryParams = [options.user_id, options.title];
+  if (!coverUrlEmpty) {
+    queryParams.push(options.cover_image_url);
+  }
+
   return db.query(queryString, queryParams)
     .then(resolve => resolve.rows[0])
     .catch(error=> console.error(error));

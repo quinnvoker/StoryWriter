@@ -6,6 +6,7 @@ $(() => {
     show(item) {
       $story.detach();
       $composeStory.detach();
+      $composeContribution.detach();
       $stories.detach();
       $contribution.detach();
       $contributions.detach();
@@ -29,7 +30,9 @@ $(() => {
           $stories.appendTo($main);
           break;
         case 'story':
+          generateStoryView(window.targetStoryId);
           $story.appendTo($main);
+          $composeContribution.appendTo($main);
           break;
         case 'contribution':
           $contribution.appendTo($main);

@@ -71,6 +71,7 @@ Query needs to return:
  Query needs to return:
  - contribution_id
  - story_id
+ - story_title
  - contribution_created_at_time
  - contribution_content
  - contribution_is_accepted
