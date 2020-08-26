@@ -11,6 +11,11 @@ const getStory = (data) => {
   return $.ajax(`/api/stories/${story_id}`);
 };
 
+const getStoryData = (data) => {
+  const story_id = data.story_id;
+  return $.ajax(`/api/stories/data/${story_id}`);
+};
+
 const addStory = (data) => {
   return $.ajax('/api/stories', { data, method: 'POST' });
 };
@@ -34,6 +39,11 @@ const addContribution = (data) => {
 };
 
 const addVote = (data) => {
-  const contribution_id = data.contribution_id;
-  return $.ajax(`/api/votes/${contr}`, { data });
+  const contr = data.contribution_id;
+  return $.ajax(`/api/votes/${contr}`, { data, method: 'POST'  });
+};
+
+const getVote = (data) => {
+  const contr = data.contribution_id;
+  return $.ajax(`/api/votes/${contr}`, { data, method: 'GET'  });
 };

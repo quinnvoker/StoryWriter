@@ -16,18 +16,18 @@ $(() => {
     $contribution.find('p.card-text').text(contribution.contribution_content);
     $contribution.find('h6.text-muted').text(moment(contribution.contribution_created_at_time).format('MM/DD/YYYY'));
 
+
+    $contribution.find('i.fa-thumbs-up').on('click', () => {
+      const data = { contribution_id: contribution.contribution_id };
+      addVote(data)
+        .then(resolve => getVote(data))
+        .then(resolve => $contribution.find('.like-counter').text(`${resolve.vote_count} votes`));
+    });
+
     $contribution.find('.read-more').on('click',function() {
       generateContrView(contribution.contribution_id);
       views_manager.show('contribution');
     });
-
-    $contribution.find('i.fa-thumbs-up').on('click',()=>{
-      alert("clicked");
-      const $votes = $contribution.find('.like-counter').text();
-      const $count = $votes.split(' ');
-      $contribution.find('i.fa-thumbs-up').addClass('voted');
-      $contribution.find('.like-counter').text(parseInt($count)+1);
-    })
 
     return $contribution;
   };

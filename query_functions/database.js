@@ -369,6 +369,42 @@ const createVote = function(queryParams) {
 exports.createVote = createVote;
 
 
+const getVoteCount = function(options) {
+  const queryString = `
+  SELECT
+    COUNT(*) AS vote_count
+    FROM
+      votes
+    WHERE contribution_id = $1
+  `;
+  const queryParams = [options.contribution_id];
+  return db.query(queryString, queryParams)
+    .then(resolve => {
+      return resolve.rows[0];
+    })
+    .catch(error=> console.error(error));
+};
+exports.getVoteCount = getVoteCount;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /** Get story data
  * @param {id: integer} stories.id
  * @return {Promise<{}>} A promise to the user.
