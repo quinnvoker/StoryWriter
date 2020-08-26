@@ -22,7 +22,7 @@ $(() => {
           <h5 class="card-title"></h5>
           <p class="card-text"></p>
           <i class="fas fa-thumbs-up"></i><span class="like-counter">${contrObj.contribution_vote_count} votes</span>
-          <a id="${contrObj.contribution_id}" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
+          <a class="contribution-link" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
         </div>
       </div>
     `);
@@ -33,8 +33,7 @@ $(() => {
     $pendingContr.find('.card-title').text(contrObj.contribution_author_name);
     $pendingContr.find('.card-text').text(contrObj.contribution_content);
     $pendingContr.find('.like-counter').text(contrObj.contribution_vote_count);
-    $pendingContr.find('#contribution-1').on('click',function() {
-      $('header').hide();
+    $pendingContr.find('.contribution-link').on('click',function() {
       generateContrView(contrObj.contribution_id);
       views_manager.show('contribution');
     });
