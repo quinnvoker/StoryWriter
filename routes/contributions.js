@@ -33,6 +33,10 @@ module.exports = (queryFunctions) => {
     };
     queryFunctions.getPendingContributionByStoryId(options)
       .then(contributions => {
+        // check if requesting user is owner of story
+        contributions.forEach(contribution => {
+          contribution.is_story_owner = Number(contribution.story_owner_id) === Number(req.session.user_id);
+        });
         res.json(contributions);
       })
       .catch(err => {

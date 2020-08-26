@@ -5,6 +5,8 @@ const db = new Pool(dbParams);
 db.connect();
 
 
+
+
 /** Get all stories from the database
  * @param {story_id: integer} story_id
  * read request for individual story
@@ -158,22 +160,26 @@ const getPendingContributionByStoryId = function(options) {
   SELECT
     contributions.id AS contribution_id,
     users.name AS contribution_author_name,
-    created_at AS contribution_created_at_time,
+    contributions.created_at AS contribution_created_at_time,
     content AS contribution_content,
+    stories.owner_id AS story_owner_id,
     COUNT(votes) AS contribution_vote_count
     FROM
       contributions
       JOIN users ON user_id = users.id
       LEFT JOIN votes ON contributions.id = contribution_id
+      LEFT JOIN stories ON contributions.story_id = stories.id
     WHERE
       story_id = $1
-      AND deleted = FALSE
+      AND contributions.deleted = FALSE
+      AND contributions.accepted_at IS NULL
     GROUP BY
       contributions.id,
       story_id,
       users.name,
       content,
-      created_at
+      contributions.created_at,
+      stories.owner_id
   `;
   const lastUpdated = `
   SELECT
