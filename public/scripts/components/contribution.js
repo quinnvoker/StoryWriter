@@ -21,7 +21,7 @@ $(() => {
   window.createContr = createContr;
 
   const $contribution = $(`
-  <div class="content stories">
+  <div class="content stories my-stories">
     <div class="story-container">
 
 
