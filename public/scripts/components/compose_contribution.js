@@ -16,8 +16,6 @@ $(() => {
           </div>
           <form id="new-story">
             <textarea name="text" id="contribution-content" placeholder="Continue the adventure..."></textarea>
-            <div>
-            </div>
           </form>
         </div>
         <div class="modal-footer">
@@ -49,7 +47,8 @@ $(() => {
       addContribution(contributionData)
         .then(result => {
           $composeContribution.modal('hide');
-          console.log(result);
+          $composeContribution.find('#new-story')[0].reset();
+          views_manager.show('story');
         });
     });
 
