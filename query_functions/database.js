@@ -364,3 +364,59 @@ const createVote = function(queryParams) {
     .catch(error=> console.error(error));
 };
 exports.createVote = createVote;
+
+
+/** Update a contribution as accepted
+ * @param {user_id: integer} user_id
+ * @param {contribution_id: integer} contribution_id
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+
+const markContrAsAccepted = function(options) {
+  const queryString = `
+    UPDATE
+    contributions
+    SET
+      accepted_at = NOW()
+    WHERE
+      id = $1
+    RETURNING
+      *
+    `;
+  const queryParams = [options.contribution_id];
+  return db.query(queryString, queryParams)
+    .then(resolve => resolve.rows[0])
+    .catch(error=> console.error(error));
+};
+exports.markContrAsAccepted = markContrAsAccepted;
+
+
+
+/** Verify if user is owner of story
+ * @param {user_id: integer} user_id
+ * @param {contribution_id: integer} contribution_id
+ * @return {Boolean} A boolean value to the user.
+ */
+
+const verifyUser = function(options) {
+  const queryString = `
+    SELECT
+    owner_id
+      FROM
+        stories
+      LEFT JOIN
+        contributions ON stories.id = story_id
+      WHERE
+        contributions.id = $1
+  `;
+  const queryParams = [options.contribution_id];
+  return db.query(queryString, queryParams)
+    .then(resolve => {
+      const owner_id = resolve.rows[0].owner_id;
+      const user_id = options.user_id;
+      return (Number(owner_id) === Number(user_id)) ? true : false;
+    })
+    .catch(error => console.error(error));
+};
+exports.verifyUser = verifyUser;
