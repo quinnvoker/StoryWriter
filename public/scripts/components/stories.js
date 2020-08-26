@@ -11,7 +11,6 @@ $(() => {
     const $story = $(`
     <figure id="story-${story.story_id}" class="effect-sadie story-preview">
       <img class="cover-image" alt="img01"/>
-
       <figcaption>
         <i class="fas fa-heart"></i>
         <h4 class="story-title"></h4>
@@ -67,10 +66,11 @@ $(() => {
     $stories.find('h2').addClass("my-stories-heading");
     $stories.find('h2').removeClass("all-stories-heading");
     $stories.find('.grid').empty();
-    getMyStories().then(stories => {
-      for (const story of stories) {
-        $stories.find('.grid').append(createStoryPreview(story));
-      }
+    getMyFavourites().then(stories => {
+      // for (const story of stories) {
+      //   $stories.find('.grid').append(createStoryPreview(story));
+      // }
+      // console.log(stories);
     });
   };
   window.loadMyFavourites = loadMyFavourites;

@@ -38,5 +38,9 @@ $(() => {
     views_manager.show('contributions');
   });
 
+  $navbar.find('#favourites').click(() => {
+    views_manager.show('favourites');
+  });
+
   $navbar.prependTo($('body'));
 });
