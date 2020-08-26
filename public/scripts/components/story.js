@@ -21,14 +21,24 @@ $(() => {
         <div class="card-body">
           <h5 class="card-title"></h5>
           <p class="card-text"></p>
-          <i class="fas fa-thumbs-up"></i><span class="like-counter">${contrObj.contribution_vote_count} votes</span>
+          <i class="fas fa-thumbs-up vote-contribution"></i>
+          <button class="approve-contribution">Approve</button>
+          <span class="like-counter">${contrObj.contribution_vote_count} votes</span>
           <a class="contribution-link" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
         </div>
       </div>
     `);
 
-    // this is the variable to use to check if viewer is owner of story
-    // console.log(contrObj.is_story_owner);
+    const $voteButton = $pendingContr.find('.vote-contribution');
+    const $approveButton = $pendingContr.find('.approve-contribution');
+
+    if (contrObj.is_story_owner) {
+      $voteButton.hide();
+      $approveButton.show();
+    } else {
+      $voteButton.show();
+      $approveButton.hide();
+    }
 
     $pendingContr.find('.card-title').text(contrObj.contribution_author_name);
     $pendingContr.find('.card-text').text(contrObj.contribution_content);
