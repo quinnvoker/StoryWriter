@@ -98,7 +98,7 @@ section.compose-story{
 }
 
 .story-container{
-  width:95%;
+  width:90%;
   margin: 0 auto;
 }
 
@@ -391,6 +391,10 @@ figure.effect-sadie:hover p {
   border-radius:3px;
 }
 
+.voted{
+  color:#BC6C25;
+}
+
 .secondary{
   background:#606C38;
   color:#FEFAE0;
@@ -398,22 +402,32 @@ figure.effect-sadie:hover p {
   border-radius:3px;
 }
 
-/* .my-contributions{
-  display:flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-} */
 .my-contributions .card{
-  border:1px solid #BC6C25;
-  max-width: 420px;
+  border:0.5px solid #BC6C25;
+  max-width: 400px;
   font-size: 15px;
   margin: 5px;
   border-radius:0;
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  color:#283618;
 }
 
+.card:hover{
+  box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.50);
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
 
 .my-contributions .card a{
   text-align:right;
   float:right;
+}
+
+.like-counter{
+  margin-left: 5px;
 }
 
