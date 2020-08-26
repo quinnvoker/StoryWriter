@@ -12,7 +12,7 @@ $(() => {
     <figure id="story-${story.story_id}" class="effect-sadie story-preview">
       <img class="cover-image" alt="img01"/>
       <figcaption>
-        <h4></h4>
+        <h4 class="story-title"></h4>
         <a href="#">View more</a>
       </figcaption>
     </figure>

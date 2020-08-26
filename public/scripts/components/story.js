@@ -25,7 +25,7 @@ $(() => {
           <i class="fas fa-thumbs-up vote-contribution"></i>
           <button class="approve-contribution">Approve</button>
           <span class="like-counter">${contrObj.contribution_vote_count} votes</span>
-          <a class="contribution-link" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
+          <a class="read-more" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
         </div>
       </div>
     `);
@@ -58,16 +58,15 @@ $(() => {
     <div class="row">
       <div class="col-md-6 col-sm-12">
         <h4 class="title-tagline"></h4>
-        <i class="fas fa-heart"></i>
       </div>
       <div class="col-md-6 col-sm-12 text-right">
-        <p class="status"></p>
+        <p><i class="fas fa-heart"></i> <span class="status"></span></p>
       </div>
     </div>
     `);
     let contrObj = contrArray[0];
     $storyInfo.find('.title-tagline').text(contrObj.story_title);
-    $storyInfo.find('.status').text(`${contrObj.completed ? 'Completed' : 'In Progress'}`);
+    $storyInfo.find('span.status').text(`${contrObj.completed ? 'Completed' : 'In Progress'}`);
 
     return $storyInfo;
   };
