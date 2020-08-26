@@ -27,6 +27,19 @@ Query needs to return:
  >> getAllStories({user_id})
  # Story view
 
+ Get story data
+ Query needs input:
+ - story_id
+ Query needs to return:
+ - id
+ - owner_id
+ - owner_name
+ - title
+ - cover_image_url
+ - created_at
+ - completed
+ >> getStoryData()
+
  Lists all accepted contributions
  Query needs input:
  - story_id

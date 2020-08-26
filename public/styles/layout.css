@@ -500,3 +500,7 @@ i:hover.fa-thumbs-up{
 .story-preview {
   height: 260px;
 }
+
+#main-nav {
+  z-index: 10;
+}

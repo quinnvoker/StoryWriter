@@ -369,12 +369,38 @@ const createVote = function(queryParams) {
 exports.createVote = createVote;
 
 
+/** Get story data
+ * @param {id: integer} stories.id
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+const getStoryData = function(options) {
+  const queryString = `
+    SELECT
+      stories.id AS id,
+      owner_id,
+      users.name AS owner_name,
+      title,
+      cover_image_url,
+      created_at,
+      completed
+      FROM
+        stories JOIN users ON owner_id = users.id
+      WHERE
+        stories.id = $1
+  `;
+  const queryParams = [options.id];
+  return db.query(queryString, queryParams)
+    .then(resolve => resolve.rows[0])
+    .catch(error=> console.error(error));
+};
+exports.getStoryData = getStoryData;
+
 /** Update a contribution as accepted
  * @param {user_id: integer} user_id
  * @param {contribution_id: integer} contribution_id
  * @return {Promise<{}>} A promise to the user.
  */
-
 
 const markContrAsAccepted = function(options) {
   const queryString = `
