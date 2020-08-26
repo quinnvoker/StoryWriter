@@ -45,6 +45,7 @@ module.exports = (queryFunctions) => {
     };
     queryFunctions.getStoryData(options)
       .then(stories => {
+        stories.is_owner = Number(stories.owner_id) === Number(req.session.user_id);
         res.json(stories);
       })
       .catch(err => {
