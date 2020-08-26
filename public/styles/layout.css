@@ -392,6 +392,10 @@ figure.effect-sadie:hover p {
   border-radius:3px;
 }
 
+.create-at{
+  float:right;
+}  
+  
 .error-panel {
   background-color: red;
   border-radius: 3px;
