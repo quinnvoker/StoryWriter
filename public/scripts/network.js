@@ -11,6 +11,11 @@ const getStory = (data) => {
   return $.ajax(`/api/stories/${story_id}`);
 };
 
+const getStoryData = (data) => {
+  const story_id = data.story_id;
+  return $.ajax(`/api/stories/data/${story_id}`);
+};
+
 const addStory = (data) => {
   return $.ajax('/api/stories', { data, method: 'POST' });
 };
