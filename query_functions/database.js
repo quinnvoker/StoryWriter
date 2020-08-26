@@ -173,6 +173,7 @@ const getAllStories = function(options) {
     stories.id AS story_id,
     stories.cover_image_url AS story_cover_url,
     stories.title AS story_title,
+    stories.completed AS story_completed,
     users.name AS story_author_name
     FROM
       stories
