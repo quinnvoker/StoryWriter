@@ -259,16 +259,16 @@ nav.black ul li a {
 	opacity: 0;
 }
 
-.grid figure h2 {
+.grid figure h4 {
 	word-spacing: -0.15em;
-	font-weight: 300;
+  font-weight: 300;
 }
 
-.grid figure h2 span {
+.grid figure h4 span {
 	font-weight: 800;
 }
 
-.grid figure h2,
+.grid figure h4,
 .grid figure p {
 	margin: 0;
 }
@@ -292,7 +292,7 @@ figure.effect-sadie figcaption::before {
 	transform: translate3d(0,50%,0);
 }
 
-figure.effect-sadie h2 {
+figure.effect-sadie h4 {
 	position: absolute;
 	top: 50%;
 	left: 0;
@@ -321,7 +321,7 @@ figure.effect-sadie p {
 	transform: translate3d(0,10px,0);
 }
 
-figure.effect-sadie:hover h2 {
+figure.effect-sadie:hover h4 {
 	color:#FEFAE0;
 	-webkit-transform: translate3d(0,-50%,0) translate3d(0,-40px,0);
 	transform: translate3d(0,-50%,0) translate3d(0,-40px,0);
@@ -342,6 +342,12 @@ figure.effect-sadie:hover p {
 
 .story-container section{
   margin:1.5em 0;
+}
+
+.favourite-container{
+  display:flex;
+  flex-direction: row;
+  text-align:right;
 }
 .contribution-form textarea{
   width: 650px;
@@ -364,10 +370,18 @@ figure.effect-sadie:hover p {
 .approved-contributions .card-body{
   font-size: 15px;
   /* padding: 0.5rem; */
+
   border-radius: 0;
 }
 .approved-contributions .card-body .user{
   font-size: 15px;
+}
+
+button.approve-contribution{
+  color:#FEFAE0;
+  border:none;
+  background:#BC6C25;
+  border-radius:3px;
 }
 
 .modal-header,

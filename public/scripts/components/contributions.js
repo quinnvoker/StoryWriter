@@ -6,7 +6,7 @@ $(() => {
         <h5 class="card-title"></h5>
         <h6 class="card-subtitle mb-2 text-muted"></h6>
         <p class="card-text"></p>
-        <i class="fas fa-thumbs-up"></i><span class="like-counter">${contribution.contribution_vote_count} votes</span>
+        <i class="fas fa-thumbs-up"></i><span class="like-counter">${contribution.contribution_vote_count} </span>
         <a id="${contribution.contribution_id}" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
       </div>
     </div>
