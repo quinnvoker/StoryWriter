@@ -110,7 +110,7 @@ $(() => {
           </div>
       </section>
 
-      <div class="unapproved-contributions"><div class="row"></div></div>
+      <div class="unapproved-contributions row"></div>
 
     <div>
   </div>
@@ -121,13 +121,17 @@ $(() => {
   const generateStoryView = (storyId) => {
     const $storyInfo = $story.find('.story-info');
     const $approved = $story.find('.approved-contributions');
-    const $pending = $story.find('.unapproved-contributions .row');
+    const $pending = $story.find('.unapproved-contributions');
     const $contributionForm = $story.find('.contribution-form');
 
     // remove old element from last view
     $storyInfo.empty();
     $approved.empty();
     $pending.empty();
+
+    // hide pending and contribution form to prevent flicker on load
+    $pending.hide();
+    $contributionForm.hide();
 
     // add accepted contributions and toggle functions based on if user is owner
     $.get(`/api/stories/${storyId}`)
@@ -146,19 +150,12 @@ $(() => {
             if (storyData.is_owner) {
               if (!storyData.completed) {
                 $completeButton.show();
-              } else {
-                $completeButton.hide();
               }
-              $favouriteButton.hide();
             } else {
               $favouriteButton.show();
-              $completeButton.hide();
             }
 
-            if (storyData.completed) {
-              $pending.hide();
-              $contributionForm.hide();
-            } else {
+            if (!storyData.completed) {
               $pending.show();
               $contributionForm.show();
             }
