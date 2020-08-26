@@ -382,6 +382,27 @@ const createStory = function(options) {
 };
 exports.createStory = createStory;
 
+
+const updateStoryCompleted = function(options) {
+  const queryString = `
+    UPDATE
+      stories
+      SET
+        completed = TRUE
+      WHERE
+        stories.id = $1 AND stories.owner_id = $2
+      RETURNING
+        *
+  `;
+  const queryParams = [options.story_id, options.user_id];
+  return db.query(queryString, queryParams)
+    .then(resolve => resolve.rows[0])
+    .catch(error => console.error(error));
+};
+exports.updateStoryCompleted = updateStoryCompleted;
+
+
+
 /** Delete a story
  * @param {story_id, user_id} array with story_id and user_id
  * @return {Promise<{}>} A promise to the user.
