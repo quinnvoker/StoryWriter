@@ -29,17 +29,22 @@ $(() => {
   </div>
   `);
 
-  window.targetStoryId = -1;
-
-  const setTargetStory = (storyId) => {
-    window.targetStoryId = storyId;
-  };
-  window.setTargetStory = setTargetStory;
-
   $composeContribution.find('#submit-contribution')
     .click((event) => {
       event.preventDefault();
       const content = $composeContribution.find('#contribution-content').val();
+
+      const $errorPanel = $composeStory.find('.error-panel');
+
+      if ($errorPanel.is(':visible')) {
+        $errorPanel.slideUp();
+      }
+
+      if (title.length < 1 || content.length < 1) {
+        $errorPanel.find('.error').text('Cannot submit story without title or content!');
+        $errorPanel.slideDown();
+        return;
+      }
 
       const contributionData = { content, story_id: window.targetStoryId };
       addContribution(contributionData)

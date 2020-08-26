@@ -28,10 +28,6 @@ $(() => {
 
     const $errorPanel = $composeStory.find('.error-panel');
 
-    if ($errorPanel.is(':visible')) {
-      $errorPanel.slideUp();
-    }
-
     const title = $composeStory.find('#new-story-title').val();
     const content = $composeStory.find('#contribution-content').val();
     const cover_image_url = $composeStory.find('#new-story-cover').val();
@@ -40,6 +36,8 @@ $(() => {
       $errorPanel.find('.error').text('Cannot submit story without title or content!');
       $errorPanel.slideDown();
       return;
+    } else if ($errorPanel.is(':visible')) {
+      $errorPanel.slideUp();
     }
 
     const storyData = {title, cover_image_url};
