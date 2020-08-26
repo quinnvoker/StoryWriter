@@ -61,7 +61,7 @@ $(() => {
 
   window.createPendingContr = createPendingContr;
 
-  const createStoryInfo = (contrArray) => {
+  const createStoryInfo = (story) => {
     const $storyInfo = $(`
     <div class="row">
       <div class="col-md-6 col-sm-12">
@@ -76,9 +76,8 @@ $(() => {
       </div>
     </div>
     `);
-    let contrObj = contrArray[0];
-    $storyInfo.find('.title-tagline').text(contrObj.story_title);
-    $storyInfo.find('span.status').text(`${contrObj.completed ? 'Completed' : 'In Progress'}`);
+    $storyInfo.find('.title-tagline').text(story.title);
+    $storyInfo.find('span.status').text(`${story.completed ? 'Completed' : 'In Progress'}`);
 
 
     $storyInfo.find('.complete-button').hide();
@@ -86,7 +85,14 @@ $(() => {
 
     $storyInfo.find('.favourite-button').on('click',()=>{
       $storyInfo.find('.favourite-button').addClass('voted');
-    })
+    });
+
+    $storyInfo.find('.complete-button').click(() => {
+      updateStoryCompleted({story_id: story.id})
+        .then(() => {
+          views_manager.show('story');
+        });
+    });
 
     return $storyInfo;
   };
@@ -133,33 +139,33 @@ $(() => {
     $pending.hide();
     $contributionForm.hide();
 
-    // add accepted contributions and toggle functions based on if user is owner
-    $.get(`/api/stories/${storyId}`)
-      .then(apprContrs => {
-        $storyInfo.append(createStoryInfo(apprContrs));
-        for (const contribution of apprContrs) {
-          $approved.append(createApprovedContr(contribution));
-        }
+    getStoryData({ story_id: storyId })
+      .then(storyData => {
+        $storyInfo.append(createStoryInfo(storyData));
 
-        // toggle pending contribution list and contribution form visibility if story is complete
         const $completeButton = $storyInfo.find('.complete-button');
         const $favouriteButton = $storyInfo.find('.favourite-button');
 
-        getStoryData({ story_id: storyId })
-          .then(storyData => {
-            if (storyData.is_owner) {
-              if (!storyData.completed) {
-                $completeButton.show();
-              }
-            } else {
-              $favouriteButton.show();
-            }
+        if (storyData.is_owner) {
+          if (!storyData.completed) {
+            $completeButton.show();
+          }
+        } else {
+          $favouriteButton.show();
+        }
 
-            if (!storyData.completed) {
-              $pending.show();
-              $contributionForm.show();
-            }
-          });
+        if (!storyData.completed) {
+          $pending.show();
+          $contributionForm.show();
+        }
+      });
+
+    // add accepted contributions
+    $.get(`/api/stories/${storyId}`)
+      .then(apprContrs => {
+        for (const contribution of apprContrs) {
+          $approved.append(createApprovedContr(contribution));
+        }
       });
 
     //
