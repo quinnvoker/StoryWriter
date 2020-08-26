@@ -513,3 +513,7 @@ i:hover.fa-heart{
 .story-preview {
   height: 260px;
 }
+
+#main-nav {
+  z-index: 10;
+}

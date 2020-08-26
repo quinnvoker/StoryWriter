@@ -38,6 +38,21 @@ module.exports = (queryFunctions) => {
           .json({ error: err.message });
       });
   });
+  // Read story data without contribution
+  router.get('/data/:id', (req, res) => {
+    const options = {
+      id: req.params.id,
+    };
+    queryFunctions.getStoryData(options)
+      .then(stories => {
+        res.json(stories);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
 
   // Read
   router.get("/:id", (req, res) => {
