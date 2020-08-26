@@ -48,7 +48,8 @@ $(() => {
         addContribution(contributionData)
           .then(result => {
             $composeStory.find('#new-story')[0].reset();
-            console.log(result);
+            setTargetStory(contributionData.story_id);
+            views_manager.show('story');
           });
       });
   });

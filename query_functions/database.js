@@ -217,17 +217,14 @@ const getFavouritesByUserId = function(options) {
   SELECT
     stories.id AS story_id,
     stories.title AS story_title,
-    favourites.user_id AS user,
-    MAX(contributions.accepted_at) AS last_update,
-    completed
+    users.name AS story_author_name,
+    stories.cover_image_url AS story_cover_url
     FROM
       favourites
       JOIN stories ON stories.id = favourites.story_id
-      LEFT JOIN contributions ON stories.id = contributions.story_id
+      JOIN users ON stories.owner_id = users.id
     WHERE
       favourites.user_id = $1
-    GROUP BY
-      stories.id, title, completed, favourites.user_id
     ORDER BY
       story_id;
   `;
@@ -236,6 +233,31 @@ const getFavouritesByUserId = function(options) {
     .catch(error=> console.error(error));
 };
 exports.getFavouritesByUserId = getFavouritesByUserId;
+
+
+/** Add a story to favourite
+ *
+ * @param {story_id: integer} story_id
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+const addFavoriteByStoryId = function(options) {
+  const queryString = `
+    INSERT INTO
+      favourites
+      (user_id, story_id)
+      VALUES
+        ($1, $2)
+      RETURNING
+        *
+  `;
+  const queryParams = [options.user_id, options.story_id];
+  return db.query(queryString, queryParams)
+    .then(resolve => resolve.rows[0])
+    .catch(error=> console.error(error));
+};
+exports.addFavoriteByStoryId = addFavoriteByStoryId;
+
 
 /** Get full contribution details by contribution_id
  * @param {contribution_id: integer} contribution_id
@@ -248,19 +270,22 @@ const getContributionById = function(queryParams) {
       story_id AS story_id,
       content AS contribution_content,
       users.name AS contribution_author_name,
-      created_at AS contribution_created_at,
+      contributions.created_at AS contribution_created_at,
+      stories.owner_id AS story_owner_id,
       COUNT(votes) AS contribution_vote_count
       FROM
         contributions
         JOIN users ON users.id = user_id
         LEFT JOIN votes ON contributions.id = contribution_id
+        LEFT JOIN stories ON contributions.story_id = stories.id
       WHERE
         contributions.id = $1
       GROUP BY
         story_id,
         content,
         users.name,
-        created_at;
+        contributions.created_at,
+        stories.owner_id;
   `;
   return db.query(queryString, queryParams)
     .then(resolve => resolve.rows[0])
@@ -366,12 +391,74 @@ const createVote = function(queryParams) {
 exports.createVote = createVote;
 
 
+const getVoteCount = function(options) {
+  const queryString = `
+  SELECT
+    COUNT(*) AS vote_count
+    FROM
+      votes
+    WHERE contribution_id = $1
+  `;
+  const queryParams = [options.contribution_id];
+  return db.query(queryString, queryParams)
+    .then(resolve => {
+      return resolve.rows[0];
+    })
+    .catch(error=> console.error(error));
+};
+exports.getVoteCount = getVoteCount;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/** Get story data
+ * @param {id: integer} stories.id
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+const getStoryData = function(options) {
+  const queryString = `
+    SELECT
+      stories.id AS id,
+      owner_id,
+      users.name AS owner_name,
+      title,
+      cover_image_url,
+      created_at,
+      completed
+      FROM
+        stories JOIN users ON owner_id = users.id
+      WHERE
+        stories.id = $1
+  `;
+  const queryParams = [options.id];
+  return db.query(queryString, queryParams)
+    .then(resolve => resolve.rows[0])
+    .catch(error=> console.error(error));
+};
+exports.getStoryData = getStoryData;
+
 /** Update a contribution as accepted
  * @param {user_id: integer} user_id
  * @param {contribution_id: integer} contribution_id
  * @return {Promise<{}>} A promise to the user.
  */
-
 
 const markContrAsAccepted = function(options) {
   const queryString = `

@@ -11,9 +11,17 @@ body{
 .logo,
 h1,
 h2,
-h3 {
+h3,
+h4 {
   font-family: 'Archivo Black', sans-serif;
+  margin: 10px 0;
+}
 
+h2{
+  font-size: 5em;
+}
+h3{
+  font-size:3em;
 }
 
 header {
@@ -37,11 +45,30 @@ section.compose-story{
   flex-direction:column;
 }
 
-.compose-story .tagline{
+.tagline{
   color:#606C38;
-  font-size: 5em;
+
 }
 
+.tagline .highlight{
+  color:#BC6C25;
+}
+
+.title-tagline{
+  color:#BC6C25;
+}
+
+.all-stories-heading{
+  color:#FEFAE0;
+  font-size:3em;
+  text-align:center;
+}
+.my-stories-heading,
+.contributions-heading{
+  color:#BC6C25;
+  font-size:3em;
+  text-align:center;
+}
 .compose-story input{
   margin: 5px 0;
   /* border-radius: 3px; */
@@ -72,9 +99,6 @@ section.compose-story{
 }
 
 
-.tagline .highlight{
-  color:#BC6C25;
-}
 
 .content {
   background:#606C38;
@@ -99,7 +123,7 @@ section.compose-story{
 
 .story-container{
   width:90%;
-  margin: 0 auto;
+  margin:30px auto;
 }
 
 .logo {
@@ -235,16 +259,16 @@ nav.black ul li a {
 	opacity: 0;
 }
 
-.grid figure h2 {
+.grid figure h4 {
 	word-spacing: -0.15em;
-	font-weight: 300;
+  font-weight: 300;
 }
 
-.grid figure h2 span {
+.grid figure h4 span {
 	font-weight: 800;
 }
 
-.grid figure h2,
+.grid figure h4,
 .grid figure p {
 	margin: 0;
 }
@@ -268,7 +292,8 @@ figure.effect-sadie figcaption::before {
 	transform: translate3d(0,50%,0);
 }
 
-figure.effect-sadie h2 {
+figure.effect-sadie h4,
+figure.effect-sadie i{
 	position: absolute;
 	top: 50%;
 	left: 0;
@@ -278,6 +303,9 @@ figure.effect-sadie h2 {
 	transition: transform 0.35s, color 0.35s;
 	-webkit-transform: translate3d(0,-50%,0);
 	transform: translate3d(0,-50%,0);
+}
+figure.effect-sadie i{
+  top: 70%;
 }
 
 figure.effect-sadie figcaption::before,
@@ -297,9 +325,13 @@ figure.effect-sadie p {
 	transform: translate3d(0,10px,0);
 }
 
-figure.effect-sadie:hover h2 {
+figure.effect-sadie:hover h4 {
 	color:#FEFAE0;
 	-webkit-transform: translate3d(0,-50%,0) translate3d(0,-40px,0);
+	transform: translate3d(0,-50%,0) translate3d(0,-40px,0);
+}
+figure.effect-sadie:hover i{
+  -webkit-transform: translate3d(0,-50%,0) translate3d(0,-40px,0);
 	transform: translate3d(0,-50%,0) translate3d(0,-40px,0);
 }
 
@@ -310,12 +342,6 @@ figure.effect-sadie:hover p {
 	transform: translate3d(0,0,0);
 }
 
-
-.tagline{
-  color:#BC6C25;
-  /* font-size: 20px; */
-}
-
 .status{
   color:#BC6C25;
   font-size: 15px;
@@ -324,6 +350,12 @@ figure.effect-sadie:hover p {
 
 .story-container section{
   margin:1.5em 0;
+}
+
+.favourite-container{
+  display:flex;
+  flex-direction: row;
+  text-align:right;
 }
 .contribution-form textarea{
   width: 650px;
@@ -338,20 +370,26 @@ figure.effect-sadie:hover p {
 .approved-contributions .card{
   margin: 10px 0;
   border-radius: 0;
+  border:1px solid #BC6C25;
   box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
   transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
 }
-.approved-contributions .even{
-  border:none;
-  width:100%;
-}
+
 .approved-contributions .card-body{
   font-size: 15px;
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
+
   border-radius: 0;
 }
 .approved-contributions .card-body .user{
   font-size: 15px;
+}
+
+button.approve-contribution{
+  color:#FEFAE0;
+  border:none;
+  background:#BC6C25;
+  border-radius:3px;
 }
 
 .modal-header,
@@ -378,6 +416,10 @@ figure.effect-sadie:hover p {
   color:#FEFAE0;
   border:none;
   border-radius:3px;
+}
+
+button.orange .fa-chevron-right{
+  font-size: 15px;
 }
 
 .voted{
@@ -436,14 +478,24 @@ figure.effect-sadie:hover p {
   margin-left: 5px;
 }
 
+i:hover.fa-thumbs-up,
+i:hover.fa-heart{
+  color:#BC6C25;
+}
+
+
 .text-muted{
   font-size:15px;
 }
-  
+
+.row{
+  margin:0;
+}
+
 .create-at{
   float:right;
-}  
-  
+}
+
 .error-panel {
   background-color: red;
   border-radius: 3px;
@@ -460,4 +512,8 @@ figure.effect-sadie:hover p {
 
 .story-preview {
   height: 260px;
+}
+
+#main-nav {
+  z-index: 10;
 }

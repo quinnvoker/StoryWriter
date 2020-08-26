@@ -13,6 +13,7 @@ $(() => {
     return $approvedContr;
   };
 
+
   window.createApprovedContr = createApprovedContr;
 
   const createPendingContr = (contrObj) => {
@@ -21,23 +22,40 @@ $(() => {
         <div class="card-body">
           <h5 class="card-title"></h5>
           <p class="card-text"></p>
-          <i class="fas fa-thumbs-up"></i><span class="like-counter">${contrObj.contribution_vote_count} votes</span>
-          <a id="${contrObj.contribution_id}" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
+          <i class="fas fa-thumbs-up vote-contribution"></i>
+          <button class="approve-contribution">Approve</button>
+          <span class="like-counter"></span>
+          <a class="read-more text-right" href="#">Read more <i class="fas fa-chevron-right"></i></a>
         </div>
       </div>
     `);
 
-    // this is the variable to use to check if viewer is owner of story
-    // console.log(contrObj.is_story_owner);
+    const $voteButton = $pendingContr.find('.vote-contribution');
+    const $approveButton = $pendingContr.find('.approve-contribution');
+
+    if (contrObj.is_story_owner) {
+      $voteButton.hide();
+      $approveButton.show();
+    } else {
+      $voteButton.show();
+      $approveButton.hide();
+    }
 
     $pendingContr.find('.card-title').text(contrObj.contribution_author_name);
     $pendingContr.find('.card-text').text(contrObj.contribution_content);
-    $pendingContr.find('.like-counter').text(contrObj.contribution_vote_count);
-    $pendingContr.find('#contribution-1').on('click',function() {
-      $('header').hide();
+    $pendingContr.find('.like-counter').text(`${contrObj.contribution_vote_count} votes`);
+    $pendingContr.find('.read-more').on('click',function() {
       generateContrView(contrObj.contribution_id);
       views_manager.show('contribution');
     });
+    $voteButton.on('click', () => {
+      const data = { contribution_id: contrObj.contribution_id };
+      addVote(data)
+        .then(resolve => getVote(data))
+        .then(resolve => $pendingContr.find('.like-counter').text(`${resolve.vote_count} votes`));
+    });
+
+
     return $pendingContr;
   };
 
@@ -47,16 +65,28 @@ $(() => {
     const $storyInfo = $(`
     <div class="row">
       <div class="col-md-6 col-sm-12">
-        <h2 class="title-tagline"></h2>
+        <h4 class="title-tagline"></h4>
       </div>
       <div class="col-md-6 col-sm-12 text-right">
-        <p class="status"></p>
+        <p>
+          <i class="favourite-button fas fa-heart"></i>
+          <span class="status"></span>
+          <button class="complete-button">Mark Completed</button>
+        </p>
       </div>
     </div>
     `);
     let contrObj = contrArray[0];
     $storyInfo.find('.title-tagline').text(contrObj.story_title);
-    $storyInfo.find('.status').text(`${contrObj.completed ? 'Completed' : 'In Progress'}`);
+    $storyInfo.find('span.status').text(`${contrObj.completed ? 'Completed' : 'In Progress'}`);
+
+
+    $storyInfo.find('.complete-button').hide();
+    $storyInfo.find('.favourite-button').hide();
+
+    $storyInfo.find('.favourite-button').on('click',()=>{
+      $storyInfo.find('.favourite-button').addClass('voted');
+    })
 
     return $storyInfo;
   };
@@ -68,11 +98,16 @@ $(() => {
     <div class="story-container">
 
       <div class="story-info"></div>
-
       <div class="approved-contributions"></div>
 
       <section class="contribution-form">
-        <button type="button" class="orange" data-toggle="modal" data-target="#exampleModal">Continue the adventure</button>
+          <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h2 class="display-4 tagline"><span class="highlight">Continue</span> the adventure</h2>
+              <p class="lead">A little blurb goes here.</p>
+              <button type="button" class="orange" data-toggle="modal" data-target="#exampleModal">Submit a contribution <i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
       </section>
 
       <div class="unapproved-contributions"><div class="row"></div></div>
@@ -87,20 +122,50 @@ $(() => {
     const $storyInfo = $story.find('.story-info');
     const $approved = $story.find('.approved-contributions');
     const $pending = $story.find('.unapproved-contributions .row');
+    const $contributionForm = $story.find('.contribution-form');
 
     // remove old element from last view
     $storyInfo.empty();
     $approved.empty();
     $pending.empty();
 
-    // create element for current view
+    // add accepted contributions and toggle functions based on if user is owner
     $.get(`/api/stories/${storyId}`)
       .then(apprContrs => {
         $storyInfo.append(createStoryInfo(apprContrs));
         for (const contribution of apprContrs) {
           $approved.append(createApprovedContr(contribution));
         }
+
+        // toggle pending contribution list and contribution form visibility if story is complete
+        const $completeButton = $storyInfo.find('.complete-button');
+        const $favouriteButton = $storyInfo.find('.favourite-button');
+
+        getStoryData({ story_id: storyId })
+          .then(storyData => {
+            if (storyData.is_owner) {
+              if (!storyData.completed) {
+                $completeButton.show();
+              } else {
+                $completeButton.hide();
+              }
+              $favouriteButton.hide();
+            } else {
+              $favouriteButton.show();
+              $completeButton.hide();
+            }
+
+            if (storyData.completed) {
+              $pending.hide();
+              $contributionForm.hide();
+            } else {
+              $pending.show();
+              $contributionForm.show();
+            }
+          });
       });
+
+    //
     $.get(`/api/contributions/story/${storyId}`)
       .then(pendContrs => {
         for (const contribution of pendContrs) {

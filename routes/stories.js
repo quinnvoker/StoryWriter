@@ -38,6 +38,22 @@ module.exports = (queryFunctions) => {
           .json({ error: err.message });
       });
   });
+  // Read story data without contribution
+  router.get('/data/:id', (req, res) => {
+    const options = {
+      id: req.params.id,
+    };
+    queryFunctions.getStoryData(options)
+      .then(stories => {
+        stories.is_owner = Number(stories.owner_id) === Number(req.session.user_id);
+        res.json(stories);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
 
   // Read
   router.get("/:id", (req, res) => {
