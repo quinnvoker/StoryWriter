@@ -4,10 +4,16 @@ html, body {
   width: 100%;
 }
 
-body {
-  font-family: "Helvetica Neue",sans-serif;
-  font-weight: lighter;
-  /* background:#606C38; */
+body{
+  font-family: 'Comic Neue', cursive;
+}
+
+.logo,
+h1,
+h2,
+h3 {
+  font-family: 'Archivo Black', sans-serif;
+
 }
 
 header {
@@ -38,7 +44,7 @@ section.compose-story{
 
 .compose-story input{
   margin: 5px 0;
-  border-radius: 3px;
+  /* border-radius: 3px; */
   padding: 5px;
   border:1px solid #BC6C25;
 }
@@ -46,7 +52,7 @@ section.compose-story{
   width: 650px;
   height: 200px;
   margin: 5px 0;
-  border-radius: 3px;
+  /* border-radius: 3px; */
   padding: 5px;
   border:1px solid #BC6C25;
   resize:none;
@@ -84,10 +90,10 @@ section.compose-story{
 
 .stories{
   padding-top: 100px;
-  /*you just need more content on the page. LOL*/
 }
 
 .my-stories {
+  min-height:100%;
   background:#FEFAE0;
 }
 
@@ -305,9 +311,9 @@ figure.effect-sadie:hover p {
 }
 
 
-.title-tagline{
+.tagline{
   color:#BC6C25;
-  font-size: 20px;
+  /* font-size: 20px; */
 }
 
 .status{
@@ -331,9 +337,9 @@ figure.effect-sadie:hover p {
 
 .approved-contributions .card{
   margin: 10px 0;
-  background:#283618;
-  color:#FEFAE0;
-
+  border-radius: 0;
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
 }
 .approved-contributions .even{
   border:none;
@@ -346,18 +352,6 @@ figure.effect-sadie:hover p {
 }
 .approved-contributions .card-body .user{
   font-size: 15px;
-}
-
-.unapproved-contributions .card{
-  background:#606C38;
-  color:#FEFAE0;
-  font-size: 15px;
-}
-
-.unapproved-contributions .card a{
-  color:#FEFAE0;
-  text-align:right;
-  float:right;
 }
 
 .modal-header,
@@ -374,15 +368,20 @@ figure.effect-sadie:hover p {
   height: 200px;
   margin: 5px 0;
   border-radius: 3px;
-  padding: 5px;
+  padding: 5px 10px;
   border:1px solid #BC6C25;
   resize:none;
 }
+
 .orange{
   background:#BC6C25;
   color:#FEFAE0;
   border:none;
   border-radius:3px;
+}
+
+.voted{
+  color:#BC6C25;
 }
 
 .secondary{
@@ -392,6 +391,55 @@ figure.effect-sadie:hover p {
   border-radius:3px;
 }
 
+.my-contributions .card,
+.unapproved-contributions .card{
+  border:0.5px solid #BC6C25;
+  max-width: 400px;
+  font-size: 15px;
+  margin: 5px;
+  border-radius:0;
+  box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+  transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+  color:#283618;
+}
+
+.card:hover{
+  box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.50);
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+
+.read-more{
+  display:none;
+  color:#283618;
+}
+
+.read-more:hover{
+  text-decoration:none;
+  color:#BC6C25;
+}
+
+.card:hover .read-more{
+  display:inline;
+}
+
+.my-contributions .card a,
+.unapproved-contributions .card a{
+  text-align:right;
+  float:right;
+}
+
+.like-counter{
+  margin-left: 5px;
+}
+
+.text-muted{
+  font-size:15px;
+}
+  
 .create-at{
   float:right;
 }  

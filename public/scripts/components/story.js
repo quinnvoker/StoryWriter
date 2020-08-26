@@ -17,17 +17,17 @@ $(() => {
 
   const createPendingContr = (contrObj) => {
     const $pendingContr = $(`
-        <div class="card" style="width: 18rem;">
-          <div class="card-body" id="contribution-1">
-            <h5 class="card-title author"></h5>
-            <p class="card-text unapprove-content"></p>
-            <i class="fas fa-thumbs-up"></i><span class="like-counter"></span>
-            <a id="contribution-1" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
-          </div>
+        <div  class="card col-lg-4 col-sm-12">
+        <div class="card-body">
+          <h5 class="card-title"></h5>
+          <p class="card-text"></p>
+          <i class="fas fa-thumbs-up"></i><span class="like-counter">${contrObj.contribution_vote_count} votes</span>
+          <a id="${contrObj.contribution_id}" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
         </div>
+      </div>
     `);
-    $pendingContr.find('.author').text(contrObj.contribution_author_name);
-    $pendingContr.find('.unapprove-content').text(contrObj.contribution_content);
+    $pendingContr.find('.card-title').text(contrObj.contribution_author_name);
+    $pendingContr.find('.card-text').text(contrObj.contribution_content);
     $pendingContr.find('.like-counter').text(contrObj.contribution_vote_count);
     $pendingContr.find('#contribution-1').on('click',function() {
       $('header').hide();
@@ -71,7 +71,7 @@ $(() => {
         <button type="button" class="orange" data-toggle="modal" data-target="#exampleModal">Continue the adventure</button>
       </section>
 
-      <div class="unapproved-contributions"></div>
+      <div class="unapproved-contributions"><div class="row"></div></div>
 
     <div>
   </div>
@@ -82,7 +82,7 @@ $(() => {
   const generateStoryView = (storyId) => {
     const $storyInfo = $story.find('.story-info');
     const $approved = $story.find('.approved-contributions');
-    const $pending = $story.find('.unapproved-contributions');
+    const $pending = $story.find('.unapproved-contributions .row');
 
     // remove old element from last view
     $storyInfo.empty();
