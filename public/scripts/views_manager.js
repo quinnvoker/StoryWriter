@@ -42,6 +42,7 @@ $(() => {
           $contributions.appendTo($main);
           break;
         case 'favourites':
+          $stories.addClass('my-stories');
           loadMyFavourites();
           $stories.appendTo($main);
           break;
