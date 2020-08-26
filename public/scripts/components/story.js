@@ -29,6 +29,11 @@ $(() => {
     $pendingContr.find('.author').text(contrObj.contribution_author_name);
     $pendingContr.find('.unapprove-content').text(contrObj.contribution_content);
     $pendingContr.find('.like-counter').text(contrObj.contribution_vote_count);
+    $pendingContr.find('#contribution-1').on('click',function() {
+      $('header').hide();
+      generateContrView(contrObj.contribution_id);
+      views_manager.show('contribution');
+    });
     return $pendingContr;
   };
 
@@ -104,8 +109,5 @@ $(() => {
 
   window.generateStoryView = generateStoryView;
 
-  window.$story.find('#contribution-1').on('click',function() {
-    $('header').hide();
-    views_manager.show('contribution');
-  });
+
 });
