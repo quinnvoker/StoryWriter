@@ -68,13 +68,20 @@ $(() => {
         <h4 class="title-tagline"></h4>
       </div>
       <div class="col-md-6 col-sm-12 text-right">
-        <p><i class="fas fa-heart"></i> <span class="status"></span></p>
+        <p>
+          <i class="favourite-button fas fa-heart"></i>
+          <span class="status"></span>
+          <button class="complete-button">Mark Completed</button>
+        </p>
       </div>
     </div>
     `);
     let contrObj = contrArray[0];
     $storyInfo.find('.title-tagline').text(contrObj.story_title);
     $storyInfo.find('span.status').text(`${contrObj.completed ? 'Completed' : 'In Progress'}`);
+
+    $storyInfo.find('.complete-button').hide();
+    $storyInfo.find('.favourite-button').hide();
 
     return $storyInfo;
   };
@@ -117,26 +124,43 @@ $(() => {
     $approved.empty();
     $pending.empty();
 
-    // toggle pending contribution list and contribution form visibility if story is complete
-    getStoryData({ story_id: storyId })
-      .then(storyData => {
-        if (storyData.completed) {
-          $pending.hide();
-          $contributionForm.hide();
-        } else {
-          $pending.show();
-          $contributionForm.show();
-        }
-      });
-
-    // create element for current view
+    // add accepted contributions and toggle functions based on if user is owner
     $.get(`/api/stories/${storyId}`)
       .then(apprContrs => {
         $storyInfo.append(createStoryInfo(apprContrs));
         for (const contribution of apprContrs) {
           $approved.append(createApprovedContr(contribution));
         }
+
+        // toggle pending contribution list and contribution form visibility if story is complete
+        const $completeButton = $storyInfo.find('.complete-button');
+        const $favouriteButton = $storyInfo.find('.favourite-button');
+
+        getStoryData({ story_id: storyId })
+          .then(storyData => {
+            if (storyData.is_owner) {
+              if (!storyData.completed) {
+                $completeButton.show();
+              } else {
+                $completeButton.hide();
+              }
+              $favouriteButton.hide();
+            } else {
+              $favouriteButton.show();
+              $completeButton.hide();
+            }
+
+            if (storyData.completed) {
+              $pending.hide();
+              $contributionForm.hide();
+            } else {
+              $pending.show();
+              $contributionForm.show();
+            }
+          });
       });
+
+    //
     $.get(`/api/contributions/story/${storyId}`)
       .then(pendContrs => {
         for (const contribution of pendContrs) {
