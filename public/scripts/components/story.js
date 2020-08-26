@@ -54,6 +54,11 @@ $(() => {
         .then(resolve => getVote(data))
         .then(resolve => $pendingContr.find('.like-counter').text(`${resolve.vote_count} votes`));
     });
+    $approveButton.on('click', () => {
+      const data = { contribution_id: contrObj.contribution_id };
+      updateContrAccepted(data)
+        .then(resolve => views_manager.show('story'));
+    });
 
 
     return $pendingContr;
