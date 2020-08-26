@@ -464,11 +464,11 @@ i:hover.fa-thumbs-up{
 .row{
   margin:0;
 }
-  
+
 .create-at{
   float:right;
-}  
-  
+}
+
 .error-panel {
   background-color: red;
   border-radius: 3px;
@@ -485,4 +485,8 @@ i:hover.fa-thumbs-up{
 
 .story-preview {
   height: 260px;
+}
+
+#main-nav {
+  z-index: 10;
 }
