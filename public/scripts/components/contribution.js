@@ -1,7 +1,6 @@
 $(() => {
 
   const createContr = (contrObj) => {
-    console.log(contrObj.contribution_created_at);
     const $contrById = $(`
       <div class="card odd">
         <div class="card-body">
