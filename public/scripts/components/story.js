@@ -68,6 +68,10 @@ $(() => {
     $storyInfo.find('.title-tagline').text(contrObj.story_title);
     $storyInfo.find('span.status').text(`${contrObj.completed ? 'Completed' : 'In Progress'}`);
 
+    $storyInfo.find('i.fa-heart').on('click',()=>{
+      $storyInfo.find('i.fa-heart').addClass('voted');
+    })
+
     return $storyInfo;
   };
 

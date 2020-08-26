@@ -17,7 +17,6 @@ $(() => {
     $contribution.find('h6.text-muted').text(moment(contribution.contribution_created_at_time).format('MM/DD/YYYY'));
 
     $contribution.find('i.fa-thumbs-up').on('click',()=>{
-      alert("clicked");
       const $votes = $contribution.find('.like-counter').text();
       const $count = $votes.split(' ');
       $contribution.find('i.fa-thumbs-up').addClass('voted');

@@ -292,7 +292,8 @@ figure.effect-sadie figcaption::before {
 	transform: translate3d(0,50%,0);
 }
 
-figure.effect-sadie h4 {
+figure.effect-sadie h4,
+figure.effect-sadie i{
 	position: absolute;
 	top: 50%;
 	left: 0;
@@ -302,6 +303,9 @@ figure.effect-sadie h4 {
 	transition: transform 0.35s, color 0.35s;
 	-webkit-transform: translate3d(0,-50%,0);
 	transform: translate3d(0,-50%,0);
+}
+figure.effect-sadie i{
+  top: 70%;
 }
 
 figure.effect-sadie figcaption::before,
@@ -324,6 +328,10 @@ figure.effect-sadie p {
 figure.effect-sadie:hover h4 {
 	color:#FEFAE0;
 	-webkit-transform: translate3d(0,-50%,0) translate3d(0,-40px,0);
+	transform: translate3d(0,-50%,0) translate3d(0,-40px,0);
+}
+figure.effect-sadie:hover i{
+  -webkit-transform: translate3d(0,-50%,0) translate3d(0,-40px,0);
 	transform: translate3d(0,-50%,0) translate3d(0,-40px,0);
 }
 
@@ -410,6 +418,10 @@ button.approve-contribution{
   border-radius:3px;
 }
 
+button.orange .fa-chevron-right{
+  font-size: 15px;
+}
+
 .voted{
   color:#BC6C25;
 }
@@ -466,7 +478,8 @@ button.approve-contribution{
   margin-left: 5px;
 }
 
-i:hover.fa-thumbs-up{
+i:hover.fa-thumbs-up,
+i:hover.fa-heart{
   color:#BC6C25;
 }
 

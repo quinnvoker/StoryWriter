@@ -11,7 +11,9 @@ $(() => {
     const $story = $(`
     <figure id="story-${story.story_id}" class="effect-sadie story-preview">
       <img class="cover-image" alt="img01"/>
+
       <figcaption>
+        <i class="fas fa-heart"></i>
         <h4 class="story-title"></h4>
         <a href="#">View more</a>
       </figcaption>
