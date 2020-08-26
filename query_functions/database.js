@@ -268,6 +268,7 @@ const getContributionById = function(queryParams) {
   const queryString = `
     SELECT
       story_id AS story_id,
+      stories.title AS story_title,
       content AS contribution_content,
       users.name AS contribution_author_name,
       contributions.created_at AS contribution_created_at,
@@ -282,6 +283,7 @@ const getContributionById = function(queryParams) {
         contributions.id = $1
       GROUP BY
         story_id,
+        stories.title,
         content,
         users.name,
         contributions.created_at,
