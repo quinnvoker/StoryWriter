@@ -51,6 +51,7 @@ module.exports = (queryFunctions) => {
     const contributionId = [req.params.id];
     queryFunctions.getContributionById(contributionId)
       .then(contribution => {
+        contribution.is_story_owner = Number(contribution.story_owner_id) === Number(req.session.user_id);
         res.json(contribution);
       })
       .catch(err => {
