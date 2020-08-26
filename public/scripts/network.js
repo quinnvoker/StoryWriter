@@ -16,6 +16,11 @@ const getStoryData = (data) => {
   return $.ajax(`/api/stories/data/${story_id}`);
 };
 
+const updateStoryCompleted = (data) => {
+  const story_id = data.story_id;
+  return $.ajax(`/api/stories/completed/${story_id}`, {method: 'POST'});
+};
+
 const addStory = (data) => {
   return $.ajax('/api/stories', { data, method: 'POST' });
 };
