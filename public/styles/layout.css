@@ -394,4 +394,22 @@ figure.effect-sadie:hover p {
 
 .create-at{
   float:right;
+}  
+  
+.error-panel {
+  background-color: red;
+  border-radius: 3px;
+  padding: 0.2em;
+  color: #FEFAE0;
+  width: 100%;
+  text-align: center;
+}
+
+.cover-image {
+  object-fit: cover;
+  width: 480px;
+}
+
+.story-preview {
+  height: 260px;
 }
