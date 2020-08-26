@@ -12,7 +12,7 @@ $(() => {
     </div>
     `);
 
-    $contribution.find('h5').text(contribution.contribution_id);
+    $contribution.find('h5').text(contribution.story_title);
     $contribution.find('p.card-text').text(contribution.contribution_content);
     $contribution.find('h6.text-muted').text(moment(contribution.contribution_created_at_time).format('MM/DD/YYYY'));
 
@@ -20,7 +20,7 @@ $(() => {
       alert("clicked");
       const $votes = $contribution.find('.like-counter').text();
       const $count = $votes.split(' ');
-      $contribution.find('i.fa-thumbs-up').addClass('orange');
+      $contribution.find('i.fa-thumbs-up').addClass('voted');
       $contribution.find('.like-counter').text(parseInt($count)+1);
     })
 
@@ -33,7 +33,8 @@ $(() => {
   const loadMyContributions = () => {
     $contributions.find('.my-contributions').empty();
     getMyContributions().then(result => {
-      for (const contribution of result.contributions) {
+      console.log(result);
+      for (const contribution of result) {
         $contributions.find('.my-contributions').append(createContribution(contribution));
       }
     });
