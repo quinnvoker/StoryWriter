@@ -6,8 +6,8 @@ $(() => {
         <h5 class="card-title"></h5>
         <h6 class="card-subtitle mb-2 text-muted"></h6>
         <p class="card-text"></p>
-        <i class="fas fa-thumbs-up"></i><span class="like-counter">${contribution.contribution_vote_count} votes</span>
-        <a id="${contribution.contribution_id}" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
+        <i class="fas fa-thumbs-up"></i><span class="like-counter">${contribution.contribution_vote_count} </span>
+        <a class="read-more text-right" href="#">Read more <i class="fas fa-chevron-right"></i></a>
       </div>
     </div>
     `);
@@ -16,11 +16,17 @@ $(() => {
     $contribution.find('p.card-text').text(contribution.contribution_content);
     $contribution.find('h6.text-muted').text(moment(contribution.contribution_created_at_time).format('MM/DD/YYYY'));
 
+
     $contribution.find('i.fa-thumbs-up').on('click', () => {
       const data = { contribution_id: contribution.contribution_id };
       addVote(data)
         .then(resolve => getVote(data))
         .then(resolve => $contribution.find('.like-counter').text(`${resolve.vote_count} votes`));
+    });
+
+    $contribution.find('.read-more').on('click',function() {
+      generateContrView(contribution.contribution_id);
+      views_manager.show('contribution');
     });
 
     return $contribution;
