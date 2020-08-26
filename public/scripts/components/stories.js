@@ -1,4 +1,12 @@
 $(() => {
+
+  window.targetStoryId = -1;
+
+  const setTargetStory = (storyId) => {
+    window.targetStoryId = storyId;
+  };
+  window.setTargetStory = setTargetStory;
+
   const createStoryPreview = (story) => {
     const $story = $(`
     <figure id="story-${story.story_id}" class="effect-sadie">
