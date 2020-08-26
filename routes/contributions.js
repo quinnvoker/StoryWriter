@@ -51,6 +51,7 @@ module.exports = (queryFunctions) => {
     const contributionId = [req.params.id];
     queryFunctions.getContributionById(contributionId)
       .then(contribution => {
+        contribution.is_story_owner = Number(contribution.story_owner_id) === Number(req.session.user_id);
         res.json(contribution);
       })
       .catch(err => {
@@ -59,7 +60,29 @@ module.exports = (queryFunctions) => {
           .json({ error: err.message });
       });
   });
-  // EDIT - No route as edit not allowed for stories consisitence
+
+  // EDIT - mark contribution as accepted
+  router.post("/story/:id", (req, res) => {
+
+    const options = {
+      contribution_id: req.params.id,
+      user_id: req.session.user_id,
+    };
+    queryFunctions.verifyUser(options)
+      .then(resolve => {
+        if (resolve) {
+          return queryFunctions.markContrAsAccepted(options);
+        }
+      })
+      .then(accepted => {
+        res.json(accepted);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
 
   // ADD
   router.post("/", (req, res) => {

@@ -248,19 +248,22 @@ const getContributionById = function(queryParams) {
       story_id AS story_id,
       content AS contribution_content,
       users.name AS contribution_author_name,
-      created_at AS contribution_created_at,
+      contributions.created_at AS contribution_created_at,
+      stories.owner_id AS story_owner_id,
       COUNT(votes) AS contribution_vote_count
       FROM
         contributions
         JOIN users ON users.id = user_id
         LEFT JOIN votes ON contributions.id = contribution_id
+        LEFT JOIN stories ON contributions.story_id = stories.id
       WHERE
         contributions.id = $1
       GROUP BY
         story_id,
         content,
         users.name,
-        created_at;
+        contributions.created_at,
+        stories.owner_id;
   `;
   return db.query(queryString, queryParams)
     .then(resolve => resolve.rows[0])
@@ -366,7 +369,6 @@ const createVote = function(queryParams) {
 exports.createVote = createVote;
 
 
-
 /** Get story data
  * @param {id: integer} stories.id
  * @return {Promise<{}>} A promise to the user.
@@ -393,3 +395,57 @@ const getStoryData = function(options) {
     .catch(error=> console.error(error));
 };
 exports.getStoryData = getStoryData;
+
+/** Update a contribution as accepted
+ * @param {user_id: integer} user_id
+ * @param {contribution_id: integer} contribution_id
+ * @return {Promise<{}>} A promise to the user.
+ */
+
+const markContrAsAccepted = function(options) {
+  const queryString = `
+    UPDATE
+    contributions
+    SET
+      accepted_at = NOW()
+    WHERE
+      id = $1
+    RETURNING
+      *
+    `;
+  const queryParams = [options.contribution_id];
+  return db.query(queryString, queryParams)
+    .then(resolve => resolve.rows[0])
+    .catch(error=> console.error(error));
+};
+exports.markContrAsAccepted = markContrAsAccepted;
+
+
+
+/** Verify if user is owner of story
+ * @param {user_id: integer} user_id
+ * @param {contribution_id: integer} contribution_id
+ * @return {Boolean} A boolean value to the user.
+ */
+
+const verifyUser = function(options) {
+  const queryString = `
+    SELECT
+    owner_id
+      FROM
+        stories
+      LEFT JOIN
+        contributions ON stories.id = story_id
+      WHERE
+        contributions.id = $1
+  `;
+  const queryParams = [options.contribution_id];
+  return db.query(queryString, queryParams)
+    .then(resolve => {
+      const owner_id = resolve.rows[0].owner_id;
+      const user_id = options.user_id;
+      return (Number(owner_id) === Number(user_id)) ? true : false;
+    })
+    .catch(error => console.error(error));
+};
+exports.verifyUser = verifyUser;

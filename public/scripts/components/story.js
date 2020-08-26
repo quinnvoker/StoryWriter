@@ -13,6 +13,7 @@ $(() => {
     return $approvedContr;
   };
 
+
   window.createApprovedContr = createApprovedContr;
 
   const createPendingContr = (contrObj) => {
@@ -21,20 +22,29 @@ $(() => {
         <div class="card-body">
           <h5 class="card-title"></h5>
           <p class="card-text"></p>
-          <i class="fas fa-thumbs-up"></i><span class="like-counter">${contrObj.contribution_vote_count} votes</span>
-          <a id="${contrObj.contribution_id}" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
+          <i class="fas fa-thumbs-up vote-contribution"></i>
+          <button class="approve-contribution">Approve</button>
+          <span class="like-counter">${contrObj.contribution_vote_count} votes</span>
+          <a class="contribution-link" href="#" class="read-more text-right">Read more <i class="fas fa-chevron-right"></i></a>
         </div>
       </div>
     `);
 
-    // this is the variable to use to check if viewer is owner of story
-    // console.log(contrObj.is_story_owner);
+    const $voteButton = $pendingContr.find('.vote-contribution');
+    const $approveButton = $pendingContr.find('.approve-contribution');
+
+    if (contrObj.is_story_owner) {
+      $voteButton.hide();
+      $approveButton.show();
+    } else {
+      $voteButton.show();
+      $approveButton.hide();
+    }
 
     $pendingContr.find('.card-title').text(contrObj.contribution_author_name);
     $pendingContr.find('.card-text').text(contrObj.contribution_content);
     $pendingContr.find('.like-counter').text(contrObj.contribution_vote_count);
-    $pendingContr.find('#contribution-1').on('click',function() {
-      $('header').hide();
+    $pendingContr.find('.contribution-link').on('click',function() {
       generateContrView(contrObj.contribution_id);
       views_manager.show('contribution');
     });
@@ -47,7 +57,7 @@ $(() => {
     const $storyInfo = $(`
     <div class="row">
       <div class="col-md-6 col-sm-12">
-        <h2 class="title-tagline"></h2>
+        <h4 class="title-tagline"></h4>
       </div>
       <div class="col-md-6 col-sm-12 text-right">
         <p class="status"></p>
@@ -72,7 +82,13 @@ $(() => {
       <div class="approved-contributions"></div>
 
       <section class="contribution-form">
-        <button type="button" class="orange" data-toggle="modal" data-target="#exampleModal">Continue the adventure</button>
+          <div class="jumbotron jumbotron-fluid">
+            <div class="container">
+              <h2 class="display-4 tagline"><span class="highlight">Continue</span> the adventure</h2>
+              <p class="lead">A little blurb goes here.</p>
+              <button type="button" class="orange" data-toggle="modal" data-target="#exampleModal">Submit a contribution <i class="fas fa-chevron-right"></i></button>
+            </div>
+          </div>
       </section>
 
       <div class="unapproved-contributions"><div class="row"></div></div>
