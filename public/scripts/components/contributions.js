@@ -13,8 +13,8 @@ $(() => {
     `);
 
     $contribution.find('h5').text(`${contribution.story_title}`);
-    $contribution.find('p.card-text').text(contribution.contribution_content);
     $contribution.find('h6.text-muted').text(moment(contribution.contribution_created_at_time).format('MM/DD/YYYY'));
+    $contribution.find('p.card-text').text(previewString(contribution.contribution_content));
 
     $contribution.find('i.fa-thumbs-up').on('click', () => {
       const data = { contribution_id: contribution.contribution_id };

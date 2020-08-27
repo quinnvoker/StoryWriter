@@ -42,18 +42,21 @@ $(() => {
     }
 
     $pendingContr.find('.card-title').text(`${contrObj.contribution_author_name} added:`);
-    $pendingContr.find('.card-text').text(contrObj.contribution_content);
     $pendingContr.find('.like-counter').text(`${contrObj.contribution_vote_count} votes`);
+    $pendingContr.find('.card-text').text(previewString(contrObj.contribution_content));
+
     $pendingContr.find('.read-more').on('click',function() {
       generateContrView(contrObj.contribution_id);
       views_manager.show('contribution');
     });
+
     $voteButton.on('click', () => {
       const data = { contribution_id: contrObj.contribution_id };
       addVote(data)
         .then(resolve => getVote(data))
         .then(resolve => $pendingContr.find('.like-counter').text(`${resolve.vote_count} votes`));
     });
+
     $approveButton.on('click', () => {
       const data = { contribution_id: contrObj.contribution_id };
       updateContrAccepted(data)
