@@ -12,17 +12,18 @@ $(() => {
     <figure id="story-${story.story_id}" class="effect-sadie story-preview">
       <img class="cover-image" alt="img01"/>
       <figcaption>
-        <i class="fas fa-heart"></i>
         <h4 class="story-title"></h4>
+        <h5 class="story-progress"></h5>
         <p class="story-author"></p>
         <a href="#">View more</a>
       </figcaption>
     </figure>
     `);
-
     $story.find('img').attr('src', story.story_cover_url);
     $story.find('.story-title').text(story.story_title);
     $story.find('.story-author').text("By " + story.story_author_name);
+    const storyProgress = (story.story_completed) ? `<i class="fas fa-check-circle"></i>` : ``;
+    $story.find('.story-progress').html(storyProgress);
 
     $story.on('click',() =>{
       setTargetStory(story.story_id);

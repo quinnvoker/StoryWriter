@@ -70,7 +70,26 @@ module.exports = (queryFunctions) => {
           .json({ error: err.message });
       });
   });
-  // EDIT - No route as edit not allowed for stories consisitence
+
+
+  // EDIT - Update story as completed
+  router.post("/completed/:id", (req, res) => {
+    const options = {
+      story_id: req.params.id,
+      user_id: req.session.user_id
+    };
+    queryFunctions.updateStoryCompleted(options)
+      .then(completed => res.json(completed))
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+
+
+
 
   // ADD
   router.post("/", (req, res) => {

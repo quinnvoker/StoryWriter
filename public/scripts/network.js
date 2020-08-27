@@ -16,6 +16,11 @@ const getStoryData = (data) => {
   return $.ajax(`/api/stories/data/${story_id}`);
 };
 
+const updateStoryCompleted = (data) => {
+  const story_id = data.story_id;
+  return $.ajax(`/api/stories/completed/${story_id}`, {method: 'POST'});
+};
+
 const addStory = (data) => {
   return $.ajax('/api/stories', { data, method: 'POST' });
 };
@@ -38,6 +43,11 @@ const getContribution = (data) => {
 const addContribution = (data) => {
   return $.ajax('/api/contributions', { data, method: 'POST' });
 };
+
+const updateContrAccepted = (data) => {
+  const contribution_id = data.contribution_id;
+  return $.ajax(`/api/contributions/story/${contribution_id}`, { data, method: 'POST' });
+}
 
 const addVote = (data) => {
   const contr = data.contribution_id;

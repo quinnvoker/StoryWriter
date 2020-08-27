@@ -54,6 +54,11 @@ $(() => {
         .then(resolve => getVote(data))
         .then(resolve => $pendingContr.find('.like-counter').text(`${resolve.vote_count} votes`));
     });
+    $approveButton.on('click', () => {
+      const data = { contribution_id: contrObj.contribution_id };
+      updateContrAccepted(data)
+        .then(resolve => views_manager.show('story'));
+    });
 
 
     return $pendingContr;
@@ -61,7 +66,7 @@ $(() => {
 
   window.createPendingContr = createPendingContr;
 
-  const createStoryInfo = (contrArray) => {
+  const createStoryInfo = (story) => {
     const $storyInfo = $(`
     <div class="row">
       <div class="col-md-6 col-sm-12">
@@ -76,9 +81,8 @@ $(() => {
       </div>
     </div>
     `);
-    let contrObj = contrArray[0];
-    $storyInfo.find('.title-tagline').text(contrObj.story_title);
-    $storyInfo.find('span.status').text(`${contrObj.completed ? 'Completed' : 'In Progress'}`);
+    $storyInfo.find('.title-tagline').text(story.title);
+    $storyInfo.find('span.status').text(`${story.completed ? 'Completed' : 'In Progress'}`);
 
 
     $storyInfo.find('.complete-button').hide();
@@ -86,7 +90,14 @@ $(() => {
 
     $storyInfo.find('.favourite-button').on('click',()=>{
       $storyInfo.find('.favourite-button').addClass('voted');
-    })
+    });
+
+    $storyInfo.find('.complete-button').click(() => {
+      updateStoryCompleted({story_id: story.id})
+        .then(() => {
+          views_manager.show('story');
+        });
+    });
 
     return $storyInfo;
   };
@@ -110,7 +121,7 @@ $(() => {
           </div>
       </section>
 
-      <div class="unapproved-contributions"><div class="row"></div></div>
+      <div class="unapproved-contributions row"></div>
 
     <div>
   </div>
@@ -121,7 +132,7 @@ $(() => {
   const generateStoryView = (storyId) => {
     const $storyInfo = $story.find('.story-info');
     const $approved = $story.find('.approved-contributions');
-    const $pending = $story.find('.unapproved-contributions .row');
+    const $pending = $story.find('.unapproved-contributions');
     const $contributionForm = $story.find('.contribution-form');
 
     // remove old element from last view
@@ -129,10 +140,34 @@ $(() => {
     $approved.empty();
     $pending.empty();
 
-    // add accepted contributions and toggle functions based on if user is owner
+    // hide pending and contribution form to prevent flicker on load
+    $pending.hide();
+    $contributionForm.hide();
+
+    getStoryData({ story_id: storyId })
+      .then(storyData => {
+        $storyInfo.append(createStoryInfo(storyData));
+
+        const $completeButton = $storyInfo.find('.complete-button');
+        const $favouriteButton = $storyInfo.find('.favourite-button');
+
+        if (storyData.is_owner) {
+          if (!storyData.completed) {
+            $completeButton.show();
+          }
+        } else {
+          $favouriteButton.show();
+        }
+
+        if (!storyData.completed) {
+          $pending.show();
+          $contributionForm.show();
+        }
+      });
+
+    // add accepted contributions
     $.get(`/api/stories/${storyId}`)
       .then(apprContrs => {
-        $storyInfo.append(createStoryInfo(apprContrs));
         for (const contribution of apprContrs) {
           $approved.append(createApprovedContr(contribution));
         }
