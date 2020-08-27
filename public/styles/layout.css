@@ -459,7 +459,6 @@ button.orange .fa-chevron-right{
 .my-contributions .card,
 .unapproved-contributions .card{
   border:0.5px solid #BC6C25;
-  max-width: 400px;
   font-size: 15px;
   margin: 5px;
   border-radius:0;
@@ -573,4 +572,15 @@ h5.card-title{
 
 button:hover{
   background:#DDA15E;
+}
+
+.contribution-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 0em;
+}
+
+.contribution-preview {
+  flex: 1 1 400px;
 }

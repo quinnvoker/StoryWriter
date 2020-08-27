@@ -1,7 +1,7 @@
 $(() => {
   const createContribution = (contribution) => {
     const $contribution = $(`
-    <div  class="card col-lg-4 col-sm-12">
+    <div  class="contribution-preview card col-lg-4 col-sm-12">
       <div class="card-body">
         <h5 class="card-title"></h5>
         <h6 class="card-subtitle mb-2 text-muted"></h6>
@@ -31,7 +31,7 @@ $(() => {
     return $contribution;
   };
 
-  const $contributions = $(`<div class="content stories my-stories"><div class="story-container"><h2 class="tagline contributions-heading"></h2><div class="row my-contributions"></div><div></div>`);
+  const $contributions = $(`<div class="content stories my-stories"><div class="story-container"><h2 class="tagline contributions-heading"></h2><div class="contribution-box my-contributions"></div><div></div>`);
   window.$contributions = $contributions;
 
   const loadMyContributions = () => {

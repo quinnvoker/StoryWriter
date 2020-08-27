@@ -18,7 +18,7 @@ $(() => {
 
   const createPendingContr = (contrObj) => {
     const $pendingContr = $(`
-        <div  class="card col-lg-4 col-sm-12">
+        <div  class="contribution-preview card col-lg-4 col-sm-12">
         <div class="card-body">
           <h5 class="card-title user"></h5>
           <p class="card-text"></p>
@@ -125,7 +125,7 @@ $(() => {
             <div class="overlay"></div>
           </div>
       </section>
-      <div class="unapproved-contributions row"></div>
+      <div class="unapproved-contributions contribution-box"></div>
     <div>
   </div>
   `);
