@@ -28,7 +28,7 @@ module.exports = (queryFunctions) => {
     queryFunctions.checkIsFavourite(options)
       .then(isFavourite => {
         const favourite = isFavourite ? true : false;
-        //console.log(favourite);
+        console.log(favourite);
         return favourite;
       })
       .catch(err => {

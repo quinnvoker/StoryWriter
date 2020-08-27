@@ -74,5 +74,6 @@ const getCurrentUser = () => {
 
 const getIsFavourite = (data) => {
   const story_id = data.story_id;
+  console.log("Inside the ajax call");
   return $.ajax(`/api/favourites/${story_id}`);
 };
