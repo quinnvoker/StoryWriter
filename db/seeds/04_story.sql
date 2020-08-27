@@ -1,6 +1,6 @@
 INSERT INTO stories (owner_id, title, cover_image_url)
   VALUES
-    (11, 'The Gatekeepers', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQpAl2T7tO_8TlJ58UNoEM_yCh85FpYrZsQpSkwDA4XRaIJipXGWdA-ceBdh-g1xcWoCa_tV6n8DOUT1-gLi5YHwsluzh');
+    (11, 'The Gatekeepers', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQL4b0T0hfg-Is2y1IqkLVCWDbL9lG2YhSFfSKGpv1tc15P64R8H-Lj6jVK3eO7jsjZfM6a9DT0aJgYAR8XnGJ_j4eib_x46JO_DA&usqp=CAU&ec=45695924');
 
 INSERT INTO contributions (story_id, user_id, content, created_at, accepted_at) VALUES (3, 25, 'In the tropical Alola region on Melemele island, two young children were heading towards a giant building up in the hills.', '2020-07-19 00:45:02.85335', '2020-07-19 00:46:02.85335');
 
