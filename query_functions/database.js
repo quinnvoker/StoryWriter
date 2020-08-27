@@ -541,7 +541,7 @@ exports.getFavouritesByUserId = getFavouritesByUserId;
 const getUserInfo = function(options) {
   const queryString = `
   SELECT
-    *
+    users.name
     FROM
       users
     WHERE
