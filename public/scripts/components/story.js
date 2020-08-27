@@ -172,10 +172,6 @@ $(() => {
         for (const contribution of apprContrs) {
           $approved.append(createApprovedContr(contribution));
         }
-
-        // toggle pending contribution list and contribution form visibility if story is complete
-        const $completeButton = $storyInfo.find('.complete-button');
-        const $favouriteButton = $storyInfo.find('.favourite-button');
       });
 
     //
