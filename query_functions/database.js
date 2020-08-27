@@ -39,6 +39,7 @@ const getContributionsByUserId = function(options) {
       users.name,
       content,
       contributions.created_at,
+      stories.completed,
       stories.title
     ORDER BY contributions.created_at
   `;
