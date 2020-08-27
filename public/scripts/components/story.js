@@ -165,6 +165,7 @@ $(() => {
         if (!storyData.completed) {
           $pending.show();
           $contributionForm.show();
+          $story.find('.jumbotron').css('background-image', 'url(' + storyData.cover_image_url + ')');
         }
       });
 

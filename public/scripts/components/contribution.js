@@ -17,12 +17,15 @@ $(() => {
     const $voteButton = $contrById.find('.vote-contribution');
     const $approveButton = $contrById.find('.approve-contribution');
 
+    $voteButton.hide();
+    $approveButton.hide();
+
     if (contrObj.is_story_owner) {
-      $voteButton.hide();
-      $approveButton.show();
+      if (!contrObj.contribution_accepted_at) {
+        $approveButton.show();
+      }
     } else {
       $voteButton.show();
-      $approveButton.hide();
     }
 
     $contrById.find('.user').text(contrObj.contribution_author_name);
