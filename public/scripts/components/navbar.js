@@ -9,7 +9,6 @@ $(() => {
     </div>
     <div class="menu">
         <ul>
-          <li><a id="home" href="#">Home</a></li>
           <li class="user-item"><a id="my-stories" href="#">My Stories</a></li>
           <li class="user-item"><a id="contributions" href="#">My Contributions</a></li>
           <li class="user-item"><a id="favourites" href="#">My Favourites</a></li>
@@ -39,8 +38,9 @@ $(() => {
     }
   });
 
-  $navbar.find('#home').click(() => {
+  $navbar.find('.logo').click(() => {
     views_manager.show('home');
+    $(window).scrollTop(0);
   });
 
   $navbar.find('#my-stories').click(() => {
