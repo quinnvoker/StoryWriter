@@ -89,8 +89,12 @@ $(() => {
     $storyInfo.find('.favourite-button').hide();
 
     $storyInfo.find('.favourite-button').on('click',()=>{
-      $storyInfo.find('.favourite-button').addClass('voted');
+      addFavourites({story_id: story.id})
+        .then(() =>{
+          $storyInfo.find('.favourite-button').addClass('orange');
+        })
     });
+
 
     $storyInfo.find('.complete-button').click(() => {
       updateStoryCompleted({story_id: story.id})
@@ -114,7 +118,6 @@ $(() => {
           <div class="jumbotron jumbotron-fluid">
             <div class="container">
               <h2 class="display-4 tagline"><span class="highlight">Continue</span> the adventure</h2>
-              <p class="lead">A little blurb goes here.</p>
               <button type="button" class="orange" data-toggle="modal" data-target="#exampleModal">Submit a contribution <i class="fas fa-chevron-right"></i></button>
             </div>
             <div class="overlay"></div>
@@ -172,6 +175,36 @@ $(() => {
         for (const contribution of apprContrs) {
           $approved.append(createApprovedContr(contribution));
         }
+
+        // toggle pending contribution list and contribution form visibility if story is complete
+        const $completeButton = $storyInfo.find('.complete-button');
+        const $favouriteButton = $storyInfo.find('.favourite-button');
+
+        getStoryData({ story_id: storyId })
+          .then(storyData => {
+            if (storyData.is_owner) {
+              if (!storyData.completed) {
+                $completeButton.show();
+              } else {
+                $completeButton.hide();
+              }
+              $favouriteButton.hide();
+            } else {
+              $favouriteButton.show();
+              $completeButton.hide();
+            }
+
+            if (storyData.completed) {
+              $pending.hide();
+              $contributionForm.hide();
+            } else {
+              $pending.show();
+              $contributionForm.show();
+              $story.find('.jumbotron').css('background-image', 'url(' + storyData.cover_image_url + ')');
+              $story.find('.jumbotron').css('background-repeat', 'no-repeat');
+              $story.find('.jumbotron').css('background-size', 'cover');
+            }
+          });
       });
 
     //
