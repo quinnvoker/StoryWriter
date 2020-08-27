@@ -43,13 +43,21 @@ $(() => {
         $errorPanel.slideUp();
       }
 
-      const contributionData = { content, story_id: window.targetStoryId };
-      addContribution(contributionData)
-        .then(result => {
-          $composeContribution.modal('hide');
-          $composeContribution.find('#new-story')[0].reset();
-          views_manager.show('story');
+      getCurrentUser()
+        .then(() => {
+          const contributionData = { content, story_id: window.targetStoryId };
+          addContribution(contributionData)
+            .then(result => {
+              $composeContribution.modal('hide');
+              $composeContribution.find('#new-story')[0].reset();
+              views_manager.show('story');
+            });
+        })
+        .catch(() => {
+          $errorPanel.find('.error').text('You must be logged in to submit a contribution!');
+          $errorPanel.slideDown();
         });
+
     });
 
   $composeContribution.find('.exit')
