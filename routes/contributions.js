@@ -88,7 +88,6 @@ module.exports = (queryFunctions) => {
   router.post("/", (req, res) => {
     const user_id = req.session.user_id;
     const { story_id, content, accepted } = req.body;
-    console.log(req.body);
     const newContribution = {
       user_id,
       story_id,
