@@ -27,7 +27,7 @@ $(() => {
   getCurrentUser()
     .then(userInfo => {
       console.log(userInfo.name);
-      $navbar.find('.user-name-display').text(userInfo.name);
+      $navbar.find('.user-name-display').text(`Welcome back, ${userInfo.name}!`);
       $userItems.show();
     });
 
