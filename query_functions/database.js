@@ -202,7 +202,7 @@ const getAllStories = function(options) {
     queryString += ` AND stories.completed = $${queryParams.length}`;
   }
 
-  queryString += ` ORDER BY stories.created_at;`;
+  queryString += ` ORDER BY stories.id;`;
 
   return db.query(queryString, queryParams)
     .then(resolve => resolve.rows)
