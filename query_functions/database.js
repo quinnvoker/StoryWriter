@@ -21,6 +21,7 @@ const getContributionsByUserId = function(options) {
     contributions.id AS contribution_id,
     story_id,
     stories.title AS story_title,
+    stories.completed AS story_completed,
     contributions.created_at AS contribution_created_at_time,
     content AS contribution_content,
     accepted_at IS NOT NULL AS contribution_is_accepted,
@@ -38,6 +39,7 @@ const getContributionsByUserId = function(options) {
       users.name,
       content,
       contributions.created_at,
+      stories.completed,
       stories.title
     ORDER BY contributions.created_at
   `;

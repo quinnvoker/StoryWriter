@@ -1,7 +1,19 @@
 $(() => {
 
+
   const createContr = (contrObj) => {
     const $contrById = $(`
+      <div class="row">
+        <div class="col-md-6 col-sm-12 title-line">
+          <h4 class="title-tagline"></h4>
+        </div>
+        <div class="col-md-6 col-sm-12 text-right">
+          <p>
+            <span class="status"></span>
+          </p>
+        </div>
+      </div>
+
       <div class="card odd">
         <div class="card-body">
           <p class="user"></p>
@@ -28,6 +40,9 @@ $(() => {
       $voteButton.show();
     }
 
+    $contrById.find('.title-tagline').text(contrObj.story_title);
+    const storyProgress = (contrObj.story_completed) ? `Completed` : `In progress`;
+    $contrById.find('.status').text(storyProgress);
     $contrById.find('.user').text(contrObj.contribution_author_name);
     $contrById.find('.contribution-content ').text(contrObj.contribution_content);
     $contrById.find('.like-counter').text(`${contrObj.contribution_vote_count} votes`);
@@ -51,14 +66,13 @@ $(() => {
 
   const $contribution = $(`
   <div class="content stories my-stories">
-    <h2></h2>
-    <div class="story-container">
-    <div>
+    <div class="story-info"></div>
+    <div class="story-container"><div>
   </div>
   `);
   window.$contribution = $contribution;
 
-  const $button = $(`<button type="button" class="orange" > <i class="fas fa-chevron-left"></i> Go back to the story </button>`);
+  const $button = $(`<button type="button" class="orange back-to-story" > <i class="fas fa-chevron-left"></i> Go back to the story </button>`);
 
 
   const generateContrView = (contrId) => {
