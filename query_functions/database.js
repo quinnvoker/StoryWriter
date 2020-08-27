@@ -317,7 +317,7 @@ const getPendingContributionByStoryId = function(options) {
         queryString += `
         HAVING
           contributions.created_at > $${queryParams.length}
-        ORDER BY COUNT(votes)
+        ORDER BY COUNT(votes) DESC
         `;
       }
       return db.query(queryString, queryParams);
