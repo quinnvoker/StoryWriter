@@ -19,6 +19,25 @@ module.exports = (queryFunctions) => {
       });
   });
 
+  // Get boolean value if user favourite a story by story_id
+  router.get("/:id", (req, res) => {
+    const options = {
+      user_id: req.session.user_id,
+      story_id: req.params.id
+    };
+    queryFunctions.checkIsFavourite(options)
+      .then(isFavourite => {
+        const favourite = isFavourite ? true : false;
+        console.log(favourite);
+        return favourite;
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
   // Add a new favourite story by user id and story id
   router.post("/:id", (req, res) => {
     const options = {
