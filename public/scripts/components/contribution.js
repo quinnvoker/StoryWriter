@@ -65,8 +65,12 @@ $(() => {
         result.contribution_id = contrId;
         const $contrContent = $contribution.find('.story-container');
         $contrContent.empty();
-        $contrContent.append(createContr(result))
+        $contrContent.append(createContr(result));
         $contrContent.append($button);
+        $button.on('click', () => {
+          setTargetStory(result.story_id);
+          views_manager.show('story');
+        });
 
         // $contribution.find('h2').text(result)
       });
