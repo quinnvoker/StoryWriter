@@ -31,7 +31,7 @@ $(() => {
     return $contribution;
   };
 
-  const $contributions = $(`<div class="content stories my-stories"><div class="story-container"><h2 class="tagline contributions-heading"></h2><div class="row my-contributions"></div><div></div>`);
+  const $contributions = $(`<div class="content stories my-stories"><div class="story-container"><h2 class="tagline contributions-heading"></h2><div class="contribution-box my-contributions"></div><div></div>`);
   window.$contributions = $contributions;
 
   const loadMyContributions = () => {

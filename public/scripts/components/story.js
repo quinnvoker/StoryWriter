@@ -125,7 +125,7 @@ $(() => {
             <div class="overlay"></div>
           </div>
       </section>
-      <div class="unapproved-contributions row"></div>
+      <div class="unapproved-contributions contribution-box"></div>
     <div>
   </div>
   `);
