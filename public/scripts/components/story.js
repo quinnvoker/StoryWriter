@@ -71,7 +71,7 @@ $(() => {
         <p>
           <i class="favourite-button fas fa-heart"></i>
           <span class="status"></span>
-          <button class="complete-button">Mark Completed</button>
+          <button class="orange complete-button">Mark Completed</button>
         </p>
       </div>
     </div>
@@ -99,7 +99,6 @@ $(() => {
 
       <div class="story-info"></div>
       <div class="approved-contributions"></div>
-
       <section class="contribution-form">
           <div class="jumbotron jumbotron-fluid">
             <div class="container">
@@ -107,6 +106,7 @@ $(() => {
               <p class="lead">A little blurb goes here.</p>
               <button type="button" class="orange" data-toggle="modal" data-target="#exampleModal">Submit a contribution <i class="fas fa-chevron-right"></i></button>
             </div>
+            <div class="overlay"></div>
           </div>
       </section>
 
@@ -161,6 +161,7 @@ $(() => {
             } else {
               $pending.show();
               $contributionForm.show();
+              $story.find('.jumbotron').css('background-image', 'url(' + storyData.cover_image_url + ')');
             }
           });
       });

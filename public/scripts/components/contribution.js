@@ -48,22 +48,27 @@ $(() => {
 
   const $contribution = $(`
   <div class="content stories my-stories">
+    <h2></h2>
     <div class="story-container">
-
-
     <div>
   </div>
   `);
-
   window.$contribution = $contribution;
+
+  const $button = $(`<button type="button" class="orange" > <i class="fas fa-chevron-left"></i> Go back to the story </button>`);
+
 
   const generateContrView = (contrId) => {
     getContribution({ contribution_id: contrId })
       .then(result => {
+        console.log(result);
         result.contribution_id = contrId;
         const $contrContent = $contribution.find('.story-container');
         $contrContent.empty();
-        $contrContent.append(createContr(result));
+        $contrContent.append(createContr(result))
+        $contrContent.append($button);
+
+        // $contribution.find('h2').text(result)
       });
   };
   window.generateContrView = generateContrView;
