@@ -8,7 +8,7 @@ $(() => {
         </div>
       </div>
     `);
-    $approvedContr.find('.user').text(contrObj.contribution_author_name);
+    $approvedContr.find('.user').text(`${contrObj.contribution_author_name} wrote:`);
     $approvedContr.find('.contribution-content ').text(contrObj.contribution_content);
     return $approvedContr;
   };
@@ -20,7 +20,7 @@ $(() => {
     const $pendingContr = $(`
         <div  class="card col-lg-4 col-sm-12">
         <div class="card-body">
-          <h5 class="card-title"></h5>
+          <h5 class="card-title user"></h5>
           <p class="card-text"></p>
           <i class="fas fa-thumbs-up vote-contribution"></i>
           <button class="approve-contribution">Approve</button>
@@ -41,7 +41,7 @@ $(() => {
       $approveButton.hide();
     }
 
-    $pendingContr.find('.card-title').text(contrObj.contribution_author_name);
+    $pendingContr.find('.card-title').text(`${contrObj.contribution_author_name} added:`);
     $pendingContr.find('.card-text').text(contrObj.contribution_content);
     $pendingContr.find('.like-counter').text(`${contrObj.contribution_vote_count} votes`);
     $pendingContr.find('.read-more').on('click',function() {
@@ -111,7 +111,6 @@ $(() => {
   const $story = $(`
   <div class="content stories my-stories">
     <div class="story-container">
-
       <div class="story-info"></div>
       <div class="approved-contributions"></div>
       <section class="contribution-form">
@@ -123,9 +122,7 @@ $(() => {
             <div class="overlay"></div>
           </div>
       </section>
-
       <div class="unapproved-contributions row"></div>
-
     <div>
   </div>
   `);

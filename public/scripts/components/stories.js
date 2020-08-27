@@ -17,6 +17,7 @@ $(() => {
         <p class="story-author"></p>
         <a href="#">View more</a>
       </figcaption>
+      <div="overlay"></div>
     </figure>
     `);
     $story.find('img').attr('src', story.story_cover_url);

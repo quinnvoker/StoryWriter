@@ -293,6 +293,19 @@ figure.effect-sadie figcaption::before {
 	-webkit-transform: translate3d(0,50%,0);
 	transform: translate3d(0,50%,0);
 }
+figure.effect-sadie figcaption::after {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: -webkit-linear-gradient(top, rgba(72,76,97,0) 0%, rgba(72,76,97,0.8) 75%);
+	background: linear-gradient(to bottom, rgba(72,76,97,0) 0%, rgba(72,76,97,0.8) 75%);
+	content: '';
+	opacity: 0;
+	-webkit-transform: translate3d(0,50%,0);
+	transform: translate3d(0,50%,0);
+}
 
 figure.effect-sadie h4,
 figure.effect-sadie i{
@@ -304,7 +317,8 @@ figure.effect-sadie i{
 	-webkit-transition: -webkit-transform 0.35s, color 0.35s;
 	transition: transform 0.35s, color 0.35s;
 	-webkit-transform: translate3d(0,-50%,0);
-	transform: translate3d(0,-50%,0);
+  transform: translate3d(0,-50%,0);
+  text-shadow: 4px 3px 8px #000000;
 }
 figure.effect-sadie i{
   top: 70%;
@@ -380,8 +394,6 @@ figure.effect-sadie:hover p {
 
 .approved-contributions .card-body{
   font-size: 15px;
-  /* padding: 0.5rem; */
-
   border-radius: 0;
 }
 .approved-contributions .card-body .user{
@@ -547,4 +559,11 @@ i:hover.fa-heart{
   font-size: 50px;
   text-align: center;
   line-height: 100px;
+}
+
+h5.user,
+p.user,
+h5.card-title{
+  color: #787a7d;
+  font-size: 1em;
 }

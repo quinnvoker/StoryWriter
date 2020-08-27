@@ -12,7 +12,7 @@ $(() => {
     </div>
     `);
 
-    $contribution.find('h5').text(contribution.story_title);
+    $contribution.find('h5').text(`${contribution.story_title}`);
     $contribution.find('p.card-text').text(contribution.contribution_content);
     $contribution.find('h6.text-muted').text(moment(contribution.contribution_created_at_time).format('MM/DD/YYYY'));
 
