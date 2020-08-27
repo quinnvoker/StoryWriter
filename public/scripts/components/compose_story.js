@@ -40,17 +40,24 @@ $(() => {
       $errorPanel.slideUp();
     }
 
-    const storyData = {title, cover_image_url};
-    addStory(storyData)
-      .then(result => {
-        const contributionData = { content, story_id: result.story_id, accepted: true };
-
-        addContribution(contributionData)
+    getCurrentUser()
+      .then(() => {
+        const storyData = {title, cover_image_url};
+        addStory(storyData)
           .then(result => {
-            $composeStory.find('#new-story')[0].reset();
-            setTargetStory(contributionData.story_id);
-            views_manager.show('story');
+            const contributionData = { content, story_id: result.story_id, accepted: true };
+
+            addContribution(contributionData)
+              .then(result => {
+                $composeStory.find('#new-story')[0].reset();
+                setTargetStory(contributionData.story_id);
+                views_manager.show('story');
+              });
           });
+      })
+      .catch(() => {
+        $errorPanel.find('.error').text('You must be logged in to submit a story!');
+        $errorPanel.slideDown();
       });
   });
 });

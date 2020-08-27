@@ -531,3 +531,24 @@ const getFavouritesByUserId = function(options) {
     .catch(error=> console.error(error));
 };
 exports.getFavouritesByUserId = getFavouritesByUserId;
+
+/* ----------------------------Users------------------------------- */
+
+/** Get user info from a given user id
+ * @param {user_id: integer} user_id
+ * @return {Promise<{}>} A promise to the user.
+ */
+const getUserInfo = function(options) {
+  const queryString = `
+  SELECT
+    users.name
+    FROM
+      users
+    WHERE
+      users.id = $1;
+  `;
+  return db.query(queryString, [options.user_id])
+    .then(result => result.rows[0])
+    .catch(error => console.error(error));
+};
+exports.getUserInfo = getUserInfo;
