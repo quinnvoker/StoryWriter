@@ -13,7 +13,7 @@ $(() => {
           <li class="user-item"><a id="my-stories" href="#">My Stories</a></li>
           <li class="user-item"><a id="contributions" href="#">Contributions</a></li>
           <li class="user-item"><a id="favourites" href="#">Favourites</a></li>
-          <li class="user-item"><a href="#"><strong class="user-name-display"></strong></a></li>
+          <li class="user-item"><span><strong class="user-name-display"></strong></span></li>
         </ul>
     </div>
   </nav>

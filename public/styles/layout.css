@@ -163,7 +163,8 @@ nav ul li {
   padding: 16px 40px;
 }
 
-nav ul li a {
+nav ul li a,
+nav ul li span {
   text-decoration: none;
   color:#283618;
   font-size: 16px;
@@ -180,7 +181,8 @@ nav.black ul {
 }
 
 nav.black .logo,
-nav.black ul li a {
+nav.black ul li a,
+nav.black ul li span {
   color:#FEFAE0;
 }
 
