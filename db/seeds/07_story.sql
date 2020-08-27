@@ -1,6 +1,6 @@
-INSERT INTO stories (owner_id, title, cover_image_url)
+INSERT INTO stories (owner_id, title, cover_image_url, completed)
   VALUES
-    (14, 'The First Official Exploration', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSfhP8e5sbV6vwCfIn83Aa0JxZhAhj815p_AAbAjhKysiPV2GQBM4twHJDdhMHa96w2_YEKZa8-07lMyBxTQgZRhpbL4DOKcxKTwg&usqp=CAU&ec=45695924');
+    (14, 'The First Official Exploration', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSfhP8e5sbV6vwCfIn83Aa0JxZhAhj815p_AAbAjhKysiPV2GQBM4twHJDdhMHa96w2_YEKZa8-07lMyBxTQgZRhpbL4DOKcxKTwg&usqp=CAU&ec=45695924', TRUE);
 
 INSERT INTO contributions (story_id, user_id, content, created_at, accepted_at)
   VALUES
@@ -11,9 +11,9 @@ INSERT INTO contributions (story_id, user_id, content, created_at, accepted_at)
     (6, 1, 'I run downstairs to find Dad finished cooking, setting breakfast on the table for me. He loves cooking, and this is the first real meal hes had the chance to make in the house. Weve been surviving off of fast food since we left Pewter City, so Im glad to taste his fresh cooking again.
 Once I sit down, I ask him when were going to leave for New Bark Town to meet Professor Elm. His eyes widen, giving me the impression he forgot that he promised me wed do it today.', '2020-07-20 00:45:02.85335', '2020-07-20 00:46:02.85335');
 
-INSERT INTO contributions (story_id, user_id, content, created_at)
+INSERT INTO contributions (story_id, user_id, content, created_at, accepted_at)
   VALUES
-    (6, 12, '"You forgot???? How dare you!" I yelled as I put on my jacket, and I ran out of the house. I was going to start my adventure on my own terms!', '2020-07-21 00:45:02.85335');
+    (6, 12, '"You forgot???? How dare you!" I yelled as I put on my jacket, and I ran out of the house. I was going to start my adventure on my own terms! I ran off and became a Pokemon champion! The end!', '2020-07-21 00:45:02.85335', '2020-07-21 00:50:02.85335');
 
 INSERT INTO contributions (story_id, user_id, content, created_at)
   VALUES
