@@ -43,10 +43,7 @@ $(() => {
 
     $pendingContr.find('.card-title').text(`${contrObj.contribution_author_name} added:`);
     $pendingContr.find('.like-counter').text(`${contrObj.contribution_vote_count} votes`);
-
-    const fulltext = contrObj.contribution_content;
-    const previewText = fulltext.length > 255 ? fulltext.slice(0, 250).concat('... (cont\'d)') : fulltext;
-    $pendingContr.find('.card-text').text(previewText);
+    $pendingContr.find('.card-text').text(previewString(contrObj.contribution_content));
 
     $pendingContr.find('.read-more').on('click',function() {
       generateContrView(contrObj.contribution_id);

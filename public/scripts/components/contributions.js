@@ -14,10 +14,7 @@ $(() => {
 
     $contribution.find('h5').text(`${contribution.story_title}`);
     $contribution.find('h6.text-muted').text(moment(contribution.contribution_created_at_time).format('MM/DD/YYYY'));
-
-    const fulltext = contribution.contribution_content;
-    const previewText = fulltext.length > 255 ? fulltext.slice(0, 250).concat('... (cont\'d)') : fulltext;
-    $contribution.find('p.card-text').text(previewText);
+    $contribution.find('p.card-text').text(previewString(contribution.contribution_content));
 
     $contribution.find('i.fa-thumbs-up').on('click', () => {
       const data = { contribution_id: contribution.contribution_id };
