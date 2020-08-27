@@ -1,7 +1,7 @@
 $(() => {
   const createContribution = (contribution) => {
     const $contribution = $(`
-    <div  class="card col-lg-4 col-sm-12">
+    <div  class="contribution-preview card col-lg-4 col-sm-12">
       <div class="card-body">
         <h5 class="card-title"></h5>
         <h6 class="card-subtitle mb-2 text-muted"></h6>

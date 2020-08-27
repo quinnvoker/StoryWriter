@@ -18,7 +18,7 @@ $(() => {
 
   const createPendingContr = (contrObj) => {
     const $pendingContr = $(`
-        <div  class="card col-lg-4 col-sm-12">
+        <div  class="contribution-preview card col-lg-4 col-sm-12">
         <div class="card-body">
           <h5 class="card-title user"></h5>
           <p class="card-text"></p>
