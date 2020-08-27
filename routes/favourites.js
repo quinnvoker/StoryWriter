@@ -9,8 +9,25 @@ module.exports = (queryFunctions) => {
     };
     queryFunctions.getFavouritesByUserId(options)
       .then(favourites => {
-        console.log(favourites);
         res.json(favourites);
+      })
+      .catch(err => {
+        res
+          .status(500)
+          .json({ error: err.message });
+      });
+  });
+
+  // Get boolean value if user favourite a story by story_id
+  router.get("/:id", (req, res) => {
+    const options = {
+      user_id: req.session.user_id,
+      story_id: req.params.id
+    };
+    queryFunctions.checkIsFavourite(options)
+      .then(isFavourite => {
+        const favourite = isFavourite ? true : false;
+        res.json(favourite);
       })
       .catch(err => {
         res

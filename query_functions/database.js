@@ -224,9 +224,12 @@ const getStoryData = function(options) {
       title,
       cover_image_url,
       created_at,
+      favourites.user_id AS favourite_user_id,
       completed
       FROM
-        stories JOIN users ON owner_id = users.id
+        stories
+        JOIN users ON owner_id = users.id
+        LEFT JOIN favourites ON story_id = stories.id
       WHERE
         stories.id = $1
   `;
@@ -531,6 +534,24 @@ const getFavouritesByUserId = function(options) {
     .catch(error=> console.error(error));
 };
 exports.getFavouritesByUserId = getFavouritesByUserId;
+
+/** Check if story is favourited by user_id */
+
+const checkIsFavourite = function(options) {
+  const queryString = `
+  SELECT
+    favourites.id
+    FROM
+      favourites
+    WHERE
+      user_id = $1 AND story_id = $2
+  `;
+  const queryParams = [options.user_id, options.story_id];
+  return db.query(queryString, queryParams)
+    .then(resolve => resolve.rows[0])
+    .catch(error=> console.error(error));
+};
+exports.checkIsFavourite = checkIsFavourite;
 
 /* ----------------------------Users------------------------------- */
 

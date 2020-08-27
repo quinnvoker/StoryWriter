@@ -87,6 +87,14 @@ $(() => {
     $storyInfo.find('.title-tagline').text(story.title);
     $storyInfo.find('span.status').text(`${story.completed ? 'Completed' : 'In Progress'}`);
 
+    getIsFavourite({ story_id: story.id })
+      .then(resolve => {
+        if (resolve) {
+          $storyInfo.find('.favourite-button').addClass('orange');
+        } else {
+          $storyInfo.find('.favourite-button').removeClass('orange');
+        }
+      });
 
     $storyInfo.find('.complete-button').hide();
     $storyInfo.find('.favourite-button').hide();
@@ -167,6 +175,7 @@ $(() => {
           $contributionForm.show();
           $story.find('.jumbotron').css('background-image', 'url(' + storyData.cover_image_url + ')');
         }
+
       });
 
     // add accepted contributions
