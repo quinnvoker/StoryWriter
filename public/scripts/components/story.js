@@ -162,6 +162,7 @@ $(() => {
         if (!storyData.completed) {
           $pending.show();
           $contributionForm.show();
+          $story.find('.jumbotron').css('background-image', 'url(' + storyData.cover_image_url + ')');
         }
       });
 
@@ -175,30 +176,6 @@ $(() => {
         // toggle pending contribution list and contribution form visibility if story is complete
         const $completeButton = $storyInfo.find('.complete-button');
         const $favouriteButton = $storyInfo.find('.favourite-button');
-
-        getStoryData({ story_id: storyId })
-          .then(storyData => {
-            if (storyData.is_owner) {
-              if (!storyData.completed) {
-                $completeButton.show();
-              } else {
-                $completeButton.hide();
-              }
-              $favouriteButton.hide();
-            } else {
-              $favouriteButton.show();
-              $completeButton.hide();
-            }
-
-            if (storyData.completed) {
-              $pending.hide();
-              $contributionForm.hide();
-            } else {
-              $pending.show();
-              $contributionForm.show();
-              $story.find('.jumbotron').css('background-image', 'url(' + storyData.cover_image_url + ')');
-            }
-          });
       });
 
     //
