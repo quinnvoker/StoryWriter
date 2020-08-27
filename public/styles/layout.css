@@ -58,6 +58,10 @@ section.compose-story{
   color:#BC6C25;
 }
 
+.title-line{
+  padding-left: 0;
+}
+
 .all-stories-heading{
   color:#FEFAE0;
   font-size:3em;
@@ -344,6 +348,7 @@ figure.effect-sadie:hover p {
   color:#BC6C25;
   font-size: 15px;
   font-weight: 300;
+  margin-top: 15px;
 }
 
 .story-container section{
@@ -421,7 +426,7 @@ button.orange .fa-chevron-right{
 }
 
 .back-to-story{
-  margin: 1em;
+  margin: 1em 0;
   padding: 0.25em 0.5em;
 }
 

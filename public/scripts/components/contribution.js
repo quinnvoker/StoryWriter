@@ -4,7 +4,7 @@ $(() => {
   const createContr = (contrObj) => {
     const $contrById = $(`
       <div class="row">
-        <div class="col-md-6 col-sm-12">
+        <div class="col-md-6 col-sm-12 title-line">
           <h4 class="title-tagline"></h4>
         </div>
         <div class="col-md-6 col-sm-12 text-right">
