@@ -420,6 +420,11 @@ button.orange .fa-chevron-right{
   font-size: 15px;
 }
 
+.back-to-story{
+  margin: 1em;
+  padding: 0.25em 0.5em;
+}
+
 .voted{
   color:#BC6C25;
 }
