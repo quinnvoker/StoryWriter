@@ -9,7 +9,6 @@ module.exports = (queryFunctions) => {
     };
     queryFunctions.getFavouritesByUserId(options)
       .then(favourites => {
-        console.log(favourites);
         res.json(favourites);
       })
       .catch(err => {
@@ -28,8 +27,7 @@ module.exports = (queryFunctions) => {
     queryFunctions.checkIsFavourite(options)
       .then(isFavourite => {
         const favourite = isFavourite ? true : false;
-        console.log(favourite);
-        return favourite;
+        res.json(favourite);
       })
       .catch(err => {
         res

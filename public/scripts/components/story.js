@@ -87,18 +87,14 @@ $(() => {
     $storyInfo.find('.title-tagline').text(story.title);
     $storyInfo.find('span.status').text(`${story.completed ? 'Completed' : 'In Progress'}`);
 
-
-    console.log(story.id);
     getIsFavourite({ story_id: story.id })
       .then(resolve => {
-        console.log("This is not working?");
-        console.log(resolve);
-      })
-      .catch(err => {
-        console.log("The catch is working");
-        console.log(err);
+        if (resolve) {
+          $storyInfo.find('.favourite-button').addClass('orange');
+        } else {
+          $storyInfo.find('.favourite-button').removeClass('orange');
+        }
       });
-    console.log("did it get to this line?");
 
     $storyInfo.find('.complete-button').hide();
     $storyInfo.find('.favourite-button').hide();
@@ -181,19 +177,6 @@ $(() => {
         }
 
       });
-
-    // console.log(storyId);
-    // getIsFavourite({ story_id: storyId })
-    //   .then(resolve => {
-    //     console.log("This is not working?");
-    //     console.log(resolve);
-    //   })
-    //   .catch(err => {
-    //     console.log("The catch is working");
-    //     console.log(err);
-    //   });
-    // console.log("did it get to this line?");
-
 
     // add accepted contributions
     $.get(`/api/stories/${storyId}`)
