@@ -1,3 +1,4 @@
+
 INSERT INTO stories (owner_id, title, cover_image_url)
   VALUES
     (17, 'A Storm at Sea', 'https://cdn.gamer-network.net/2020/usgamer/Pokemon-Mystery-Dungeon-DS-Hed-1.jpg/EG11/thumbnail/1920x1080/format/jpg/quality/65/pokemon-mystery-dungeon-dx-will-connect-to-pokemon-sword-and-shield-but-dont-expect-any-galar-cameos.jpg');
