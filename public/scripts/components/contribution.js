@@ -48,6 +48,15 @@ $(() => {
     $contrById.find('.like-counter').text(`${contrObj.contribution_vote_count} votes`);
     $contrById.find('.create-at').text(moment(contrObj.contribution_created_at).format('MM/DD/YYYY'));
 
+    $approveButton.on('click', () => {
+      const data = { contribution_id: contrObj.contribution_id };
+      updateContrAccepted(data)
+        .then(() => {
+          setTargetStory(contrObj.story_id);
+          views_manager.show('story');
+        });
+    });
+
     $contrById.find('i.fa-thumbs-up').on('click', () => {
       const data = { contribution_id: contrObj.contribution_id };
       addVote(data)
