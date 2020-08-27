@@ -84,6 +84,7 @@ const getContributionById = function(queryParams) {
       content AS contribution_content,
       users.name AS contribution_author_name,
       contributions.created_at AS contribution_created_at,
+      contributions.accepted_at AS contribution_accepted_at,
       stories.owner_id AS story_owner_id,
       COUNT(votes) AS contribution_vote_count
       FROM
@@ -99,6 +100,7 @@ const getContributionById = function(queryParams) {
         content,
         users.name,
         contributions.created_at,
+        contributions.accepted_at,
         stories.owner_id;
   `;
   return db.query(queryString, queryParams)
