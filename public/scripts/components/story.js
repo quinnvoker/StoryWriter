@@ -18,7 +18,7 @@ $(() => {
 
   const createPendingContr = (contrObj) => {
     const $pendingContr = $(`
-        <div  class="card col-lg-4 col-sm-12">
+        <div  class="contribution-preview card col-lg-4 col-sm-12">
         <div class="card-body">
           <h5 class="card-title user"></h5>
           <p class="card-text"></p>
@@ -42,18 +42,21 @@ $(() => {
     }
 
     $pendingContr.find('.card-title').text(`${contrObj.contribution_author_name} added:`);
-    $pendingContr.find('.card-text').text(contrObj.contribution_content);
     $pendingContr.find('.like-counter').text(`${contrObj.contribution_vote_count} votes`);
+    $pendingContr.find('.card-text').text(previewString(contrObj.contribution_content));
+
     $pendingContr.find('.read-more').on('click',function() {
       generateContrView(contrObj.contribution_id);
       views_manager.show('contribution');
     });
+
     $voteButton.on('click', () => {
       const data = { contribution_id: contrObj.contribution_id };
       addVote(data)
         .then(resolve => getVote(data))
         .then(resolve => $pendingContr.find('.like-counter').text(`${resolve.vote_count} votes`));
     });
+
     $approveButton.on('click', () => {
       const data = { contribution_id: contrObj.contribution_id };
       updateContrAccepted(data)
@@ -84,6 +87,14 @@ $(() => {
     $storyInfo.find('.title-tagline').text(story.title);
     $storyInfo.find('span.status').text(`${story.completed ? 'Completed' : 'In Progress'}`);
 
+    getIsFavourite({ story_id: story.id })
+      .then(resolve => {
+        if (resolve) {
+          $storyInfo.find('.favourite-button').addClass('orange');
+        } else {
+          $storyInfo.find('.favourite-button').removeClass('orange');
+        }
+      });
 
     $storyInfo.find('.complete-button').hide();
     $storyInfo.find('.favourite-button').hide();
@@ -122,7 +133,7 @@ $(() => {
             <div class="overlay"></div>
           </div>
       </section>
-      <div class="unapproved-contributions row"></div>
+      <div class="unapproved-contributions contribution-box"></div>
     <div>
   </div>
   `);
@@ -164,6 +175,7 @@ $(() => {
           $contributionForm.show();
           $story.find('.jumbotron').css('background-image', 'url(' + storyData.cover_image_url + ')');
         }
+
       });
 
     // add accepted contributions

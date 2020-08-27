@@ -33,6 +33,7 @@ const storiesRoutes = require("./routes/stories");
 const contributionsRoutes = require("./routes/contributions");
 const votesRoutes = require("./routes/votes");
 const favouritesRoutes = require("./routes/favourites");
+const usersRoutes = require("./routes/users");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -41,6 +42,7 @@ app.use("/api/stories", storiesRoutes(queryFunctions));
 app.use("/api/contributions", contributionsRoutes(queryFunctions));
 app.use("/api/votes", votesRoutes(queryFunctions));
 app.use("/api/favourites", favouritesRoutes(queryFunctions));
+app.use("/api/users", usersRoutes(queryFunctions));
 // Note: mount other resources here, using the same pattern above
 
 

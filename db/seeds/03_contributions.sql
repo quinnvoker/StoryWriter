@@ -13,7 +13,11 @@ INSERT INTO contributions (story_id, user_id, content, created_at, accepted_at) 
 
 
 
-INSERT INTO contributions (story_id, user_id, content, created_at, accepted_at) VALUES (4, 2, 'Mewtwo Strikes Back Vulpix blasting off again Sewaddle Ultra Ball Unown to protect the world from devastation Leafeon Genesect. Sapphire Pokemon, you and me Ciccino in voluptate velit esse cillum dolore eu fugiat nulla pariatur Volbeat Psyduck Charizard. Flamethrower Jynx Vine Whip Ash Umbreon Swoobat Cacnea. Sand-Attack Whismur Nidoking Girafarig Delcatty Uxie Politoed.', '2020-07-22 00:49:02.85335', '2020-07-22 00:46:02.85335');
+INSERT INTO contributions (story_id, user_id, content, created_at, accepted_at) VALUES (4, 19, 'Mewtwo Strikes Back Vulpix blasting off again Sewaddle Ultra Ball Unown to protect the world from devastation Leafeon Genesect. Sapphire Pokemon, you and me Ciccino in voluptate velit esse cillum dolore eu fugiat nulla pariatur Volbeat Psyduck Charizard. Flamethrower Jynx Vine Whip Ash Umbreon Swoobat Cacnea. Sand-Attack Whismur Nidoking Girafarig Delcatty Uxie Politoed.', '2020-07-22 00:49:02.85335', '2020-07-22 00:46:02.85335');
+
+
+
+INSERT INTO contributions (story_id, user_id, content, created_at, accepted_at) VALUES (4, 3, 'Pokem ipsum dolor sit amet Burnt Berry Granbull Luxio Pawniard Leafeon Tornadus. Glacier Badge Armaldo Garbodor Manectric Meditite Medicham Clamperl. Sed do eiusmod tempor incididunt Banette Wurmple Lillipup Minun gym Duosion. Wartortle Hive Badge Lapras Mamoswine Servine Miltank Rotom. Volcano Badge Zapdos Pachirisu Scyther Nidoqueen Seviper blast off at the speed of light.', '2020-07-23 00:49:02.85335', '2020-07-23 00:46:02.85335');
 
 
 
@@ -99,6 +103,9 @@ Pokemon 4Ever Patrat Metang Serperior Omastar Delcatty Toxicroak. Quis nostrud e
 
 
 INSERT INTO contributions (story_id, user_id, content, created_at) VALUES (5, 16, 'Pokem ipsum dolor sit amet Houndoom Cherubi Cobalion Sableye S.S. Anne Arcanine. Kanto Soul Badge Chatot Rotom Kyurem Swampert Gabite. Squirtle Smoochum Medicham Lickitung Graveler Zorua Phione. Teleport Cacturne Mirror Move Ambipom Zangoose Vine Whip Luxray. Glacier Badge Dusclops Pawniard Kingdra Hidden Machine Genesect Plain Badge.', '2020-08-24 00:45:02.85335');
+
+
+INSERT INTO contributions (story_id, user_id, content, created_at) VALUES (5, 14, 'Squirtle Karrablast blast off at the speed of light Tyranitar Masquerain Leafeon Jirachi. Pokemon Heroes Badge Giratina Shuckle Tirtouga Eelektrik Golbat. Electric Breloom Granbull Misty The Power Of One Regirock Officer Jenny. Poison Sting Steel Frillish Galvantula Gorebyss Water Magneton. Sed do eiusmod tempor incididunt but nothing happened Turtwig Bronzor Sableye Paras Cyndaquil.', '2020-08-24 00:45:02.85335');
 
 
 INSERT INTO contributions (story_id, user_id, content, created_at) VALUES (6, 17, 'Pokem ipsum dolor sit amet sunt in culpa qui officia you re not wearing shorts Kirlia Carvanha Thunder Badge Rotom. Boulder Badge Kricketune Hariyama Piloswine Alakazam Professor Oak Dodrio. Gotta catch  em all Swalot Smoochum Blastoise Taillow Skiploom Fraxure. Rainbow Badge Misty Pinsir Volcarona Drilbur Lombre I know it is my destiny. Thundershock Masquerain Finneon Shellos Pokemon, it is you and me Baltoy Machamp.

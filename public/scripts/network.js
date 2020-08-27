@@ -67,3 +67,12 @@ const addFavourites = (data) => {
   const story_id = data.story_id;
   return $.ajax(`/api/favourites/${story_id}`, { data, method: 'POST' });
 };
+
+const getCurrentUser = () => {
+  return $.ajax('/api/users/me');
+};
+
+const getIsFavourite = (data) => {
+  const story_id = data.story_id;
+  return $.ajax(`/api/favourites/${story_id}`);
+};

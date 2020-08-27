@@ -137,6 +137,7 @@ section.compose-story{
   font-weight: bold;
   font-size: 20px;
   letter-spacing: 2px;
+  cursor: pointer;
 }
 
 nav {
@@ -160,10 +161,11 @@ nav ul {
 
 nav ul li {
   display: inline-block;
-  padding: 16px 40px;
+  padding: 16px 28px;
 }
 
-nav ul li a {
+nav ul li a,
+nav ul li span {
   text-decoration: none;
   color:#283618;
   font-size: 16px;
@@ -180,7 +182,8 @@ nav.black ul {
 }
 
 nav.black .logo,
-nav.black ul li a {
+nav.black ul li a,
+nav.black ul li span {
   color:#FEFAE0;
 }
 
@@ -456,7 +459,6 @@ button.orange .fa-chevron-right{
 .my-contributions .card,
 .unapproved-contributions .card{
   border:0.5px solid #BC6C25;
-  max-width: 400px;
   font-size: 15px;
   margin: 5px;
   border-radius:0;
@@ -570,4 +572,15 @@ h5.card-title{
 
 button:hover{
   background:#DDA15E;
+}
+
+.contribution-box {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0 0em;
+}
+
+.contribution-preview {
+  flex: 1 1 400px;
 }
