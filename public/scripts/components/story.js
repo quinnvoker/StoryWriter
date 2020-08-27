@@ -76,7 +76,7 @@ $(() => {
         <p>
           <i class="favourite-button fas fa-heart"></i>
           <span class="status"></span>
-          <button class="complete-button">Mark Completed</button>
+          <button class="orange complete-button">Mark Completed</button>
         </p>
       </div>
     </div>
@@ -110,7 +110,6 @@ $(() => {
 
       <div class="story-info"></div>
       <div class="approved-contributions"></div>
-
       <section class="contribution-form">
           <div class="jumbotron jumbotron-fluid">
             <div class="container">
@@ -118,6 +117,7 @@ $(() => {
               <p class="lead">A little blurb goes here.</p>
               <button type="button" class="orange" data-toggle="modal" data-target="#exampleModal">Submit a contribution <i class="fas fa-chevron-right"></i></button>
             </div>
+            <div class="overlay"></div>
           </div>
       </section>
 
@@ -171,6 +171,34 @@ $(() => {
         for (const contribution of apprContrs) {
           $approved.append(createApprovedContr(contribution));
         }
+
+        // toggle pending contribution list and contribution form visibility if story is complete
+        const $completeButton = $storyInfo.find('.complete-button');
+        const $favouriteButton = $storyInfo.find('.favourite-button');
+
+        getStoryData({ story_id: storyId })
+          .then(storyData => {
+            if (storyData.is_owner) {
+              if (!storyData.completed) {
+                $completeButton.show();
+              } else {
+                $completeButton.hide();
+              }
+              $favouriteButton.hide();
+            } else {
+              $favouriteButton.show();
+              $completeButton.hide();
+            }
+
+            if (storyData.completed) {
+              $pending.hide();
+              $contributionForm.hide();
+            } else {
+              $pending.show();
+              $contributionForm.show();
+              $story.find('.jumbotron').css('background-image', 'url(' + storyData.cover_image_url + ')');
+            }
+          });
       });
 
     //

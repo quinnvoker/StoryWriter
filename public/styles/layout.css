@@ -98,8 +98,6 @@ section.compose-story{
   background-color:#DDA15E;
 }
 
-
-
 .content {
   background:#606C38;
   width: 100%;
@@ -516,4 +514,27 @@ i:hover.fa-heart{
 
 #main-nav {
   z-index: 10;
+}
+
+.jumbotron{
+  position:relative;
+}
+
+.jumbotron .container{
+  position:relative;
+  z-index:100;
+}
+
+.jumbotron .overlay{
+  backdrop-filter: blur(6px);
+  height:100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index:0;
+  background: rgba(0, 0, 0, 0.73);
+  font-size: 50px;
+  text-align: center;
+  line-height: 100px;
 }

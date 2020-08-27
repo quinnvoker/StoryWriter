@@ -45,6 +45,7 @@ $(() => {
       for (const story of stories) {
         $stories.find('.grid').append(createStoryPreview(story));
       }
+      // console.log(stories);
     });
   };
   window.loadAllStories = loadAllStories;
@@ -58,6 +59,7 @@ $(() => {
       for (const story of stories) {
         $stories.find('.grid').append(createStoryPreview(story));
       }
+      // console.log(stories);
     });
   };
   window.loadMyStories = loadMyStories;
@@ -68,9 +70,9 @@ $(() => {
     $stories.find('h2').removeClass("all-stories-heading");
     $stories.find('.grid').empty();
     getMyFavourites().then(stories => {
-      // for (const story of stories) {
-      //   $stories.find('.grid').append(createStoryPreview(story));
-      // }
+      for (const story of stories) {
+        $stories.find('.grid').append(createStoryPreview(story));
+      }
       // console.log(stories);
     });
   };
