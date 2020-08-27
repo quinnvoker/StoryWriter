@@ -11,9 +11,9 @@ INSERT INTO stories (owner_id, title, cover_image_url)
   VALUES
     (1, 'The New Guild Recruits', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQL4b0T0hfg-Is2y1IqkLVCWDbL9lG2YhSFfSKGpv1tc15P64R8H-Lj6jVK3eO7jsjZfM6a9DT0aJgYAR8XnGJ_j4eib_x46JO_DA&usqp=CAU&ec=45695924');
 
-INSERT INTO stories (owner_id, title, cover_image_url)
+INSERT INTO stories (owner_id, title, cover_image_url, completed)
   VALUES
-    (2, 'The Scream', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQukufE6H94xVUrupLdc4fZuWVXAoUle8e3wn3MssvGMd8eFgaE_w-s1w1fFwGlbJ8XYH1Gz8M9pbr9s2dXtnE0RVTCBDYCD70whQ&usqp=CAU&ec=45695924');
+    (19, 'The Scream', 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQukufE6H94xVUrupLdc4fZuWVXAoUle8e3wn3MssvGMd8eFgaE_w-s1w1fFwGlbJ8XYH1Gz8M9pbr9s2dXtnE0RVTCBDYCD70whQ&usqp=CAU&ec=45695924', TRUE);
 
 INSERT INTO stories (owner_id, title, cover_image_url)
   VALUES
