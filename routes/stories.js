@@ -14,7 +14,6 @@ module.exports = (queryFunctions) => {
     let options = {};
     queryFunctions.getAllStories(options)
       .then(stories => {
-        console.log(stories);
         res.json(stories);
       })
       .catch(err => {
