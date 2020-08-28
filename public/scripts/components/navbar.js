@@ -9,6 +9,7 @@ $(() => {
     </div>
     <div class="menu">
         <ul>
+          <li class="placeholder-item" style="opacity:0;"><a>.</a></li>
           <li class="user-item"><a id="my-stories" href="#">My Stories</a></li>
           <li class="user-item"><a id="contributions" href="#">My Contributions</a></li>
           <li class="user-item"><a id="favourites" href="#">My Favourites</a></li>
@@ -27,6 +28,7 @@ $(() => {
     .then(userInfo => {
       console.log(userInfo.name);
       $navbar.find('.user-name-display').text(`Welcome back, ${userInfo.name}!`);
+      $navbar.find('.placeholder-item').hide();
       $userItems.show();
     });
 
