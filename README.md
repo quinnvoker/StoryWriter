@@ -1,5 +1,4 @@
 # Story Writer
-=========
 
 Collaborative story writing app for the web, implemented as a single-page-application using Node and JQuery. Written in a week as a midterm project for Lighthouse Labs by Angel Tsang, Emily Urdaneta, and Quinn Branscombe.
 
